@@ -1,0 +1,25 @@
+<div class="menu-container">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>{{ editMode ? "Editar personaje" : character.name }}</span>
+      <span class="menu-spacer"></span>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>download</mat-icon>
+          <span>Descargar personaje</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>upload</mat-icon>
+          <span>Cargar personaje</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>save</mat-icon>
+          <span>Guardar personaje</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

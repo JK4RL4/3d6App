@@ -1,0 +1,128 @@
+
+*:focus
+    outline: unset
+
+ul
+    list-style-type: none
+    padding: 0.5rem 1rem
+    margin: 0
+
+    li
+        width: 100%
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        align-items: flex-start
+        padding-top: 0.5rem
+        font-size: 22px
+
+h3
+    margin: 0
+    padding: 0.5rem 0 0 0
+    text-align: center
+    text-transform: uppercase
+    font-weight: normal
+    font-family: BreatheFireIii
+    font-size: 24px
+
+.char-sheet-column
+    display: flex
+    flex-direction: column
+    justify-content: flex-start
+    align-items: center
+    height: calc(100vh - 56px)
+    width: 49%
+
+.char-sheet-column:first-of-type
+    padding-right: 0.75%
+
+.char-box
+    width: 98%
+    margin: 0.5rem 0 0 0
+    border: 1px solid black
+    border-radius: 4px
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)
+    opacity: 0.9
+    background: GhostWhite
+
+.char-sheet
+    position: relative
+    width: 100%
+    heigth: calc(100vh - 56px)
+    max-heigth: calc(100vh - 56px)
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: center
+    background-image: url(../../assets/img/background.jpg)
+    background-size: 100% 100%
+    background-repeat: no-repeat
+    background-position: 50% 100%
+
+.char-skills
+    ul
+        max-height: 43vh
+        overflow: auto
+
+.char-attack
+    select
+        padding: 0.5rem
+        margin: 0.5rem 0.5rem 0 0.5rem
+        border: unset
+        font-family: 'Times New Roman', Times, serif
+        font-size: 22px
+        background: GhostWhite
+
+    ul
+        max-height: 24vh
+        overflow: auto
+        padding-top: unset
+
+.char-attack-effects
+    flex-direction: column !important
+
+    div
+        display: flex
+        flex-direction: column
+        justify-content: flex-end
+        align-items: flex-start
+
+.char-energy, .char-health
+    position: absolute
+    bottom: 0.2rem
+    width: fit-content
+    height: 10vh
+    display: flex
+    flex-direction: row
+    align-items: center
+
+    .char-controls
+        display: flex
+        flex-direction: column
+        justify-content: space-around
+        align-items: flex-start
+
+    .char-stat
+        display: flex
+        flex-direction: column
+        justify-content: space-around
+        align-items: center
+
+        span
+            min-width: 35px
+            font-size: 32px
+            font-weight: bold
+            text-align: center
+
+        img
+            height: auto
+            width: 35px
+
+.char-energy
+    left: 0.2rem
+    padding-right: 1rem
+
+.char-health
+    right: 0.2rem
+    justify-content: flex-end
+    padding-left: 1rem

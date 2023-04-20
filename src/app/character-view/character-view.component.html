@@ -1,0 +1,187 @@
+<div class="char-sheet">
+  <!-- Columna izquierda -->
+  <div class="char-sheet-column">
+    <!-- Atributos -->
+    <div class="char-attributes char-box">
+      <h3>{{ "attributes" | translate }}</h3>
+      <ul>
+        <li *ngFor="let attribute of character.attributes">
+          <span
+            ><b>{{ attribute.name | translate }}</b></span
+          >
+          <span>{{ attribute.rank }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Estadísticas -->
+    <div class="char-stats char-box">
+      <h3>{{ "stats" | translate }}</h3>
+      <ul class="char-stats-data">
+        <li>
+          <span
+            ><b>{{ "perception" | translate }}</b></span
+          >
+          <span>{{ perception }}</span>
+        </li>
+        <li>
+          <span
+            ><b>{{ "will" | translate }}</b></span
+          >
+          <span>{{ will }}</span>
+        </li>
+        <li>
+          <span
+            ><b>{{ "speed" | translate }}</b></span
+          >
+          <span>{{ speed }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Ataque -->
+    <div class="char-attack char-box">
+      <h3>{{ "attack" | translate }}</h3>
+
+      <!-- Arma -->
+      <select
+        name="select"
+        [(ngModel)]="currentWeaponIndex"
+        (change)="updateWeapon($event)"
+      >
+        <option value="null" disabled selected>Selecciona arma</option>
+        <option
+          *ngFor="let weapon of character.weapons; index as i"
+          [value]="i"
+        >
+          {{ weapon.name }}
+        </option>
+      </select>
+
+      <ul class="char-attack-data">
+        <li>
+          <span><b>Energía</b></span>
+          <span>{{ currentWeapon?.energy }}</span>
+        </li>
+        <li>
+          <span><b>Alcance</b></span>
+          <span>{{ currentWeapon?.range }}</span>
+        </li>
+        <li>
+          <span><b>Impacto</b></span>
+          <span>{{ currentWeapon?.impact }}</span>
+        </li>
+        <li>
+          <span><b>Daño</b></span>
+          <span>{{ currentWeapon?.damage }}</span>
+        </li>
+        <li class="char-attack-effects">
+          <span><b>Efectos</b></span>
+          <div>
+            <span
+              class="capitalize"
+              *ngFor="let effect of currentWeapon?.effects"
+              >{{ effect?.type }} ({{ effect?.rank }})</span
+            >
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Energía -->
+    <div class="char-energy char-box">
+      <div class="char-controls">
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="add"
+          (click)="updateEnergy(1)"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="remove"
+          (click)="updateEnergy(-1)"
+        >
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+      <div class="char-stat">
+        <img
+          src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/fist_hand_energy_power_thunder_bolt_strength_lightning-128.png"
+        />
+        <span>{{ character.energy }} </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Columna derecha -->
+  <div class="char-sheet-column">
+    <!-- Habilidades -->
+    <div class="char-skills char-box">
+      <h3>{{ "skills" | translate }}</h3>
+      <ul>
+        <li *ngFor="let skill of character.skills">
+          <span
+            ><b>{{ skill.name }}</b></span
+          >
+          <span>{{ skill.rank }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Armadura -->
+    <div class="char-armor char-box">
+      <h3>{{ "defense" | translate }}</h3>
+      <ul class="char-armor-data">
+        <li>
+          <span><b>Con arma</b></span>
+          <span>{{ weaponDefense }}</span>
+        </li>
+        <li>
+          <span><b>Con escudo</b></span>
+          <span>{{ shieldDefense }}</span>
+        </li>
+        <li>
+          <span><b>Pasiva</b></span>
+          <span>{{ defense }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Vida -->
+    <div class="char-health char-box">
+      <div class="char-stat">
+        <img
+          src="https://cdn1.iconfinder.com/data/icons/game-ui-set-part-2/96/Heart_red-128.png"
+        />
+        <span>{{ character.health }}</span>
+      </div>
+      <div class="char-controls">
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="add"
+          (click)="updateHealth(1)"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="remove"
+          (click)="updateHealth(-1)"
+        >
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cambiar a editar personaje -->
+<button mat-fab class="toggle-screen" (click)="editModeChange.emit(true)">
+  <mat-icon>edit</mat-icon>
+</button>

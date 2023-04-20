@@ -1,0 +1,248 @@
+<div class="character-creator">
+  <div class="character-creator-wrapper">
+    <mat-accordion class="edit-container" multi>
+      <mat-expansion-panel>
+        <!-- Arquetipo -->
+        <mat-expansion-panel-header>
+          <mat-panel-title class="character-creator-title">
+            {{ "archetype" | translate }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <!-- Nombre -->
+        <input
+          matInput
+          [(ngModel)]="character.name"
+          maxlength="25"
+          [placeholder]="'name' | translate"
+        />
+
+        <!-- Concepto -->
+        <input
+          matInput
+          [(ngModel)]="character.archetype.concept"
+          maxlength="25"
+          [placeholder]="'concept' | translate"
+        />
+
+        <!-- Naturaleza -->
+        <select name="select" [(ngModel)]="character.archetype.nature">
+          <span matPrefix>{{ "nature" | translate }} &nbsp;</span>
+          <option value="null" disabled selected>Selecciona naturaleza</option>
+          <option *ngFor="let nature of NATURE" [value]="nature">
+            {{ nature }}
+          </option>
+        </select>
+
+        <!-- Conducta -->
+        <select name="select" [(ngModel)]="character.archetype.conduct">
+          <option value="null" disabled selected>Selecciona conducta</option>
+          <option *ngFor="let nature of NATURE" [value]="nature">
+            {{ nature }}
+          </option>
+        </select>
+      </mat-expansion-panel>
+
+      <!-- Atributos -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title class="character-creator-title">
+            {{ "attributes" | translate }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <!-- Atributos -->
+        <div
+          *ngFor="let attribute of character.attributes"
+          class="character-creator-attribute"
+        >
+          <mat-label> {{ attribute.name | translate }}</mat-label>
+          <select
+            name="select"
+            class="align-right"
+            [(ngModel)]="attribute.rank"
+          >
+            <option value="null" disabled selected>Rango</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+        </div>
+      </mat-expansion-panel>
+
+      <!-- Habilidades -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title class="character-creator-title">
+            {{ "skills" | translate }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div *ngFor="let skill of character.skills" class="skill-container">
+          <select
+            name="select"
+            class="character-creator-skill"
+            [(ngModel)]="skill.name"
+          >
+            <option value="null" disabled selected>Selecciona habilidad</option>
+            <option *ngFor="let skillType of SKILLS" [value]="skillType.name">
+              <span>{{ skillType.name }}</span>
+            </option>
+          </select>
+          <select name="select" class="align-right" [(ngModel)]="skill.rank">
+            <option value="null" disabled selected>Rango</option>
+            <option value="-2">-2</option>
+            <option value="-1">-1</option>
+            <option value="0" selected>0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+        </div>
+        <!-- Añadir habilidad -->
+        <div class="skill-add">
+          <button
+            mat-icon-button
+            color="primary"
+            aria-label="add"
+            (click)="newSkill()"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </mat-expansion-panel>
+
+      <!-- Armadura -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title class="character-creator-title">
+            {{ "gear" | translate }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="gear">
+          <!-- Ropa -->
+          <select name="select" [(ngModel)]="character.gear.clothes">
+            <option value="null" disabled selected>Selecciona ropa</option>
+            <option *ngFor="let clothes of GEAR.clothes" [value]="clothes.name">
+              {{ clothes.name }}
+            </option>
+          </select>
+          <!-- Armadura -->
+          <select name="select" [(ngModel)]="character.gear.armor">
+            <option value="null" disabled selected>Selecciona armadura</option>
+            <option *ngFor="let armor of GEAR.armor" [value]="armor.name">
+              {{ armor.name }}
+            </option>
+          </select>
+          <!-- Yelmo -->
+          <select name="select" [(ngModel)]="character.gear.helmet">
+            <option value="null" disabled selected>Selecciona yelmo</option>
+            <option *ngFor="let helmet of GEAR.helmet" [value]="helmet.name">
+              {{ helmet.name }}
+            </option>
+          </select>
+          <!-- Escudo -->
+          <select name="select" [(ngModel)]="character.gear.shield">
+            <option value="null" disabled selected>Selecciona escudo</option>
+            <option *ngFor="let shield of GEAR.shield" [value]="shield.name">
+              {{ shield.name }}
+            </option>
+          </select>
+        </div>
+      </mat-expansion-panel>
+
+      <!-- Armas -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title class="character-creator-title">
+            {{ "weapons" | translate }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <!-- Configurador de arma -->
+        <div
+          *ngFor="let weapon of character.weapons; index as i"
+          class="weapon-config"
+        >
+          <hr *ngIf="i > 0" />
+          <input
+            type="text"
+            [(ngModel)]="weapon.name"
+            placeholder="Nombre del arma"
+            maxlength="25"
+          />
+          <!-- Tamaño -->
+          <select name="select" [(ngModel)]="weapon.size">
+            <option value="null" disabled selected>Selecciona tamaño</option>
+            <option *ngFor="let size of WEAPON.size" [value]="size.size">
+              {{ "Tamaño " + size.size }}
+            </option>
+          </select>
+          <!-- Calidad -->
+          <select name="select" [(ngModel)]="weapon.quality">
+            <option value="null" disabled selected>Selecciona calidad</option>
+            <option
+              *ngFor="let quality of WEAPON.quality"
+              [value]="quality.quality"
+            >
+              {{ "Calidad " + quality.quality }}
+            </option>
+          </select>
+          <!-- Alcance -->
+          <select name="select" [(ngModel)]="weapon.range">
+            <option value="null" disabled selected>Selecciona alcance</option>
+            <option *ngFor="let range of WEAPON.range" [value]="range">
+              {{ "Alcance " + range }}
+            </option>
+          </select>
+          <!-- Daño -->
+          <select
+            name="select"
+            class="damage-select"
+            [(ngModel)]="weapon.damageType"
+            multiple
+          >
+            <option value="null" disabled selected>
+              Selecciona hasta 3 tipos de daño
+            </option>
+            <option
+              *ngFor="let damage of WEAPON.damageType"
+              [value]="damage.type"
+              [disabled]="
+                weapon.damageType.length == 3 &&
+                !weapon.damageType.includes(damage.type)
+              "
+            >
+              {{ "Daño " + damage.type }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Añadir arma -->
+        <div class="skill-add">
+          <button
+            mat-icon-button
+            color="primary"
+            aria-label="add"
+            (click)="newWeapon()"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>
+
+<!-- Cambiar a ver personaje -->
+<button mat-fab class="toggle-screen" (click)="editModeChange.emit(false)">
+  <mat-icon>face</mat-icon>
+</button>

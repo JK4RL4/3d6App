@@ -1,0 +1,18 @@
+<div class="app-container">
+  <!-- Menu -->
+  <app-menu [(editMode)]="editMode" [character]="character"></app-menu>
+
+  <!-- Creator -->
+  <app-character-creator
+    *ngIf="editMode"
+    [character]="character"
+    (editModeChange)="editMode = $event ? true : false"
+  ></app-character-creator>
+
+  <!-- View -->
+  <app-character-view
+    *ngIf="!editMode"
+    [character]="character"
+    (editModeChange)="editMode = $event ? true : false"
+  ></app-character-view>
+</div>

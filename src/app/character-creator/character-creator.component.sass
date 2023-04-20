@@ -1,0 +1,96 @@
+
+*:focus
+    outline: unset
+
+.character-creator
+    position: relative
+    height: calc(100vh - 56px)
+    background-image: url(../../assets/img/background.jpg)
+    background-size: 100% 100%
+    background-repeat: no-repeat
+    background-position: 50% 100%
+    max-height: calc(100vh - 56px)
+    overflow: auto
+
+.character-creator-wrapper
+    padding: 20px
+    opacity: 0.9
+    display: flex
+    justify-content: center
+    align-items: center
+
+.character-creator-title
+    font-family: BreatheFireIii
+    font-size: 24px
+    text-transform: uppercase
+
+.align-right
+    text-align: right
+
+input
+    width: 90%
+    margin: 0.5rem
+    border: unset
+    border-bottom: 1px solid LightGray
+    font-family: 'Times New Roman', Times, serif
+    font-size: 22px
+    text-align: center
+
+    &::first-letter
+        text-transform: uppercase
+
+.character-creator-attribute
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+    font-family: 'Times New Roman', Times, serif
+    font-size: 22px
+
+select
+    width: 100%
+    padding: 0.5rem
+    margin: 0.5rem 0
+    border: unset
+    font-family: 'Times New Roman', Times, serif
+    font-size: 22px
+
+.skill-add
+    width: 100%
+    display: flex
+    justify-content: center
+    margin-top: 1rem
+
+.skill-container
+    width: 100%
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+    .character-creator-skill
+        min-width: 255px
+
+.gear
+    width: 100%
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+.weapon-config
+    width: 100%
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+    hr
+        width: 90%
+        margin: 0 0 1rem 0
+        border: 1px solid DarkRed
+
+    .damage-select
+        height: 345px
+
+        option
+            margin: 0.5rem 0
