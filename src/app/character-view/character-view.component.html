@@ -39,6 +39,95 @@
       </ul>
     </div>
 
+    <!-- Defensa -->
+    <div class="char-armor char-box">
+      <h3>{{ "defense" | translate }}</h3>
+      <ul class="char-armor-data">
+        <li>
+          <span><b>Con arma</b></span>
+          <span>{{ weaponDefense }}</span>
+        </li>
+        <li>
+          <span><b>Con escudo</b></span>
+          <span>{{ shieldDefense }}</span>
+        </li>
+        <li>
+          <span><b>Pasiva</b></span>
+          <span>{{ defense }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Energía -->
+    <div class="char-energy char-box">
+      <div class="char-controls">
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="add"
+          (click)="updateEnergy(1)"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="remove"
+          (click)="updateEnergy(-1)"
+        >
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+      <div class="char-stat">
+        <img
+          src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/fist_hand_energy_power_thunder_bolt_strength_lightning-128.png"
+        />
+        <span>{{ character.energy }} </span>
+      </div>
+
+      <!-- Vida -->
+      <div class="char-stat">
+        <img
+          src="https://cdn1.iconfinder.com/data/icons/game-ui-set-part-2/96/Heart_red-128.png"
+        />
+        <span>{{ character.health }}</span>
+      </div>
+      <div class="char-controls">
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="add"
+          (click)="updateHealth(1)"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="remove"
+          (click)="updateHealth(-1)"
+        >
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Columna derecha -->
+  <div class="char-sheet-column">
+    <!-- Habilidades -->
+    <div class="char-skills char-box">
+      <h3>{{ "skills" | translate }}</h3>
+      <ul>
+        <li *ngFor="let skill of character.skills">
+          <span
+            ><b>{{ skill.name }}</b></span
+          >
+          <span>{{ skill.rank }}</span>
+        </li>
+      </ul>
+    </div>
+
     <!-- Ataque -->
     <div class="char-attack char-box">
       <h3>{{ "attack" | translate }}</h3>
@@ -86,97 +175,6 @@
           </div>
         </li>
       </ul>
-    </div>
-
-    <!-- Energía -->
-    <div class="char-energy char-box">
-      <div class="char-controls">
-        <button
-          mat-icon-button
-          color="primary"
-          aria-label="add"
-          (click)="updateEnergy(1)"
-        >
-          <mat-icon>add</mat-icon>
-        </button>
-        <button
-          mat-icon-button
-          color="primary"
-          aria-label="remove"
-          (click)="updateEnergy(-1)"
-        >
-          <mat-icon>remove</mat-icon>
-        </button>
-      </div>
-      <div class="char-stat">
-        <img
-          src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/fist_hand_energy_power_thunder_bolt_strength_lightning-128.png"
-        />
-        <span>{{ character.energy }} </span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Columna derecha -->
-  <div class="char-sheet-column">
-    <!-- Habilidades -->
-    <div class="char-skills char-box">
-      <h3>{{ "skills" | translate }}</h3>
-      <ul>
-        <li *ngFor="let skill of character.skills">
-          <span
-            ><b>{{ skill.name }}</b></span
-          >
-          <span>{{ skill.rank }}</span>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Armadura -->
-    <div class="char-armor char-box">
-      <h3>{{ "defense" | translate }}</h3>
-      <ul class="char-armor-data">
-        <li>
-          <span><b>Con arma</b></span>
-          <span>{{ weaponDefense }}</span>
-        </li>
-        <li>
-          <span><b>Con escudo</b></span>
-          <span>{{ shieldDefense }}</span>
-        </li>
-        <li>
-          <span><b>Pasiva</b></span>
-          <span>{{ defense }}</span>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Vida -->
-    <div class="char-health char-box">
-      <div class="char-stat">
-        <img
-          src="https://cdn1.iconfinder.com/data/icons/game-ui-set-part-2/96/Heart_red-128.png"
-        />
-        <span>{{ character.health }}</span>
-      </div>
-      <div class="char-controls">
-        <button
-          mat-icon-button
-          color="primary"
-          aria-label="add"
-          (click)="updateHealth(1)"
-        >
-          <mat-icon>add</mat-icon>
-        </button>
-        <button
-          mat-icon-button
-          color="primary"
-          aria-label="remove"
-          (click)="updateHealth(-1)"
-        >
-          <mat-icon>remove</mat-icon>
-        </button>
-      </div>
     </div>
   </div>
 </div>

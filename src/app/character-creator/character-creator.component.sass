@@ -34,7 +34,6 @@ input
     border-bottom: 1px solid LightGray
     font-family: 'Times New Roman', Times, serif
     font-size: 22px
-    text-align: center
 
     &::first-letter
         text-transform: uppercase
@@ -46,6 +45,9 @@ input
     align-items: center
     font-family: 'Times New Roman', Times, serif
     font-size: 22px
+
+    select
+        width: 3rem
 
 select
     width: 100%
@@ -68,7 +70,8 @@ select
     align-items: center
 
     .character-creator-skill
-        min-width: 255px
+        min-width: 220px
+        text-overflow: ellipsis
 
 .gear
     width: 100%
@@ -85,12 +88,31 @@ select
     align-items: center
 
     hr
-        width: 90%
+        width: 50%
         margin: 0 0 1rem 0
-        border: 1px solid DarkRed
+        border: unset
+        border-bottom: 1px solid LightGray
+
+    >div
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        align-items: center
 
     .damage-select
-        height: 345px
+        // height: 345px
 
         option
             margin: 0.5rem 0
+
+    .damage-select-title
+        width: 100%
+        padding: 0.5rem
+        font-family: 'Times New Roman', Times, serif
+        font-size: 22px
+
+.remove
+    width: 24px
+    height: 24px
+    padding: 0
+    color: red

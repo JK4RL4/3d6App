@@ -82,7 +82,18 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
 
-        <div *ngFor="let skill of character.skills" class="skill-container">
+        <div
+          *ngFor="let skill of character.skills; index as i"
+          class="skill-container"
+        >
+          <button
+            mat-icon-button
+            class="remove"
+            aria-label="remove"
+            (click)="character.skills.splice(i, 1)"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
           <select
             name="select"
             class="character-creator-skill"
@@ -173,12 +184,22 @@
           class="weapon-config"
         >
           <hr *ngIf="i > 0" />
-          <input
-            type="text"
-            [(ngModel)]="weapon.name"
-            placeholder="Nombre del arma"
-            maxlength="25"
-          />
+          <div>
+            <button
+              mat-icon-button
+              class="remove"
+              aria-label="remove"
+              (click)="character.weapons.splice(i, 1)"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+            <input
+              type="text"
+              [(ngModel)]="weapon.name"
+              placeholder="Nombre del arma"
+              maxlength="25"
+            />
+          </div>
           <!-- Tamaño -->
           <select name="select" [(ngModel)]="weapon.size">
             <option value="null" disabled selected>Selecciona tamaño</option>
@@ -204,15 +225,13 @@
             </option>
           </select>
           <!-- Daño -->
+          <span class="damage-select-title"> Selecciona hasta 3 tipos de daño </span>
           <select
             name="select"
             class="damage-select"
             [(ngModel)]="weapon.damageType"
             multiple
           >
-            <option value="null" disabled selected>
-              Selecciona hasta 3 tipos de daño
-            </option>
             <option
               *ngFor="let damage of WEAPON.damageType"
               [value]="damage.type"
