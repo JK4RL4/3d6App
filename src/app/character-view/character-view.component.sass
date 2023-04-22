@@ -16,6 +16,10 @@ ul
         padding-top: 0.5rem
         font-size: 20px
 
+        span:first-of-type
+            color: DimGray
+            font-weight: normal
+
 h3
     margin: 0
     padding: 0.5rem 0 0 0
@@ -94,10 +98,12 @@ h3
     position: absolute
     bottom: 0.2rem
     width: 48%
+    height: 100px
     display: flex
     flex-direction: row
-    justify-content: space-around
+    justify-content: space-between
     align-items: center
+    overflow: hidden
 
     button
         display: flex
@@ -105,9 +111,25 @@ h3
         align-items: center
 
     .char-controls
+        height: 100px
         display: flex
         flex-direction: column
         justify-content: center
+        align-items: center
+        background-color: LightGray
+        padding: 0.5rem
+
+    .char-controls:first-of-type
+        border-right: 1px solid white
+
+    .char-controls:last-of-type
+        border-left: 1px solid white
+
+    .stat-icon
+        height: 50px
+        font-weight: bold
+        display: flex
+        align-items: center
 
     .char-stat
         display: flex

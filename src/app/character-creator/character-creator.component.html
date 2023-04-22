@@ -75,7 +75,7 @@
       </mat-expansion-panel>
 
       <!-- Habilidades -->
-      <mat-expansion-panel>
+      <mat-expansion-panel class="add-panel">
         <mat-expansion-panel-header>
           <mat-panel-title class="character-creator-title">
             {{ "skills" | translate }}
@@ -86,15 +86,11 @@
           *ngFor="let skill of character.skills; index as i"
           class="skill-container"
         >
-          <button
-            mat-icon-button
-            [disableRipple]="true"
-            class="remove"
-            aria-label="remove"
+          <mat-icon
+            class="skill-remove-icon"
             (click)="character.skills.splice(i, 1)"
+            >close</mat-icon
           >
-            <mat-icon>close</mat-icon>
-          </button>
           <select
             name="select"
             class="character-creator-skill"
@@ -120,15 +116,7 @@
         </div>
         <!-- Añadir habilidad -->
         <div class="skill-add">
-          <button
-            mat-icon-button
-            [disableRipple]="true"
-            color="primary"
-            aria-label="add"
-            (click)="newSkill()"
-          >
-            <mat-icon>add</mat-icon>
-          </button>
+          <mat-icon class="skill-add-icon" (click)="newSkill()">add</mat-icon>
         </div>
       </mat-expansion-panel>
 
@@ -187,15 +175,11 @@
         >
           <hr *ngIf="i > 0" />
           <div>
-            <button
-              mat-icon-button
-              [disableRipple]="true"
-              class="remove"
-              aria-label="remove"
+            <mat-icon
+              class="skill-remove-icon"
               (click)="character.weapons.splice(i, 1)"
+              >close</mat-icon
             >
-              <mat-icon>close</mat-icon>
-            </button>
             <input
               type="text"
               [(ngModel)]="weapon.name"
@@ -228,7 +212,9 @@
             </option>
           </select>
           <!-- Daño -->
-          <span class="damage-select-title"> Selecciona hasta 3 tipos de daño </span>
+          <span class="damage-select-title">
+            Selecciona hasta 3 tipos de daño
+          </span>
           <select
             name="select"
             class="damage-select"
@@ -250,15 +236,7 @@
 
         <!-- Añadir arma -->
         <div class="skill-add">
-          <button
-            mat-icon-button
-            [disableRipple]="true"
-            color="primary"
-            aria-label="add"
-            (click)="newWeapon()"
-          >
-            <mat-icon>add</mat-icon>
-          </button>
+          <mat-icon class="skill-add-icon" (click)="newWeapon()">add</mat-icon>
         </div>
       </mat-expansion-panel>
     </mat-accordion>

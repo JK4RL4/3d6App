@@ -26,6 +26,7 @@
 
 .align-right
     text-align: right
+    width: 3rem
 
 input
     width: 90%
@@ -46,9 +47,6 @@ input
     font-family: 'Times New Roman', Times, serif
     font-size: 22px
 
-    select
-        width: 3rem
-
 select
     width: 100%
     padding: 0.5rem
@@ -57,17 +55,38 @@ select
     font-family: 'Times New Roman', Times, serif
     font-size: 22px
 
+.add-panel
+    ::ng-deep mat-expansion-panel-body
+        padding: 0 !important
+
 .skill-add
-    width: 100%
+    width: calc(100% + 48px)
     display: flex
     justify-content: center
     margin-top: 1rem
+    margin-bottom: -16px
+    margin-left: -24px
+
+.skill-add-icon
+    width: 100%
+    background: LightGray
+    font-weight: bold
+    display: flex
+    justify-content: center
+    align-items: center
+    padding: 0.5rem 0
+
+.skill-remove-icon
+    color: red
+    font-weight: bold
 
 .skill-container
+    position: relative
     width: 100%
     display: flex
     justify-content: space-between
     align-items: center
+    overflow: hidden
 
     .character-creator-skill
         min-width: 220px

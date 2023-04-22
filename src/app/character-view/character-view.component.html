@@ -6,9 +6,7 @@
       <h3>{{ "attributes" | translate }}</h3>
       <ul>
         <li *ngFor="let attribute of character.attributes">
-          <span
-            ><b>{{ attribute.name | translate }}</b></span
-          >
+          <span>{{ attribute.name | translate }}</span>
           <span>{{ attribute.rank }}</span>
         </li>
       </ul>
@@ -19,21 +17,15 @@
       <h3>{{ "stats" | translate }}</h3>
       <ul class="char-stats-data">
         <li>
-          <span
-            ><b>{{ "perception" | translate }}</b></span
-          >
+          <span>{{ "perception" | translate }}</span>
           <span>{{ perception }}</span>
         </li>
         <li>
-          <span
-            ><b>{{ "will" | translate }}</b></span
-          >
+          <span>{{ "will" | translate }}</span>
           <span>{{ will }}</span>
         </li>
         <li>
-          <span
-            ><b>{{ "speed" | translate }}</b></span
-          >
+          <span>{{ "speed" | translate }}</span>
           <span>{{ speed }}</span>
         </li>
       </ul>
@@ -44,15 +36,15 @@
       <h3>{{ "defense" | translate }}</h3>
       <ul class="char-armor-data">
         <li>
-          <span><b>Con arma</b></span>
+          <span>Con arma</span>
           <span>{{ weaponDefense }}</span>
         </li>
         <li>
-          <span><b>Con escudo</b></span>
+          <span>Con escudo</span>
           <span>{{ shieldDefense }}</span>
         </li>
         <li>
-          <span><b>Pasiva</b></span>
+          <span>Pasiva</span>
           <span>{{ defense }}</span>
         </li>
       </ul>
@@ -61,24 +53,8 @@
     <!-- Energía -->
     <div class="char-energy char-box">
       <div class="char-controls">
-        <button
-          mat-icon-button
-          [disableRipple]="true"
-          color="primary"
-          aria-label="add"
-          (click)="updateEnergy(1)"
-        >
-          <mat-icon>add</mat-icon>
-        </button>
-        <button
-          mat-icon-button
-          [disableRipple]="true"
-          color="primary"
-          aria-label="remove"
-          (click)="updateEnergy(-1)"
-        >
-          <mat-icon>remove</mat-icon>
-        </button>
+        <mat-icon class="stat-icon" (click)="updateEnergy(1)">add</mat-icon>
+        <mat-icon class="stat-icon" (click)="updateEnergy(-1)">remove</mat-icon>
       </div>
       <div class="char-stat">
         <img
@@ -95,24 +71,8 @@
         <span>{{ character.health }}</span>
       </div>
       <div class="char-controls">
-        <button
-          mat-icon-button
-          [disableRipple]="true"
-          color="primary"
-          aria-label="add"
-          (click)="updateHealth(1)"
-        >
-          <mat-icon>add</mat-icon>
-        </button>
-        <button
-          mat-icon-button
-          [disableRipple]="true"
-          color="primary"
-          aria-label="remove"
-          (click)="updateHealth(-1)"
-        >
-          <mat-icon>remove</mat-icon>
-        </button>
+        <mat-icon class="stat-icon" (click)="updateHealth(1)"> add</mat-icon>
+        <mat-icon class="stat-icon" (click)="updateHealth(-1)">remove</mat-icon>
       </div>
     </div>
   </div>
@@ -124,9 +84,7 @@
       <h3>{{ "skills" | translate }}</h3>
       <ul>
         <li *ngFor="let skill of character.skills">
-          <span
-            ><b>{{ skill.name }}</b></span
-          >
+          <span>{{ skill.name }}</span>
           <span>{{ skill.rank }}</span>
         </li>
       </ul>
@@ -153,23 +111,23 @@
 
       <ul class="char-attack-data">
         <li>
-          <span><b>Energía</b></span>
+          <span>Energía</span>
           <span>{{ currentWeapon?.energy }}</span>
         </li>
         <li>
-          <span><b>Alcance</b></span>
+          <span>Alcance</span>
           <span>{{ currentWeapon?.range }}</span>
         </li>
         <li>
-          <span><b>Impacto</b></span>
+          <span>Impacto</span>
           <span>{{ currentWeapon?.impact }}</span>
         </li>
         <li>
-          <span><b>Daño</b></span>
+          <span>Daño</span>
           <span>{{ currentWeapon?.damage }}</span>
         </li>
         <li class="char-attack-effects">
-          <span><b>Efectos</b></span>
+          <span>Efectos</span>
           <div>
             <span
               class="capitalize"
