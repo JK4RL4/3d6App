@@ -14,6 +14,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatRippleModule} from '@angular/material/core';
 
 // FontAwsome
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -44,6 +45,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatExpansionModule,
     MatFormFieldModule,
     MatToolbarModule,
+    MatRippleModule,
     MatMenuModule,
     HttpClientModule,
     TranslateModule.forRoot({

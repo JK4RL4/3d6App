@@ -9,19 +9,24 @@
           : "Sin nombre"
       }}</span>
       <span class="menu-spacer"></span>
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu">
+      <button
+        mat-icon-button
+        [disableRipple]="true"
+        [matMenuTriggerFor]="menu"
+        aria-label="menu"
+      >
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
+        <button [disableRipple]="true" mat-menu-item>
           <mat-icon>download</mat-icon>
           <span>Descargar personaje</span>
         </button>
-        <button mat-menu-item>
+        <button [disableRipple]="true" mat-menu-item>
           <mat-icon>upload</mat-icon>
           <span>Cargar personaje</span>
         </button>
-        <button mat-menu-item>
+        <button [disableRipple]="true" mat-menu-item>
           <mat-icon>save</mat-icon>
           <span>Guardar personaje</span>
         </button>

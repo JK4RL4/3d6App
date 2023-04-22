@@ -63,6 +63,7 @@
       <div class="char-controls">
         <button
           mat-icon-button
+          [disableRipple]="true"
           color="primary"
           aria-label="add"
           (click)="updateEnergy(1)"
@@ -71,6 +72,7 @@
         </button>
         <button
           mat-icon-button
+          [disableRipple]="true"
           color="primary"
           aria-label="remove"
           (click)="updateEnergy(-1)"
@@ -95,6 +97,7 @@
       <div class="char-controls">
         <button
           mat-icon-button
+          [disableRipple]="true"
           color="primary"
           aria-label="add"
           (click)="updateHealth(1)"
@@ -103,6 +106,7 @@
         </button>
         <button
           mat-icon-button
+          [disableRipple]="true"
           color="primary"
           aria-label="remove"
           (click)="updateHealth(-1)"
@@ -136,7 +140,7 @@
       <select
         name="select"
         [(ngModel)]="currentWeaponIndex"
-        (change)="updateWeapon($event)"
+        (change)="updateWeapon(currentWeaponIndex)"
       >
         <option value="null" disabled selected>Selecciona arma</option>
         <option

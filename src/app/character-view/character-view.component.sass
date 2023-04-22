@@ -62,7 +62,7 @@ h3
 
 .char-skills
     ul
-        max-height: 43vh
+        max-height: 40vh
         overflow: auto
 
 .char-attack
@@ -77,7 +77,7 @@ h3
         background: GhostWhite
 
     ul
-        max-height: 24vh
+        max-height: 30vh
         overflow: auto
         padding-top: unset
 
@@ -93,16 +93,21 @@ h3
 .char-energy
     position: absolute
     bottom: 0.2rem
-    width: fit-content
+    width: 48%
     display: flex
     flex-direction: row
+    justify-content: space-around
     align-items: center
+
+    button
+        display: flex
+        justify-content: center
+        align-items: center
 
     .char-controls
         display: flex
         flex-direction: column
-        justify-content: space-around
-        align-items: flex-start
+        justify-content: center
 
     .char-stat
         display: flex
