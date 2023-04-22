@@ -43,7 +43,7 @@ h3
 .char-box
     width: 98%
     max-width: 98%
-    margin: 0.5rem 0 0 0
+    margin: 5px 0 0 0
     border: 1px solid black
     border-radius: 4px
     box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)
@@ -63,6 +63,7 @@ h3
     background-size: 100% 100%
     background-repeat: no-repeat
     background-position: 50% 100%
+    overflow: auto
 
 .char-skills
     ul
@@ -98,7 +99,7 @@ h3
     position: absolute
     bottom: 0.2rem
     width: 48%
-    height: 100px
+    height: 45px
     display: flex
     flex-direction: row
     justify-content: space-between
@@ -111,13 +112,12 @@ h3
         align-items: center
 
     .char-controls
-        height: 100px
+        height: 45px
         display: flex
         flex-direction: column
         justify-content: center
         align-items: center
         background-color: LightGray
-        padding: 0.5rem
 
     .char-controls:first-of-type
         border-right: 1px solid white
@@ -126,12 +126,15 @@ h3
         border-left: 1px solid white
 
     .stat-icon
-        height: 50px
+        height: 22.5px
         font-weight: bold
         display: flex
         align-items: center
+        justify-content: center
+        font-size: 18px
 
     .char-stat
+        position: relative
         display: flex
         flex-direction: column
         justify-content: space-around
@@ -143,10 +146,14 @@ h3
             font-size: 32px
             font-weight: bold
             text-align: center
+            color: white
+            text-shadow: -1.5px -1.5px 1px #000, 1.5px -1.5px 1px #000, -1.5px 1.5px 1px #000, 1.5px 1.5px 1px #000
 
-        img
-            height: auto
-            width: 35px
+    img
+        position: absolute
+        z-index: -1
+        height: 45px
+        width: auto
 
 .char-energy
     left: 0.2rem

@@ -53,11 +53,14 @@
 
         <!-- Atributos -->
         <div
-          *ngFor="let attribute of character.attributes"
+          *ngFor="let attribute of character.attributes; index as i"
           class="character-creator-attribute"
+          (click)="openSelect(i)"
         >
           <mat-label> {{ attribute.name | translate }}</mat-label>
           <select
+            #select{{i}}
+            id="{{ 'select' + i }}"
             name="select"
             class="align-right"
             [(ngModel)]="attribute.rank"

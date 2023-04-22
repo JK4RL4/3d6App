@@ -128,7 +128,7 @@ export const GEAR = {
   ],
 };
 
-export const WEAPON_RANGES = ['nulo', 'lanzar', 'corto', 'largo', 'extremo'];
+export const WEAPON_RANGES = ['melé', 'lanzar', 'corto', 'largo', 'extremo'];
 
 export const WEAPON_QUALITIES = [
   { quality: 'baja', damage: -1, crit: 0, effects: -1, hit: -1 },

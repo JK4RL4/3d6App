@@ -48,6 +48,6 @@ export class AppMenuComponent {
 
   download(): void {
     const blob = new Blob([JSON.stringify(this.character)], { type: 'txt' });
-    saveAs(blob, this.character.name + '.char');
+    saveAs(blob, this.character.name + '.txt');
   }
 }
