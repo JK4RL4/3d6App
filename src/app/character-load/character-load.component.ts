@@ -31,12 +31,9 @@ export class CharacterLoadComponent {
 
   loadFromFile(event: any): void {
     const file: File = event.target.files[0];
-console.log("venga");
     if (file) {
-      console.log("hola");
       let fileReader = new FileReader();
       fileReader.onload = (e) => {
-        console.log(fileReader.result?.toString());
         this.characterService.sendCharacterUpdates(
           JSON.parse(fileReader.result?.toString()!)
         );
