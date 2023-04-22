@@ -14,6 +14,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatDialogModule} from '@angular/material/dialog';
 
 // FontAwsome
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -23,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CharacterCreatorComponent } from './character-creator/character-creator.component';
 import { CharacterViewComponent } from './character-view/character-view.component';
 import { AppMenuComponent } from './app-menu/app-menu.component';
+import { CharacterLoadComponent } from './character-load/character-load.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -34,6 +36,7 @@ export function createTranslateLoader(http: HttpClient) {
     CharacterCreatorComponent,
     CharacterViewComponent,
     AppMenuComponent,
+    CharacterLoadComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatFormFieldModule,
     MatToolbarModule,
     MatMenuModule,
+    MatDialogModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

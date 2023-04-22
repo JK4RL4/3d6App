@@ -1,0 +1,24 @@
+<div mat-dialog-content>
+  <!-- Personajes -->
+  <select name="select" [(ngModel)]="selectedCharacter">
+    <option value="null" disabled selected>Selecciona personaje</option>
+    <option *ngFor="let char of savedCharacters" [value]="char.name">
+      {{ char.name }}
+    </option>
+  </select>
+</div>
+<div mat-dialog-actions class="char-load-controls">
+  <button mat-button mat-dialog-close (click)="input.click()">
+    Cargar desde archivo
+  </button>
+  <input
+    #input
+    type="file"
+    accept=".char"
+    class="file-upload"
+    (click)="input.value = ''"
+    (change)="loadFromFile($event)"
+  />
+  <button mat-button mat-dialog-close (click)="loadCharacter()">Cargar</button>
+  <button mat-button mat-dialog-close cdkFocusInitial>Cerrar</button>
+</div>
