@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Character } from '../character';
 import { CharacterService } from '../character.service';
@@ -11,6 +17,8 @@ import { CharacterService } from '../character.service';
 export class CharacterLoadComponent {
   savedCharacters!: Character[];
   selectedCharacter!: string;
+  file!: File | null;
+  @ViewChild('input') input!: ElementRef;
 
   constructor(
     private characterService: CharacterService,
@@ -30,15 +38,16 @@ export class CharacterLoadComponent {
   }
 
   loadFromFile(event: any): void {
-    const file: File = event.target.files[0];
-    if (file) {
+    this.file = event.target.files[0];
+    if (this.file) {
       let fileReader = new FileReader();
       fileReader.onload = (e) => {
         this.characterService.sendCharacterUpdates(
           JSON.parse(fileReader.result?.toString()!)
         );
+        this.dialogRef.close();
       };
-      fileReader.readAsText(file);
+      fileReader.readAsText(this.file);
     }
   }
 
@@ -46,5 +55,17 @@ export class CharacterLoadComponent {
     this.characterService.sendCharacterUpdates(
       this.savedCharacters.find((char) => char.name == this.selectedCharacter)!
     );
+    this.dialogRef.close();
+  }
+
+  resetFile(event: any): void {
+    event.target.value = null;
+    this.file = null;
+  }
+
+  selectChange(event: any): void {
+    if (event.target.value == 'file') {
+      this.input.nativeElement.click();
+    }
   }
 }

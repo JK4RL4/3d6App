@@ -12,84 +12,6 @@
       </ul>
     </div>
 
-    <!-- Estadísticas -->
-    <div class="char-stats char-box">
-      <h3>{{ "stats" | translate }}</h3>
-      <ul class="char-stats-data">
-        <li>
-          <span>{{ "perception" | translate }}</span>
-          <span>{{ perception }}</span>
-        </li>
-        <li>
-          <span>{{ "will" | translate }}</span>
-          <span>{{ will }}</span>
-        </li>
-        <li>
-          <span>{{ "speed" | translate }}</span>
-          <span>{{ speed }}</span>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Defensa -->
-    <div class="char-armor char-box">
-      <h3>{{ "defense" | translate }}</h3>
-      <ul class="char-armor-data">
-        <li>
-          <span>Con arma</span>
-          <span>{{ weaponDefense }}</span>
-        </li>
-        <li>
-          <span>Con escudo</span>
-          <span>{{ shieldDefense }}</span>
-        </li>
-        <li>
-          <span>Pasiva</span>
-          <span>{{ defense }}</span>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Energía -->
-    <div class="char-energy char-box">
-      <div class="char-controls">
-        <mat-icon class="stat-icon" (click)="updateEnergy(1)">add</mat-icon>
-        <mat-icon class="stat-icon" (click)="updateEnergy(-1)">remove</mat-icon>
-      </div>
-      <div class="char-stat">
-        <img
-          src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/fist_hand_energy_power_thunder_bolt_strength_lightning-128.png"
-        />
-        <span>{{ _character.energy }} </span>
-      </div>
-
-      <!-- Vida -->
-      <div class="char-stat">
-        <img
-          src="https://cdn1.iconfinder.com/data/icons/game-ui-set-part-2/96/Heart_red-128.png"
-        />
-        <span>{{ _character.health }}</span>
-      </div>
-      <div class="char-controls">
-        <mat-icon class="stat-icon" (click)="updateHealth(1)"> add</mat-icon>
-        <mat-icon class="stat-icon" (click)="updateHealth(-1)">remove</mat-icon>
-      </div>
-    </div>
-  </div>
-
-  <!-- Columna derecha -->
-  <div class="char-sheet-column">
-    <!-- Habilidades -->
-    <div class="char-skills char-box">
-      <h3>{{ "skills" | translate }}</h3>
-      <ul>
-        <li *ngFor="let skill of _character.skills">
-          <span>{{ skill.name }}</span>
-          <span>{{ skill.rank }}</span>
-        </li>
-      </ul>
-    </div>
-
     <!-- Ataque -->
     <div class="char-attack char-box">
       <h3>{{ "attack" | translate }}</h3>
@@ -135,6 +57,77 @@
               >{{ effect?.type }} ({{ effect?.rank }})</span
             >
           </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Energía -->
+    <div class="char-energy char-box">
+      <div class="char-controls">
+        <mat-icon class="stat-icon" (click)="updateEnergy(1)">add</mat-icon>
+        <mat-icon class="stat-icon" (click)="updateEnergy(-1)">remove</mat-icon>
+      </div>
+      <div class="char-stat">
+        <img
+          src="https://cdn0.iconfinder.com/data/icons/human-body-flat/340/fitness_health_power_strong_strength_gym_exercise_arm_hand_muscle-512.png"
+        />
+        <span>{{ _character.energy }} </span>
+      </div>
+
+      <!-- Vida -->
+      <div class="char-stat">
+        <img
+          src="https://cdn1.iconfinder.com/data/icons/game-ui-set-part-2/96/Heart_red-512.png"
+        />
+        <span>{{ _character.health }}</span>
+      </div>
+      <div class="char-controls">
+        <mat-icon class="stat-icon" (click)="updateHealth(1)"> add</mat-icon>
+        <mat-icon class="stat-icon" (click)="updateHealth(-1)">remove</mat-icon>
+      </div>
+    </div>
+  </div>
+
+  <!-- Columna derecha -->
+  <div class="char-sheet-column">
+    <!-- Estadísticas -->
+    <div class="char-stats char-box">
+      <h3>{{ "stats" | translate }}</h3>
+      <ul class="char-stats-data">
+        <li>
+          <span>{{ "perception" | translate }}</span>
+          <span>{{ perception }}</span>
+        </li>
+        <li>
+          <span>{{ "will" | translate }}</span>
+          <span>{{ will }}</span>
+        </li>
+        <li>
+          <span>{{ "speed" | translate }}</span>
+          <span>{{ speed }}</span>
+        </li>
+        <li>
+          <span>Defensa</span>
+          <span>{{ defense }}</span>
+        </li>
+        <li>
+          <span>Desvío</span>
+          <span>{{ weaponDefense }}</span>
+        </li>
+        <li>
+          <span>Escudo</span>
+          <span>{{ shieldDefense }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Habilidades -->
+    <div class="char-skills char-box">
+      <h3>{{ "skills" | translate }}</h3>
+      <ul>
+        <li *ngFor="let skill of parsedSkills">
+          <span>{{ skill.name }}</span>
+          <span>{{ skill.rank }}</span>
         </li>
       </ul>
     </div>

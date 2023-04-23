@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import {
   Character,
   GEAR,
+  SKILLS,
   WEAPON_DAMAGES,
   WEAPON_QUALITIES,
   WEAPON_RANGES,
@@ -35,6 +36,8 @@ export class CharacterViewComponent {
   RANGES = WEAPON_RANGES;
   QUALITIES = WEAPON_QUALITIES;
   DAMAGES = WEAPON_DAMAGES;
+  SKILLS = SKILLS;
+  parsedSkills!: { name: string; rank: number }[];
 
   @Output() editModeChange = new EventEmitter<boolean>();
   _character!: Character;
@@ -48,6 +51,7 @@ export class CharacterViewComponent {
     this.getAttributes();
     this.calculateCharPasives();
     this.calculateCharStats();
+    this.calculateSkills();
     this.updateWeapon(0);
   }
 
@@ -144,6 +148,9 @@ export class CharacterViewComponent {
     let sizeMod = this.SIZES.find(
       (size) => size.size == this.currentWeapon?.size
     )?.def;
+    let qualityMod = this.QUALITIES.find(
+      (quality) => quality.quality == this.currentWeapon?.quality
+    )?.def;
     // Percepción
     this.perception =
       this.wisdom! + (helmetPen < 0 ? helmetPen : 0) + (alert > 0 ? alert : 0);
@@ -156,12 +163,21 @@ export class CharacterViewComponent {
       (armorPen < 0 ? armorPen : 0) +
       (shieldPen < 0 ? shieldPen : 0);
     // Defensa con arma
+    let weaponDefense = (sizeMod ? sizeMod : 0) + (qualityMod ? qualityMod : 0);
     this.weaponDefense = this.currentWeapon
-      ? 4 + this.dexterity + (cc ? cc : 0) + (sizeMod ? sizeMod : 0)
+      ? weaponDefense < (this.dexterity + (cc ? cc : 0)) / 2
+        ? weaponDefense > 0
+          ? weaponDefense
+          : 0
+        : Math.round((this.dexterity + (cc ? cc : 0)) / 2)
       : 0;
     // Defensa con escudo
     this.shieldDefense =
-      shield > 0 ? 4 + this.dexterity + (cc ? cc : 0) + shield : 0;
+      shield > 0
+        ? shield < (this.dexterity + (cc ? cc : 0)) / 2
+          ? shield
+          : Math.round((this.dexterity + (cc ? cc : 0)) / 2)
+        : 0;
     // Defensa
     this.defense = 8 - (armor ? armor : 0);
   }
@@ -172,6 +188,26 @@ export class CharacterViewComponent {
     this._character.energy =
       this.strength * 3 + this.constitution * 2 + this.dexterity * 2;
     this.maxEnergy = this._character.energy;
+  }
+
+  calculateSkills(): void {
+    this.parsedSkills = [];
+    this.character.skills.forEach((skill) => {
+      let skillFound = this.SKILLS.find(
+        (skillData) => skillData.name == skill.name
+      );
+      this.parsedSkills.push({
+        name: skill.name,
+        rank:
+          parseInt(skill.rank!) +
+          parseInt(
+            this._character.attributes.find(
+              (attribute) => attribute.name == skillFound?.attribute
+            )?.rank!
+          ),
+      });
+    });
+    this.parsedSkills.sort((a, b) => a.name.localeCompare(b.name));
   }
 
   updateWeapon(weaponIndex: any): void {
@@ -211,14 +247,29 @@ export class CharacterViewComponent {
       this.currentWeapon.damage =
         4 + this.strength + weaponSize?.damage! + weaponQuality?.damage!;
       // Efectos
+      let effects: { type: string; rank: number }[] = [];
       this.currentWeapon.effects = [];
       this.currentWeapon.damageType.forEach((damage: any) => {
         let typeEffects = this.DAMAGES.find(
           (type) => type.type.toUpperCase() == damage.toUpperCase()
         );
-        this.currentWeapon.effects = this.currentWeapon.effects.concat(
-          typeEffects?.effects
-        );
+        effects = effects.concat(typeEffects?.effects!);
+      });
+      effects.forEach((effect) => {
+        if (
+          !this.currentWeapon.effects.some(
+            (weaponEffect: { type: string; rank: number }) =>
+              weaponEffect.type == effect.type
+          )
+        ) {
+          let typeEffects = effects.filter(
+            (filteredEffect) => filteredEffect.type == effect.type
+          );
+          let bestEffect = Math.min(...typeEffects.map((item) => item.rank));
+          this.currentWeapon.effects.push(
+            typeEffects.find((typeEffect) => typeEffect.rank == bestEffect)
+          );
+        }
       });
     }
   }
