@@ -27,7 +27,7 @@ export class CharacterViewComponent {
   perception!: number;
   will!: number;
   currentWeapon!: any;
-  currentWeaponIndex!: string;
+  currentWeaponIndex!: string | null;
   weaponDefense!: number;
   shieldDefense!: number;
   defense!: number;
@@ -46,8 +46,10 @@ export class CharacterViewComponent {
   }
   @Input('character') set character(character: Character) {
     this._character = character;
-    this.currentWeaponIndex = '0';
-    this.currentWeapon = this._character.weapons[0];
+    this.currentWeaponIndex = this._character.weapons?.length > 0 ? '0' : null;
+    this.currentWeapon = this.currentWeaponIndex
+      ? this._character.weapons[0]
+      : null;
     this.getAttributes();
     this.calculateCharPasives();
     this.calculateCharStats();

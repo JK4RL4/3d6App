@@ -55,9 +55,7 @@
         <div
           *ngFor="let attribute of character.attributes; index as i"
           class="character-creator-attribute"
-          (click)="openSelect(i)"
         >
-          <mat-label> {{ attribute.name | translate }}</mat-label>
           <select
             #select{{i}}
             id="{{ 'select' + i }}"
@@ -74,6 +72,9 @@
             <option value="5">5</option>
             <option value="6">6</option>
           </select>
+          <mat-label class="attribute-name">
+            {{ attribute.name | translate }}</mat-label
+          >
         </div>
       </mat-expansion-panel>
 

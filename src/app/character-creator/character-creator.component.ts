@@ -49,9 +49,4 @@ export class CharacterCreatorComponent {
       damageType: [],
     });
   }
-
-  openSelect(index: any): void {
-    const event = new MouseEvent('mousedown');
-    // document.getElementById('select' + index)?.selectmenu();
-  }
 }
