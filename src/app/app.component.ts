@@ -15,6 +15,8 @@ export class AppComponent implements OnInit, OnDestroy {
   character: Character = JSON.parse(JSON.stringify(EMPTY_CHARACTER));
   editMode: boolean = true;
   characterUpdates!: Subscription;
+  actionCompleted!: Subscription;
+  actionCompletedTex!: string;
 
   constructor(
     private characterService: CharacterService,
@@ -32,10 +34,20 @@ export class AppComponent implements OnInit, OnDestroy {
           ? (this.character = character)
           : (this.character = JSON.parse(JSON.stringify(EMPTY_CHARACTER)));
       });
+
+    this.actionCompleted = this.characterService
+      .getActionCompleted()
+      .subscribe((action: string) => {
+        this.actionCompletedTex = action;
+        setTimeout(() => {
+          this.actionCompletedTex = '';
+        }, 1500);
+      });
   }
 
   ngOnDestroy(): void {
     this.characterUpdates.unsubscribe();
+    this.actionCompleted.unsubscribe();
   }
 
   selectLanguage(lang: string) {

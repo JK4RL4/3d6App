@@ -9,6 +9,8 @@ export class CharacterService {
   currentCharacter!: Character;
   characterUpdate = new Subject<Character>();
 
+  actionCompleted = new Subject<string>();
+
   constructor() {}
 
   getCharacterUpdates(): Observable<Character> {
@@ -27,5 +29,13 @@ export class CharacterService {
   clearCharacterUpdates(): void {
     this.characterUpdate.next(JSON.parse(JSON.stringify(EMPTY_CHARACTER)));
     this.currentCharacter = JSON.parse(JSON.stringify(EMPTY_CHARACTER));
+  }
+
+  getActionCompleted(): Observable<string> {
+    return this.actionCompleted.asObservable();
+  }
+
+  sendActionCompleted(action: string): void {
+    this.actionCompleted.next(action);
   }
 }

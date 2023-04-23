@@ -4,6 +4,7 @@ import { Character } from '../character';
 import { MatDialog } from '@angular/material/dialog';
 import { saveAs } from 'file-saver';
 import { CharacterLoadComponent } from '../character-load/character-load.component';
+import { CharacterService } from '../character.service';
 
 @Component({
   selector: 'app-menu',
@@ -17,7 +18,10 @@ export class AppMenuComponent {
   characterLoaded!: Subscription;
   fileUrl: any;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private characterService: CharacterService,
+    private dialog: MatDialog
+  ) {}
 
   openDialog(
     enterAnimationDuration: string,
@@ -44,6 +48,7 @@ export class AppMenuComponent {
         : this.savedCharacters.push(this.character);
     }
     localStorage.setItem('chracters', JSON.stringify(this.savedCharacters));
+    this.characterService.sendActionCompleted('Personaje guardado');
   }
 
   download(): void {

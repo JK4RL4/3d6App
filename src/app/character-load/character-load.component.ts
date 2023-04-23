@@ -45,6 +45,7 @@ export class CharacterLoadComponent {
         this.characterService.sendCharacterUpdates(
           JSON.parse(fileReader.result?.toString()!)
         );
+        this.characterService.sendActionCompleted('Personaje cargado');
         this.dialogRef.close();
       };
       fileReader.readAsText(this.file);
@@ -55,6 +56,7 @@ export class CharacterLoadComponent {
     this.characterService.sendCharacterUpdates(
       this.savedCharacters.find((char) => char.name == this.selectedCharacter)!
     );
+    this.characterService.sendActionCompleted('Personaje cargado');
     this.dialogRef.close();
   }
 

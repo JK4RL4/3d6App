@@ -15,4 +15,14 @@
     [character]="character"
     (editModeChange)="editMode = $event ? true : false"
   ></app-character-view>
+
+  <!-- Feedback -->
+  <div
+    *ngIf="actionCompletedTex && actionCompletedTex != ''"
+    mat-dialog-content
+    class="load-feedback"
+  >
+    <mat-icon class="feedback-icon">done</mat-icon>
+    <span>{{ actionCompletedTex }}</span>
+  </div>
 </div>
