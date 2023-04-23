@@ -91,11 +91,18 @@ h3
 .char-attack-effects
     flex-direction: column !important
 
+    >span
+        color: DimGray
+        font-weight: normal
+
     div
         display: flex
         flex-direction: column
         justify-content: flex-end
         align-items: flex-start
+
+        span
+            color: black !important
 
 .char-energy
     position: absolute
@@ -143,7 +150,7 @@ h3
             font-size: 28px
             font-weight: bold
             text-align: center
-          
+
     img
         position: absolute
         top: -3px
@@ -153,3 +160,11 @@ h3
         width: auto
         filter: drop-shadow(1px 1px 1px black)
 
+.overMax
+    color: green
+
+.overMin
+    color: red
+
+.overMid
+    color: orange

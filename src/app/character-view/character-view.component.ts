@@ -98,9 +98,9 @@ export class CharacterViewComponent {
 
   updateHealth(x: number): void {
     this._character.health += x;
-    if (this._character.health > this.maxHealth) {
-      this._character.health = this.maxHealth;
-    }
+    // if (this._character.health > this.maxHealth) {
+    //   this._character.health = this.maxHealth;
+    // }
     if (this._character.health < 0) {
       this._character.health = 0;
     }
@@ -108,9 +108,9 @@ export class CharacterViewComponent {
 
   updateEnergy(x: number): void {
     this._character.energy += x;
-    if (this._character.energy > this.maxEnergy) {
-      this._character.energy = this.maxEnergy;
-    }
+    // if (this._character.energy > this.maxEnergy) {
+    //   this._character.energy = this.maxEnergy;
+    // }
     if (this._character.energy < 0) {
       this._character.energy = 0;
     }
@@ -181,7 +181,7 @@ export class CharacterViewComponent {
           : Math.round((this.dexterity + (cc ? cc : 0)) / 2)
         : 0;
     // Defensa
-    this.defense = 8 - (armor ? armor : 0);
+    this.defense = armor ? armor : 0;
   }
 
   calculateCharStats(): void {
@@ -239,6 +239,7 @@ export class CharacterViewComponent {
       this.currentWeapon.energy = 2 + weaponSize?.energy!;
       // Impacto
       this.currentWeapon.impact =
+        8 +
         this.dexterity +
         (hit ? hit : 0) +
         weaponQuality?.hit! +

@@ -71,7 +71,12 @@
         <img
           src="https://cdn0.iconfinder.com/data/icons/human-body-flat/340/fitness_health_power_strong_strength_gym_exercise_arm_hand_muscle-512.png"
         />
-        <span>{{ _character.energy }} </span>
+        <span
+          [ngClass]="{
+            overMax: _character.energy > maxEnergy
+          }"
+          >{{ _character.energy }}
+        </span>
       </div>
 
       <!-- Vida -->
@@ -79,7 +84,16 @@
         <img
           src="https://cdn1.iconfinder.com/data/icons/game-ui-set-part-2/96/Heart_red-512.png"
         />
-        <span>{{ _character.health }}</span>
+        <span
+          [ngClass]="{
+            overMax: _character.health > maxHealth,
+            overMid:
+              _character.health <= maxHealth / 2 &&
+              _character.health > maxHealth / 4,
+            overMin: _character.health <= maxHealth / 4
+          }"
+          >{{ _character.health }}</span
+        >
       </div>
       <div class="char-controls">
         <mat-icon class="stat-icon" (click)="updateHealth(1)"> add</mat-icon>
@@ -111,12 +125,12 @@
           <span>{{ defense }}</span>
         </li>
         <li>
-          <span>Desvío</span>
-          <span>{{ weaponDefense }}</span>
+          <span>Bloqueo</span>
+          <span>{{ shieldDefense }}</span>
         </li>
         <li>
-          <span>Escudo</span>
-          <span>{{ shieldDefense }}</span>
+          <span>Desvío</span>
+          <span>{{ weaponDefense }}</span>
         </li>
       </ul>
     </div>
