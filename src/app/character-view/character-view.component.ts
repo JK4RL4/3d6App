@@ -39,7 +39,6 @@ export class CharacterViewComponent {
   SKILLS = SKILLS;
   parsedSkills!: { name: string; rank: number }[];
 
-  @Output() editModeChange = new EventEmitter<boolean>();
   _character!: Character;
   get character(): Character {
     return this._character;
@@ -157,7 +156,9 @@ export class CharacterViewComponent {
     this.perception =
       this.wisdom! + (helmetPen < 0 ? helmetPen : 0) + (alert > 0 ? alert : 0);
     // Voluntad
-    this.will = Math.round(this.wisdom * 2 + this.intelligence);
+    this.will = Math.round(
+      (this.wisdom * 2 + this.intelligence + this.strength) / 2
+    );
     // Velocidad
     this.speed =
       this.dexterity * 2 +
@@ -210,6 +211,7 @@ export class CharacterViewComponent {
       });
     });
     this.parsedSkills.sort((a, b) => a.name.localeCompare(b.name));
+    console.log(this.parsedSkills);
   }
 
   updateWeapon(weaponIndex: any): void {

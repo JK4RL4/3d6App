@@ -9,6 +9,7 @@ export class CharacterService {
   currentCharacter!: Character;
   characterUpdate = new Subject<Character>();
 
+  currentActionCompleted!: string;
   actionCompleted = new Subject<string>();
 
   constructor() {}
@@ -37,5 +38,14 @@ export class CharacterService {
 
   sendActionCompleted(action: string): void {
     this.actionCompleted.next(action);
+  }
+
+  getCurrentActionCompleted(): string {
+    return this.currentActionCompleted;
+  }
+
+  clearActionCompleted(): void {
+    this.actionCompleted.next('');
+    this.currentActionCompleted = '';
   }
 }

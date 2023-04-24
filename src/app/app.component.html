@@ -1,28 +1,36 @@
 <div class="app-container">
   <!-- Menu -->
-  <app-menu [editMode]="editMode" [character]="character"></app-menu>
-
-  <!-- Creator -->
-  <app-character-creator
-    *ngIf="editMode"
+  <app-menu
+    class="menu"
+    [editMode]="editMode"
     [character]="character"
-    (editModeChange)="editMode = $event ? true : false"
-  ></app-character-creator>
+  ></app-menu>
 
-  <!-- View -->
-  <app-character-view
-    *ngIf="!editMode"
-    [character]="character"
-    (editModeChange)="editMode = $event ? true : false"
-  ></app-character-view>
-
-  <!-- Feedback -->
-  <div
-    *ngIf="actionCompletedTex && actionCompletedTex != ''"
-    mat-dialog-content
-    class="load-feedback"
-  >
-    <mat-icon class="feedback-icon">done</mat-icon>
-    <span>{{ actionCompletedTex }}</span>
-  </div>
+  <mat-tab-group headerPosition="below" (focusChange)="updateCharacter($event)" class="menu-tabs">
+    <mat-tab class="menu-tab">
+      <ng-template mat-tab-label>
+        <fa-icon [icon]="faPen" class="mat-tab-icon"></fa-icon>
+      </ng-template>
+      <!-- Creator -->
+      <app-character-creator
+        [character]="character"
+      ></app-character-creator>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <fa-icon [icon]="faDice" class="mat-tab-icon"></fa-icon>
+      </ng-template>
+      <!-- View -->
+      <app-character-view
+        [character]="character"
+      ></app-character-view
+    ></mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <fa-icon [icon]="faWandSparkles" class="mat-tab-icon"></fa-icon>
+      </ng-template>
+      <!-- Spells -->
+      <app-character-spells></app-character-spells>
+    </mat-tab>
+  </mat-tab-group>
 </div>

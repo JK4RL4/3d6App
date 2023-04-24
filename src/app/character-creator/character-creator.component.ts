@@ -34,7 +34,6 @@ export class CharacterCreatorComponent {
     quality: WEAPON_QUALITIES,
     damageType: WEAPON_DAMAGES,
   };
-  @Output() editModeChange = new EventEmitter<boolean>();
 
   newSkill(): void {
     this.character.skills.push({ name: this.SKILLS[0].name, rank: '0' });

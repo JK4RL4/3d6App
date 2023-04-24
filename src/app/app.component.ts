@@ -1,8 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { Character, EMPTY_CHARACTER } from './character';
 import { CharacterService } from './character.service';
+import {
+  faWandSparkles,
+  faPen,
+  faDice,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +22,12 @@ export class AppComponent implements OnInit, OnDestroy {
   editMode: boolean = true;
   characterUpdates!: Subscription;
   actionCompleted!: Subscription;
-  actionCompletedTex!: string;
+  faWandSparkles = faWandSparkles;
+  faPen = faPen;
+  faDice = faDice;
 
   constructor(
+    private snackBar: MatSnackBar,
     private characterService: CharacterService,
     private translateService: TranslateService
   ) {
@@ -38,10 +47,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.actionCompleted = this.characterService
       .getActionCompleted()
       .subscribe((action: string) => {
-        this.actionCompletedTex = action;
+        this.snackBar.open(action);
         setTimeout(() => {
-          this.actionCompletedTex = '';
-        }, 1500);
+          this.snackBar.dismiss();
+        }, 1000);
       });
   }
 
@@ -52,5 +61,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
   selectLanguage(lang: string) {
     this.translateService.use(lang);
+  }
+
+  updateCharacter(e: any): void {
+    this.editMode = e.index == 0;
+    if (e.index != 0) {
+      this.character = JSON.parse(JSON.stringify(this.character));
+    }
   }
 }
