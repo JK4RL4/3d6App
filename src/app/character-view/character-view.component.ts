@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   Character,
   GEAR,
@@ -167,19 +167,14 @@ export class CharacterViewComponent {
       (shieldPen < 0 ? shieldPen : 0);
     // Defensa con arma
     let weaponDefense = (sizeMod ? sizeMod : 0) + (qualityMod ? qualityMod : 0);
-    this.weaponDefense = this.currentWeapon
-      ? weaponDefense < (this.dexterity + (cc ? cc : 0)) / 2
-        ? weaponDefense > 0
-          ? weaponDefense
-          : 0
-        : Math.round((this.dexterity + (cc ? cc : 0)) / 2)
-      : 0;
+    this.weaponDefense =
+      this.currentWeapon && this.currentWeapon.range?.toUpperCase() == 'MELÉ'
+        ? weaponDefense + Math.round((this.dexterity + (cc ? cc : 0)) / 2)
+        : 0;
     // Defensa con escudo
     this.shieldDefense =
       shield > 0
-        ? shield < (this.dexterity + (cc ? cc : 0)) / 2
-          ? shield
-          : Math.round((this.dexterity + (cc ? cc : 0)) / 2)
+        ? shield + Math.round((this.dexterity + (cc ? cc : 0)) / 2) - shieldPen
         : 0;
     // Defensa
     this.defense = armor ? armor : 0;
@@ -211,7 +206,6 @@ export class CharacterViewComponent {
       });
     });
     this.parsedSkills.sort((a, b) => a.name.localeCompare(b.name));
-    console.log(this.parsedSkills);
   }
 
   updateWeapon(weaponIndex: any): void {
@@ -236,7 +230,7 @@ export class CharacterViewComponent {
           (skill) => skill.name?.toUpperCase() == 'ARMAS A DISTANCIA'
         )?.rank!
       );
-      let hit = this.currentWeapon.range?.toUpperCase() != 'NULO' ? ad : cc;
+      let hit = this.currentWeapon.range?.toUpperCase() != 'MELÉ' ? ad : cc;
       // Energía
       this.currentWeapon.energy = 2 + weaponSize?.energy!;
       // Impacto

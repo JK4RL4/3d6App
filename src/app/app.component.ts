@@ -8,6 +8,7 @@ import {
   faWandSparkles,
   faPen,
   faDice,
+  faScroll,
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
   faWandSparkles = faWandSparkles;
   faPen = faPen;
   faDice = faDice;
+  faScroll = faScroll;
 
   constructor(
     private snackBar: MatSnackBar,
