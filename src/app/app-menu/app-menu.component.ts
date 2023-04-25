@@ -12,7 +12,7 @@ import { CharacterService } from '../character.service';
   styleUrls: ['./app-menu.component.sass'],
 })
 export class AppMenuComponent {
-  @Input() editMode!: boolean;
+  @Input() index!: number;
   @Input() character!: Character;
   savedCharacters!: Character[];
   characterLoaded!: Subscription;

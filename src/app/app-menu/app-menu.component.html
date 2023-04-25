@@ -2,11 +2,13 @@
   <mat-toolbar color="primary">
     <mat-toolbar-row>
       <span>{{
-        editMode
+        index == 0
           ? "Editar personaje"
-          : character.name
-          ? character.name
-          : "Sin nombre"
+          : index == 1
+          ? "Trasfondo"
+          : index == 2
+          ? "Estadísticas"
+          : "Habilidades especiales"
       }}</span>
       <span class="menu-spacer"></span>
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu">

@@ -20,7 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
   title = '3d6App';
   selectedLanguage = 'es';
   character: Character = JSON.parse(JSON.stringify(EMPTY_CHARACTER));
-  editMode: boolean = true;
+  index: number = 0;
   characterUpdates!: Subscription;
   actionCompleted!: Subscription;
   faWandSparkles = faWandSparkles;
@@ -66,7 +66,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   updateCharacter(e: any): void {
-    this.editMode = e.index == 0;
+    this.index = e.index;
     if (e.index != 0) {
       this.character = JSON.parse(JSON.stringify(this.character));
     }
