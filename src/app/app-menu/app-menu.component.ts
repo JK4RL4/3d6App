@@ -57,4 +57,6 @@ export class AppMenuComponent {
     });
     saveAs(blob, this.character.name + '.txt');
   }
+
+  rules(): void {}
 }

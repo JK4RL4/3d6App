@@ -17,6 +17,13 @@
           [placeholder]="'name' | translate"
         />
 
+        <!-- Imagen -->
+        <input
+          matInput
+          [(ngModel)]="character.image"
+          [placeholder]="'image' | translate"
+        />
+
         <!-- Concepto -->
         <input
           matInput
@@ -41,6 +48,13 @@
             {{ nature }}
           </option>
         </select>
+
+        <!-- Lore -->
+        <textarea
+          matInput
+          [(ngModel)]="character.lore"
+          [placeholder]="'lore' | translate"
+        ></textarea>
       </mat-expansion-panel>
 
       <!-- Atributos -->

@@ -73,7 +73,8 @@
         />
         <span
           [ngClass]="{
-            overMax: _character.energy > maxEnergy
+            overMax: _character.energy > maxEnergy,
+            overMin: _character.energy == 0
           }"
           >{{ _character.energy }}
         </span>
@@ -88,9 +89,9 @@
           [ngClass]="{
             overMax: _character.health > maxHealth,
             overMid:
-              _character.health <= maxHealth / 2 &&
-              _character.health > maxHealth / 4,
-            overMin: _character.health <= maxHealth / 4
+              _character.health < maxHealth / 2 &&
+              _character.health >= maxHealth / 4,
+            overMin: _character.health < maxHealth / 4
           }"
           >{{ _character.health }}</span
         >

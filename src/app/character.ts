@@ -1,5 +1,7 @@
 export interface Character {
   name: string;
+  image: string;
+  lore: string;
   energy: number;
   health: number;
   archetype: {
@@ -33,6 +35,8 @@ export interface Character {
 
 export const EMPTY_CHARACTER = {
   name: null,
+  lore: null,
+  image: null,
   energy: 12,
   health: 20,
   archetype: {

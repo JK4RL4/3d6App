@@ -23,5 +23,7 @@
   "attack": "Ataque",
   "defense": "Defensa",
   "stats": "Pasivas",
-  "gear": "Equipo"
+  "gear": "Equipo",
+  "lore": "Trasfondo",
+  "image": "Imagen"
 }

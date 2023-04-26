@@ -1,10 +1,6 @@
 <div class="app-container">
   <!-- Menu -->
-  <app-menu
-    class="menu"
-    [index]="index"
-    [character]="character"
-  ></app-menu>
+  <app-menu class="menu" [index]="index" [character]="character"></app-menu>
 
   <mat-tab-group
     headerPosition="below"
@@ -23,7 +19,7 @@
       <ng-template mat-tab-label>
         <fa-icon [icon]="faScroll" class="mat-tab-icon"></fa-icon>
       </ng-template>
-      <app-character-lore></app-character-lore>
+      <app-character-lore [character]="character"></app-character-lore>
     </mat-tab>
     <!-- View -->
     <mat-tab>

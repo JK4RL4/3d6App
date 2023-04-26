@@ -1,1 +1,26 @@
-<div class="character-spells"></div>
+<div class="character-lore-container">
+  <div class="char-box">
+    <div class="character-lore-top">
+      <img class="character-image" [src]="character.image" />
+      <div class="character-lore-titles">
+        <div class="character-name">
+          <span>{{ character.name }}</span>
+        </div>
+        <div class="character-concept capitalize">
+          <span>{{ character.archetype.concept }}</span>
+        </div>
+        <div>
+          <div class="character-nature">
+            <span>{{ character.archetype.nature }}</span>
+          </div>
+          <div class="character-conduct">
+            <span>{{ character.archetype.conduct }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="character-lore">
+      <span>{{ character.lore }}</span>
+    </div>
+  </div>
+</div>
