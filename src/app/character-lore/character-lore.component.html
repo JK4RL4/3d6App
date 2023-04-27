@@ -1,26 +1,43 @@
 <div class="character-lore-container">
   <div class="char-box">
     <div class="character-lore-top">
-      <img class="character-image" [src]="character.image" />
+      <span class="placeholder" *ngIf="!character.image"> </span>
+      <img
+        *ngIf="character.image"
+        class="character-image"
+        [src]="character.image"
+      />
       <div class="character-lore-titles">
         <div class="character-name">
-          <span>{{ character.name }}</span>
+          <span>{{ character.name ? character.name : "Nombre" }}</span>
         </div>
         <div class="character-concept capitalize">
-          <span>{{ character.archetype.concept }}</span>
+          <span>{{
+            character.archetype.concept
+              ? character.archetype.concept
+              : "Concepto"
+          }}</span>
         </div>
         <div>
           <div class="character-nature">
-            <span>{{ character.archetype.nature }}</span>
+            <span>{{
+              character.archetype.nature
+                ? character.archetype.nature
+                : "Naturaleza"
+            }}</span>
           </div>
           <div class="character-conduct">
-            <span>{{ character.archetype.conduct }}</span>
+            <span>{{
+              character.archetype.conduct
+                ? character.archetype.conduct
+                : "Conducta"
+            }}</span>
           </div>
         </div>
       </div>
     </div>
     <div class="character-lore">
-      <span>{{ character.lore }}</span>
+      <span>{{ character.lore ? character.lore : "Trasfondo" }}</span>
     </div>
   </div>
 </div>

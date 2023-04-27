@@ -1,7 +1,9 @@
 {
   "archetype": "Perfil",
   "attributes": "Atributos",
+  "salvations": "Salvaciones",
   "skills": "Habilidades",
+  "esp-skills": "Habilidades especiales",
   "armor": "Armadura",
   "weapons": "Armas",
   "name": "Nombre",

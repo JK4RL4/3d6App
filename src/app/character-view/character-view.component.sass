@@ -70,7 +70,7 @@ h3
 
 .char-skills
     ul
-        max-height: 45vh
+        max-height: 31vh
         overflow: auto
 
 .char-attack
@@ -110,7 +110,8 @@ h3
 .char-energy
     position: absolute
     bottom: 0.2rem
-    width: 48%
+    left: 1%
+    width: calc(98% - 2px)
     height: 50px
     display: flex
     flex-direction: row
@@ -141,26 +142,26 @@ h3
         text-shadow: -1px -1px 1px #fff, 1px -1px 1px #fff, -1px 1px 1px #fff, 1px 1px 1px #fff
 
     .char-stat
+        width: 33%
         position: relative
         display: flex
-        flex-direction: column
-        justify-content: space-around
+        flex-direction: row
+        justify-content: space-between
         align-items: center
 
         span
             min-width: 35px
-            padding-left: 20px
             font-size: 28px
             font-weight: bold
             text-align: center
 
+        >div
+            display: flex
+            align-items: center
     img
-        position: absolute
-        top: -3px
-        left: 0
-        z-index: -1
-        height: 20px
+        height: 30px
         width: auto
+        margin-right: 10px
         filter: drop-shadow(1px 1px 1px black)
 
 .overMax

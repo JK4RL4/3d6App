@@ -29,6 +29,7 @@ import { CharacterSpellsComponent } from './character-spells/character-spells.co
 import { AppMenuComponent } from './app-menu/app-menu.component';
 import { CharacterLoadComponent } from './character-load/character-load.component';
 import { CharacterLoreComponent } from './character-lore/character-lore.component';
+import { RulesComponent } from './rules/rules.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -43,6 +44,7 @@ export function createTranslateLoader(http: HttpClient) {
     CharacterLoadComponent,
     CharacterSpellsComponent,
     CharacterLoreComponent,
+    RulesComponent,
   ],
   imports: [
     BrowserModule,

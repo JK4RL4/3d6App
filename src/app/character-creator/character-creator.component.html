@@ -194,11 +194,13 @@
           <hr *ngIf="i > 0" />
           <div>
             <mat-icon
+              *ngIf="weapon.name != 'Sin arma'"
               class="skill-remove-icon"
               (click)="character.weapons.splice(i, 1)"
               >close</mat-icon
             >
             <input
+              [disabled]="weapon.name == 'Sin arma'"
               type="text"
               [(ngModel)]="weapon.name"
               placeholder="Nombre del arma"
@@ -256,6 +258,16 @@
         <div class="skill-add">
           <mat-icon class="skill-add-icon" (click)="newWeapon()">add</mat-icon>
         </div>
+      </mat-expansion-panel>
+
+      <!-- Habilidades especiales -->
+      <mat-expansion-panel class="add-panel" disabled="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="character-creator-title">
+            {{ "esp-skills" | translate }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div></div>
       </mat-expansion-panel>
     </mat-accordion>
   </div>

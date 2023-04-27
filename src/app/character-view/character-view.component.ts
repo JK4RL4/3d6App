@@ -31,6 +31,7 @@ export class CharacterViewComponent {
   weaponDefense!: number;
   shieldDefense!: number;
   defense!: number;
+  confidence!: number;
   GEAR = GEAR;
   SIZES = WEAPON_SIZES;
   RANGES = WEAPON_RANGES;
@@ -53,10 +54,13 @@ export class CharacterViewComponent {
     this.calculateCharPasives();
     this.calculateCharStats();
     this.calculateSkills();
+    this.setFight();
     this.updateWeapon(0);
   }
 
   getAttributes(): void {
+    // Confianza
+    this.confidence = this._character.confidence;
     // Fuerza
     this.strength = parseInt(
       this._character.attributes.find(
@@ -97,9 +101,6 @@ export class CharacterViewComponent {
 
   updateHealth(x: number): void {
     this._character.health += x;
-    // if (this._character.health > this.maxHealth) {
-    //   this._character.health = this.maxHealth;
-    // }
     if (this._character.health < 0) {
       this._character.health = 0;
     }
@@ -107,11 +108,15 @@ export class CharacterViewComponent {
 
   updateEnergy(x: number): void {
     this._character.energy += x;
-    // if (this._character.energy > this.maxEnergy) {
-    //   this._character.energy = this.maxEnergy;
-    // }
     if (this._character.energy < 0) {
       this._character.energy = 0;
+    }
+  }
+
+  updateConfidence(x: number): void {
+    this._character.confidence += x;
+    if (this._character.confidence < 0) {
+      this._character.confidence = 0;
     }
   }
 
@@ -146,6 +151,11 @@ export class CharacterViewComponent {
         (skill) => skill.name.toUpperCase() == 'ARMAS CUERPO A CUERPO'
       )?.rank!
     );
+    let fight = parseInt(
+      this._character.skills.find(
+        (skill) => skill.name.toUpperCase() == 'PELEA'
+      )?.rank!
+    );
     let sizeMod = this.SIZES.find(
       (size) => size.size == this.currentWeapon?.size
     )?.def;
@@ -154,11 +164,13 @@ export class CharacterViewComponent {
     )?.def;
     // Percepción
     this.perception =
-      this.wisdom! + (helmetPen < 0 ? helmetPen : 0) + (alert > 0 ? alert : 0);
+      8 +
+      this.wisdom! +
+      (helmetPen < 0 ? helmetPen : 0) +
+      (alert > 0 ? alert : 0);
     // Voluntad
-    this.will = Math.round(
-      (this.wisdom * 2 + this.intelligence + this.strength) / 2
-    );
+    this.will =
+      8 + Math.round((this.wisdom * 2 + this.intelligence + this.strength) / 2);
     // Velocidad
     this.speed =
       this.dexterity * 2 +
@@ -168,8 +180,20 @@ export class CharacterViewComponent {
     // Defensa con arma
     let weaponDefense = (sizeMod ? sizeMod : 0) + (qualityMod ? qualityMod : 0);
     this.weaponDefense =
-      this.currentWeapon && this.currentWeapon.range?.toUpperCase() == 'MELÉ'
-        ? weaponDefense + Math.round((this.dexterity + (cc ? cc : 0)) / 2)
+      this.currentWeapon &&
+      this.currentWeapon.range?.toUpperCase().includes('MELÉ')
+        ? weaponDefense +
+          Math.round(
+            (this.dexterity +
+              (this.currentWeapon.name.toUpperCase() == 'SIN ARMA'
+                ? fight
+                  ? fight
+                  : 0
+                : cc
+                ? cc
+                : 0)) /
+              2
+          )
         : 0;
     // Defensa con escudo
     this.shieldDefense =
@@ -197,6 +221,7 @@ export class CharacterViewComponent {
       this.parsedSkills.push({
         name: skill.name,
         rank:
+          8 +
           parseInt(skill.rank!) +
           parseInt(
             this._character.attributes.find(
@@ -225,12 +250,21 @@ export class CharacterViewComponent {
           (skill) => skill.name?.toUpperCase() == 'ARMAS CUERPO A CUERPO'
         )?.rank!
       );
+      let fight = parseInt(
+        this._character.skills.find(
+          (skill) => skill.name.toUpperCase() == 'PELEA'
+        )?.rank!
+      );
       let ad = parseInt(
         this._character.skills.find(
           (skill) => skill.name?.toUpperCase() == 'ARMAS A DISTANCIA'
         )?.rank!
       );
-      let hit = this.currentWeapon.range?.toUpperCase() != 'MELÉ' ? ad : cc;
+      let hit = !this.currentWeapon.range?.toUpperCase().includes('MELÉ')
+        ? ad
+        : this.currentWeapon.name?.toUpperCase() == 'SIN ARMA'
+        ? fight
+        : cc;
       // Energía
       this.currentWeapon.energy = 2 + weaponSize?.energy!;
       // Impacto
@@ -269,6 +303,18 @@ export class CharacterViewComponent {
             typeEffects.find((typeEffect) => typeEffect.rank == bestEffect)
           );
         }
+      });
+    }
+  }
+
+  setFight(): void {
+    if (!this._character.weapons.some((weapon) => weapon.name == 'Sin arma')) {
+      this._character.weapons.push({
+        name: 'Sin arma',
+        size: 'pequeño',
+        range: 'melé(1)',
+        quality: 'estándar',
+        damageType: ['Contundente'],
       });
     }
   }

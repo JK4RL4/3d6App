@@ -4,6 +4,7 @@ export interface Character {
   lore: string;
   energy: number;
   health: number;
+  confidence: number;
   archetype: {
     concept: string;
     nature: string;
@@ -39,6 +40,7 @@ export const EMPTY_CHARACTER = {
   image: null,
   energy: 12,
   health: 20,
+  confidence: 1,
   archetype: {
     concept: null,
     nature: null,
@@ -131,7 +133,15 @@ export const GEAR = {
   ],
 };
 
-export const WEAPON_RANGES = ['melé', 'lanzar', 'corto', 'largo', 'extremo'];
+export const WEAPON_RANGES = [
+  'melé(1)',
+  'melé(2)',
+  'melé(3)',
+  'lanzar',
+  'corto',
+  'largo',
+  'extremo',
+];
 
 export const WEAPON_QUALITIES = [
   { quality: 'baja', damage: -1, crit: 0, effects: -1, hit: -1, def: -2 },

@@ -4,6 +4,7 @@ import { Character } from '../character';
 import { MatDialog } from '@angular/material/dialog';
 import { saveAs } from 'file-saver';
 import { CharacterLoadComponent } from '../character-load/character-load.component';
+import { RulesComponent } from '../rules/rules.component';
 import { CharacterService } from '../character.service';
 
 @Component({
@@ -34,6 +35,17 @@ export class AppMenuComponent {
     });
   }
 
+  openRulesDialog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
+    this.dialog.open(RulesComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+
   save(): void {
     this.savedCharacters = JSON.parse(localStorage.getItem('chracters')!);
     if (!this.savedCharacters) {
@@ -57,6 +69,4 @@ export class AppMenuComponent {
     });
     saveAs(blob, this.character.name + '.txt');
   }
-
-  rules(): void {}
 }
