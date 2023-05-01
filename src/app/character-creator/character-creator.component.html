@@ -192,7 +192,7 @@
           class="weapon-config"
         >
           <hr *ngIf="i > 0" />
-          <div>
+          <div class="weapon-name">
             <mat-icon
               *ngIf="weapon.name != 'Sin arma'"
               class="skill-remove-icon"
@@ -206,52 +206,61 @@
               placeholder="Nombre del arma"
               maxlength="25"
             />
+            <mat-icon
+              class="skill-remove-icon"
+              (click)="hideWeapon[i] = !hideWeapon[i]"
+              >{{
+                hideWeapon[i] ? "arrow_drop_down" : "arrow_drop_up"
+              }}</mat-icon
+            >
           </div>
-          <!-- Tamaño -->
-          <select name="select" [(ngModel)]="weapon.size">
-            <option value="null" disabled selected>Selecciona tamaño</option>
-            <option *ngFor="let size of WEAPON.size" [value]="size.size">
-              {{ "Tamaño " + size.size }}
-            </option>
-          </select>
-          <!-- Calidad -->
-          <select name="select" [(ngModel)]="weapon.quality">
-            <option value="null" disabled selected>Selecciona calidad</option>
-            <option
-              *ngFor="let quality of WEAPON.quality"
-              [value]="quality.quality"
+          <div class="weapon-stats" [ngClass]="{ 'weapon-stats-hidden': hideWeapon[i] }">
+            <!-- Tamaño -->
+            <select name="select" [(ngModel)]="weapon.size">
+              <option value="null" disabled selected>Selecciona tamaño</option>
+              <option *ngFor="let size of WEAPON.size" [value]="size.size">
+                {{ "Tamaño " + size.size }}
+              </option>
+            </select>
+            <!-- Calidad -->
+            <select name="select" [(ngModel)]="weapon.quality">
+              <option value="null" disabled selected>Selecciona calidad</option>
+              <option
+                *ngFor="let quality of WEAPON.quality"
+                [value]="quality.quality"
+              >
+                {{ "Calidad " + quality.quality }}
+              </option>
+            </select>
+            <!-- Alcance -->
+            <select name="select" [(ngModel)]="weapon.range">
+              <option value="null" disabled selected>Selecciona alcance</option>
+              <option *ngFor="let range of WEAPON.range" [value]="range">
+                {{ "Alcance " + range }}
+              </option>
+            </select>
+            <!-- Daño -->
+            <span class="damage-select-title">
+              Selecciona hasta 3 tipos de daño
+            </span>
+            <select
+              name="select"
+              class="damage-select"
+              [(ngModel)]="weapon.damageType"
+              multiple
             >
-              {{ "Calidad " + quality.quality }}
-            </option>
-          </select>
-          <!-- Alcance -->
-          <select name="select" [(ngModel)]="weapon.range">
-            <option value="null" disabled selected>Selecciona alcance</option>
-            <option *ngFor="let range of WEAPON.range" [value]="range">
-              {{ "Alcance " + range }}
-            </option>
-          </select>
-          <!-- Daño -->
-          <span class="damage-select-title">
-            Selecciona hasta 3 tipos de daño
-          </span>
-          <select
-            name="select"
-            class="damage-select"
-            [(ngModel)]="weapon.damageType"
-            multiple
-          >
-            <option
-              *ngFor="let damage of WEAPON.damageType"
-              [value]="damage.type"
-              [disabled]="
-                weapon.damageType.length == 3 &&
-                !weapon.damageType.includes(damage.type)
-              "
-            >
-              {{ "Daño " + damage.type }}
-            </option>
-          </select>
+              <option
+                *ngFor="let damage of WEAPON.damageType"
+                [value]="damage.type"
+                [disabled]="
+                  weapon.damageType.length == 3 &&
+                  !weapon.damageType.includes(damage.type)
+                "
+              >
+                {{ "Daño " + damage.type }}
+              </option>
+            </select>
+          </div>
         </div>
 
         <!-- Añadir arma -->

@@ -1,10 +1,10 @@
 export const RULES = {
-  Confianza:
-    'Por cada punto de confianza, el personaje puede repetir una tirada. Ninguna tirada puede repetirse más de una vez. El resultado de la repetición sustituye por completo al de la tirada original.',
+  Destino:
+    'Por cada punto de destino, el personaje puede repetir una tirada. Ninguna tirada puede repetirse más de una vez. El resultado de la repetición sustituye por completo al de la tirada original.',
   'Fallo crítico':
-    'Si se falla una tirada de Habilidad/Salvación con un Margen de éxito de -10 o menos, se obtiene un fallo crítico. Cuando ocurra, el personaje perderá 1 punto de Confianza y puede tener efectos adicionales a discreción del narrador.',
+    'Si se falla una tirada de Habilidad/Salvación con un Margen de éxito de -10 o menos, se obtiene un fallo crítico. Cuando ocurra, el personaje perderá 1 punto de Destino y puede tener efectos adicionales a discreción del narrador.',
   'Éxito crítico':
-    'Si se supera una tirada de Habilidad/Salvación con un Margen de éxito de 10 o más, se obtiene un éxito crítico. Cada éxito crítico otorga 1 punto de Confianza y puede tener efectos adicionales a discreción del narrador.',
+    'Si se supera una tirada de Habilidad/Salvación con un Margen de éxito de 10 o más, se obtiene un éxito crítico. Cada éxito crítico otorga 1 punto de Destino y puede tener efectos adicionales a discreción del narrador.',
   Pifia:
     'Si se falla una tirada de ataque con un Margen de éxito de -10 o más, se produce una pifia. Las pifias otorgan al enemigo una oportunidad de contraataque, otorgándole una acción de combate adicional, y pueden tener efectos adicionales a discreción del narrador.',
   Penalizador:
