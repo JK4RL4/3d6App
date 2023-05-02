@@ -1,1 +1,47 @@
-<div class="character-spells"></div>
+<div class="character-spells">
+  <div *ngFor="let spell of character.spells">
+    <div class="spell-title">
+      <div class="spell-name">
+        <span>{{ spell?.type }}</span>
+        <span>{{ spell?.name }}</span>
+      </div>
+      <div class="spell-cost">
+        <div>
+          <span>Coste</span><span>{{ spell?.cost }}</span>
+        </div>
+        <div>
+          <span>Pérdida</span> <span>{{ spell?.cost }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="spell-description">{{ spell?.description }}</div>
+    <div *ngIf="spell.type == 'Combate'" class="spell-combat">
+      <!-- <ul>
+        <li>
+          <span>Tamaño</span>
+          <span>{{ spell?.size }}</span>
+        </li>
+        <li>
+          <span>Alcance</span>
+          <span class="capitalize">{{ spell?.range }}</span>
+        </li>
+        <li>
+          <span>Potencia</span>
+          <span>{{ spell?.quality }}</span>
+        </li>
+        <li>
+          <span>Daño</span>
+          <span>{{ spell?.damage }}</span>
+        </li>
+        <li class="char-attack-effects">
+          <span>Efectos</span>
+          <div>
+            <span class="capitalize" *ngFor="let effect of spell?.effects"
+              >{{ effect?.type }} ({{ effect?.rank }})</span
+            >
+          </div>
+        </li>
+      </ul> -->
+    </div>
+  </div>
+</div>

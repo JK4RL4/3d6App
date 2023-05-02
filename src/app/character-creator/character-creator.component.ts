@@ -35,6 +35,7 @@ export class CharacterCreatorComponent {
     damageType: WEAPON_DAMAGES,
   };
   hideWeapon: boolean[] = [true];
+  hideSpell: boolean[] = [true];
 
   newSkill(): void {
     this.character.skills.push({ name: this.SKILLS[0].name, rank: '0' });
@@ -49,5 +50,20 @@ export class CharacterCreatorComponent {
       damageType: [],
     });
     this.hideWeapon.push(true);
+  }
+
+  newSpell(): void {
+    this.character.spells.push({
+      name: null,
+      type: null,
+      description: null,
+      cost: null,
+      lost: null,
+      size: null,
+      range: null,
+      quality: null,
+      damageType: [],
+    });
+    this.hideSpell.push(true);
   }
 }

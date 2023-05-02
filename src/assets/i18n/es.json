@@ -27,5 +27,6 @@
   "stats": "Pasivas",
   "gear": "Equipo",
   "lore": "Trasfondo",
-  "image": "Imagen"
+  "image": "Imagen",
+  "description": "Descripción"
 }

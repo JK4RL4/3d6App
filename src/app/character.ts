@@ -32,6 +32,17 @@ export interface Character {
     quality: string | null;
     damageType: string[];
   }[];
+  spells: {
+    name: string | null;
+    description: string | null;
+    type: string | null;
+    cost: number | null;
+    lost: number | null;
+    size: string | null;
+    range: string | null;
+    quality: string | null;
+    damageType: string[];
+  }[];
 }
 
 export const EMPTY_CHARACTER = {
@@ -62,6 +73,7 @@ export const EMPTY_CHARACTER = {
     helmet: null,
   },
   weapons: [],
+  spells: [],
 };
 
 export const SKILLS = [
