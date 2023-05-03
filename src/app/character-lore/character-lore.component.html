@@ -12,6 +12,7 @@
           <span>{{ character.name ? character.name : "Nombre" }}</span>
         </div>
         <div class="character-concept capitalize">
+          <span>Concepto</span>
           <span>{{
             character.archetype.concept
               ? character.archetype.concept
@@ -20,23 +21,28 @@
         </div>
         <div>
           <div class="character-nature">
-            <span>{{
-              character.archetype.nature
-                ? character.archetype.nature
-                : "Naturaleza"
-            }}</span>
+            <span>Naturaleza / Conducta</span>
           </div>
           <div class="character-conduct">
-            <span>{{
-              character.archetype.conduct
-                ? character.archetype.conduct
-                : "Conducta"
-            }}</span>
+            <span
+              >{{
+                character.archetype.nature
+                  ? character.archetype.nature
+                  : "Naturaleza"
+              }}
+              /
+              {{
+                character.archetype.conduct
+                  ? character.archetype.conduct
+                  : "Conducta"
+              }}</span
+            >
           </div>
         </div>
       </div>
     </div>
     <div class="character-lore">
+      <span>Trasfondo</span>
       <span>{{ character.lore ? character.lore : "Trasfondo" }}</span>
     </div>
   </div>

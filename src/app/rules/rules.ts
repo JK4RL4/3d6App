@@ -35,7 +35,7 @@ export const RULES = {
   Quemar:
     'Por cada efecto de quemado en un personaje, éste recibe 3 puntos de Daño adicionales cada vez que reciba un ataque con este efecto.',
   Aturdir:
-    'Por cada efecto de aturdimiento en un personaje, éste reduce en 1 punto su Energía máxima hasta finalizar el combate.',
+    'Por cada efecto de aturdimiento en un personaje, éste sufre 1 punto de Pérdida de Energía.',
   'Golpe crítico':
     'Si se consigue un Margen de éxito de 10 o más en una tirada de ataque, se produce un golpe crítico. Los golpes críticos duplican el Daño del ataque y pueden tener efectos adicionales a discreción del narrador.',
   Coste: 'Gasto de Energía que debe realizarse para llevar a cabo una acción.',

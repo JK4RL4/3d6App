@@ -31,12 +31,13 @@
     overflow: auto
 
 .character-image
-    width: 50%
+    width: 40%
     height: auto
     border: 1px solid black
+    margin-right: 1rem
 
 .placeholder
-    min-width: 50%
+    min-width: 40%
     height: 10rem
     border: 1px solid black
     background: LightGray
@@ -46,16 +47,22 @@
     font-weight: bold
     text-align: center
     margin-bottom: 1rem
+    font-family: BreatheFireIii
 
 .character-concept
     font-size: 18px
     text-align: center
-    margin-bottom: 1.5rem
+    margin-bottom: 0.5rem
     font-style: italic
+    display: flex
+    flex-direction: column
+
+    span:first-of-type
+        color: DimGray
+        font-size: 12px
 
 .character-nature
-    margin-bottom: 0.5rem
-    font-size: 16px
+    font-size: 12px
     font-style: italic
     color: DimGray
     text-align: center
@@ -63,18 +70,25 @@
 .character-conduct
     font-size: 16px
     font-style: italic
-    color: DimGray
     text-align: center
 
 .character-lore
-    widows: 100%
+    width: 100%
     margin-top: 1rem
     font-size: 16px
+    display: flex
+    flex-direction: column
+
+    span:first-of-type
+        color: DimGray
+        font-size: 12px
+        font-style: italic
+        margin-bottom: 0.5rem
 
 .character-lore-top
     width: 100%
     display: flex
-    justify-content: center
+    justify-content: space-between
     align-items: center
 
 .character-lore-titles

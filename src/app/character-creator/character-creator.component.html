@@ -312,7 +312,7 @@
             [ngClass]="{ 'weapon-stats-hidden': hideSpell[i] }"
           >
             <!-- Tipo -->
-            <select name="select" [(ngModel)]="spell.type">
+            <select class="spell-type" name="select" [(ngModel)]="spell.type">
               <option value="null" disabled selected>Tipo</option>
               <option
                 *ngFor="let type of ['Narrativa', 'Combate']"
@@ -344,63 +344,6 @@
             [placeholder]="'description' | translate"
             [ngClass]="{ 'weapon-stats-hidden': hideSpell[i] }"
           ></textarea>
-
-          <!-- <div
-            class="weapon-stats"
-            [ngClass]="{ 'weapon-stats-hidden': hideSpell[i] }"
-          > -->
-          <!-- Tamaño -->
-          <!-- <div *ngIf="spell.type == 'Combate'" class="weapon-stats">
-              <select name="select" [(ngModel)]="spell.size">
-                <option value="null" disabled selected>Selecciona tamaño</option>
-                <option *ngFor="let size of WEAPON.size" [value]="size.size">
-                  {{ "Tamaño " + size.size }}
-                </option>
-              </select> -->
-          <!-- Potencia -->
-          <!-- <select name="select" [(ngModel)]="spell.quality">
-                <option value="null" disabled selected>
-                  Selecciona potencia
-                </option>
-                <option
-                  *ngFor="let quality of WEAPON.quality"
-                  [value]="quality.quality"
-                >
-                  {{ "Potencia " + quality.quality }}
-                </option>
-              </select> -->
-          <!-- Alcance -->
-          <!-- <select name="select" [(ngModel)]="spell.range">
-                <option value="null" disabled selected>
-                  Selecciona alcance
-                </option>
-                <option *ngFor="let range of WEAPON.range" [value]="range">
-                  {{ "Alcance " + range }}
-                </option>
-              </select> -->
-          <!-- Daño -->
-          <!-- <span class="damage-select-title">
-                Selecciona hasta 3 tipos de daño
-              </span>
-              <select
-                name="select"
-                class="damage-select"
-                [(ngModel)]="spell.damageType"
-                multiple
-              >
-                <option
-                  *ngFor="let damage of WEAPON.damageType"
-                  [value]="damage.type"
-                  [disabled]="
-                    spell.damageType.length == 3 &&
-                    !spell.damageType.includes(damage.type)
-                  "
-                >
-                  {{ "Daño " + damage.type }}
-                </option>
-              </select>
-            </div>
-          </div> -->
         </div>
 
         <!-- Añadir arma -->

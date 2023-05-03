@@ -16,22 +16,25 @@
     border-bottom: 2px solid white
 
     >div
-        width: calc(98% - 2rem)
-        max-width: calc(98% - 2rem)
-        padding: 1rem
+        max-width: calc(98% - 0.5rem)
+        min-width: calc(98% - 0.5rem)
         margin: 5px 0 0 0
-        border: 1px solid black
+        border: 1px solid white
         border-radius: 4px
         box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)
         opacity: 0.9
         background: GhostWhite
+        overflow: hidden
 
 .spell-title
+    padding: 0.5rem 1rem
     display: flex
     justify-content: space-between
     align-items: center
     font-family: 'Times New Roman', Times, serif
     font-size: 16px
+    color: White
+    background: black
 
 .spell-name
     position: relative
@@ -39,23 +42,26 @@
     flex-direction: column
 
     span:first-of-type
-        color: DimGray
+        color: #b1b1b1
         font-family: 'Times New Roman', Times, serif
         font-size: 12px
 
+    span:last-of-type
+        font-family: BreatheFireIii
+
 .spell-cost
     display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    font-weight: bold
 
-    >div
-        display: flex
-        flex-direction: column
-        justify-content: center
-        align-items: center
-        margin: 0 1rem
+    >span:first-of-type
+        font-size: 12px
+        color: #b1b1b1
 
-        span:first-of-type
-            color: DimGray
+.spell-lost
+    color: red !important
 
 .spell-description
-    width: 100%
-    margin-top: 1rem
+    padding: 1rem
