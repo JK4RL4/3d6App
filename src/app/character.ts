@@ -31,6 +31,8 @@ export interface Character {
     range: string | null;
     quality: string | null;
     damageType: string[];
+    impactAtt: string | null;
+    damageAtt: string | null;
   }[];
   spells: {
     name: string | null;
@@ -38,10 +40,6 @@ export interface Character {
     type: string | null;
     cost: number | null;
     lost: number | null;
-    size: string | null;
-    range: string | null;
-    quality: string | null;
-    damageType: string[];
   }[];
 }
 

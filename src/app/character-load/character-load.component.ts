@@ -48,7 +48,11 @@ export class CharacterLoadComponent {
 
   loadCharacter(): void {
     this.characterService.sendCharacterUpdates(
-      this.savedCharacters.find((char) => char.name == this.selectedCharacter)!
+      this.savedCharacters.find(
+        (char) =>
+          char.name ==
+          (this.selectedCharacter != 'null' ? this.selectedCharacter : null)
+      )!
     );
     this.characterService.sendActionCompleted('Personaje cargado');
     this.dialogRef.close();

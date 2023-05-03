@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   Character,
   GEAR,
@@ -39,6 +39,7 @@ export class CharacterViewComponent {
   DAMAGES = WEAPON_DAMAGES;
   SKILLS = SKILLS;
   parsedSkills!: { name: string; rank: number }[];
+  @Output() statsUpdated = new EventEmitter<Character>();
 
   _character!: Character;
   get character(): Character {
@@ -104,6 +105,7 @@ export class CharacterViewComponent {
     if (this._character.health < 0) {
       this._character.health = 0;
     }
+    this.statsUpdated.emit(this._character);
   }
 
   updateEnergy(x: number): void {
@@ -111,6 +113,7 @@ export class CharacterViewComponent {
     if (this._character.energy < 0) {
       this._character.energy = 0;
     }
+    this.statsUpdated.emit(this._character);
   }
 
   updateConfidence(x: number): void {
@@ -118,6 +121,7 @@ export class CharacterViewComponent {
     if (this._character.confidence < 0) {
       this._character.confidence = 0;
     }
+    this.statsUpdated.emit(this._character);
   }
 
   calculateCharPasives(): void {
@@ -205,11 +209,15 @@ export class CharacterViewComponent {
   }
 
   calculateCharStats(): void {
-    this._character.health = this.constitution * 10;
-    this.maxHealth = this._character.health;
-    this._character.energy =
+    this.maxHealth = this.constitution * 10;
+    if (this._character.health == null) {
+      this._character.health = this.maxHealth;
+    }
+    this.maxEnergy =
       this.strength * 3 + this.constitution * 2 + this.dexterity * 2;
-    this.maxEnergy = this._character.energy;
+    if (this._character.energy == null) {
+      this._character.energy == this.maxEnergy;
+    }
   }
 
   calculateSkills(): void {
@@ -270,7 +278,7 @@ export class CharacterViewComponent {
       // Impacto
       this.currentWeapon.impact =
         8 +
-        this.dexterity +
+        this.getAttributeByName(this.currentWeapon.impactAtt) +
         (hit ? hit : 0) +
         weaponQuality?.hit! +
         (weaponSize?.hit! + Math.round(this.strength / 2) >= 0
@@ -278,7 +286,10 @@ export class CharacterViewComponent {
           : weaponSize?.hit! + Math.round(this.strength / 2));
       // Daño
       this.currentWeapon.damage =
-        4 + this.strength + weaponSize?.damage! + weaponQuality?.damage!;
+        4 +
+        this.getAttributeByName(this.currentWeapon.damageAtt) +
+        weaponSize?.damage! +
+        weaponQuality?.damage!;
       // Efectos
       let effects: { type: string; rank: number }[] = [];
       this.currentWeapon.effects = [];
@@ -315,7 +326,28 @@ export class CharacterViewComponent {
         range: 'melé(1)',
         quality: 'estándar',
         damageType: ['Contundente'],
+        impactAtt: 'dexterity',
+        damageAtt: 'strength',
       });
+    }
+  }
+
+  getAttributeByName(att: string): number {
+    switch (att) {
+      case 'strength':
+        return this.strength;
+      case 'dexterity':
+        return this.dexterity;
+      case 'constitution':
+        return this.constitution;
+      case 'intelligence':
+        return this.intelligence;
+      case 'wisdom':
+        return this.wisdom;
+      case 'charisma':
+        return this.charisma;
+      default:
+        return 0;
     }
   }
 }

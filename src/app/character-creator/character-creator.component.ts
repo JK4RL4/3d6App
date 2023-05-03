@@ -48,6 +48,8 @@ export class CharacterCreatorComponent {
       range: null,
       quality: null,
       damageType: [],
+      impactAtt: null,
+      damageAtt: null,
     });
     this.hideWeapon.push(true);
   }
@@ -59,10 +61,6 @@ export class CharacterCreatorComponent {
       description: null,
       cost: null,
       lost: null,
-      size: null,
-      range: null,
-      quality: null,
-      damageType: [],
     });
     this.hideSpell.push(true);
   }

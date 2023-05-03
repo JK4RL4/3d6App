@@ -218,6 +218,30 @@
             class="weapon-stats"
             [ngClass]="{ 'weapon-stats-hidden': hideWeapon[i] }"
           >
+            <!-- Atributo de impacto -->
+            <select name="select" [(ngModel)]="weapon.impactAtt">
+              <option value="null" disabled selected>
+                Selecciona atributo de impacto
+              </option>
+              <option
+                *ngFor="let attribute of character.attributes"
+                [value]="attribute.name"
+              >
+                {{ "Impacto: " + (attribute.name | translate) }}
+              </option>
+            </select>
+            <!-- Atributo de daño -->
+            <select name="select" [(ngModel)]="weapon.damageAtt">
+              <option value="null" disabled selected>
+                Selecciona atributo de daño
+              </option>
+              <option
+                *ngFor="let attribute of character.attributes"
+                [value]="attribute.name"
+              >
+                {{ "Daño: " + (attribute.name | translate) }}
+              </option>
+            </select>
             <!-- Tamaño -->
             <select name="select" [(ngModel)]="weapon.size">
               <option value="null" disabled selected>Selecciona tamaño</option>
