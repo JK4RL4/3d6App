@@ -7,7 +7,7 @@
       <ul>
         <li *ngFor="let attribute of _character.attributes">
           <span>{{ attribute.name | translate }}</span>
-          <span>{{ attribute.rank + 8 }}</span>
+          <span>{{ parseInt(attribute.rank) + 8 }}</span>
         </li>
       </ul>
     </div>

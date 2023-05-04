@@ -40,6 +40,7 @@ export class CharacterViewComponent {
   SKILLS = SKILLS;
   parsedSkills!: { name: string; rank: number }[];
   @Output() statsUpdated = new EventEmitter<Character>();
+  parseInt = parseInt;
 
   _character!: Character;
   get character(): Character {
