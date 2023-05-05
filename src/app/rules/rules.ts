@@ -75,7 +75,7 @@ export const RULES = {
   Energía:
     'Puntos que deben invertirse para realizar acciones o aumentar la Iniciativa. Si cae a 0, el personaje queda Agotado. Si el valor máximo es 0 debido a Pérdida, el personaje queda Exhausto.',
   Aguante:
-    'Daño que puede recibir el personaje antes de quedar fuera de combate. Si el aguante cae por debajo del 50%, el personaje recibe un Penalizador de 1 punto a todas sus tiradas. Si cae por debajo del 25%, el personaje recibe un Penalizador de 2 puntos a todas sus tiradas.',
+    'Daño que puede recibir el personaje antes de quedar fuera de combate. Si el aguante cae por debajo del 50%, el personaje recibe un Penalizador de 1 punto a todas sus tiradas y su Velocidad se reduce en 2 puntos. Si cae por debajo del 25%, el personaje recibe un Penalizador de 2 puntos a todas sus tiradas y su Velocidad se reduce en 4 puntos.',
   Impacto: 'Dificultad de la tirada de ataque.',
   Daño: 'Daño aplicado al enemigo si la tirada de ataque tiene éxito.',
   Efecto:
