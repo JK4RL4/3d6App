@@ -200,6 +200,9 @@ export class CharacterViewComponent {
               2
           )
         : 0;
+    if (this.weaponDefense < 0) {
+      this.weaponDefense = 0;
+    }
     // Defensa con escudo
     this.shieldDefense =
       shield > 0
