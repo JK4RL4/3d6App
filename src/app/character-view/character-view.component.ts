@@ -187,17 +187,19 @@ export class CharacterViewComponent {
     this.weaponDefense =
       this.currentWeapon &&
       this.currentWeapon.range?.toUpperCase().includes('MELÉ')
-        ? weaponDefense +
-          Math.round(
-            (this.dexterity +
-              (this.currentWeapon.name.toUpperCase() == 'SIN ARMA'
-                ? fight
-                  ? fight
-                  : 0
-                : cc
-                ? cc
-                : 0)) /
-              2
+        ? Math.round(
+            weaponDefense *
+              Math.round(
+                (this.dexterity +
+                  (this.currentWeapon.name.toUpperCase() == 'SIN ARMA'
+                    ? fight
+                      ? fight
+                      : 0
+                    : cc
+                    ? cc
+                    : 0)) /
+                  10
+              )
           )
         : 0;
     if (this.weaponDefense < 0) {
@@ -206,22 +208,23 @@ export class CharacterViewComponent {
     // Defensa con escudo
     this.shieldDefense =
       shield > 0
-        ? shield + Math.round((this.dexterity + (cc ? cc : 0)) / 2) - shieldPen
+        ? Math.round(
+            shield * Math.round((this.dexterity + (cc ? cc : 0)) / 10)
+          ) - shieldPen
         : 0;
+    if (this.shieldDefense < 0) {
+      this.shieldDefense = 0;
+    }
     // Defensa
     this.defense = armor ? armor : 0;
   }
 
   calculateCharStats(): void {
     this.maxHealth = this.constitution * 10;
-    if (this._character.health == null) {
-      this._character.health = this.maxHealth;
-    }
+    this._character.health = this.maxHealth;
     this.maxEnergy =
       this.strength * 3 + this.constitution * 2 + this.dexterity * 2;
-    if (this._character.energy == null) {
-      this._character.energy == this.maxEnergy;
-    }
+    this._character.energy = this.maxEnergy;
   }
 
   calculateSkills(): void {
@@ -291,7 +294,9 @@ export class CharacterViewComponent {
       // Daño
       this.currentWeapon.damage =
         4 +
-        this.getAttributeByName(this.currentWeapon.damageAtt) +
+        (this.getAttributeByName(this.currentWeapon.damageAtt)
+          ? this.getAttributeByName(this.currentWeapon.damageAtt)
+          : 0) +
         weaponSize?.damage! +
         weaponQuality?.damage!;
       // Efectos
@@ -301,7 +306,9 @@ export class CharacterViewComponent {
         let typeEffects = this.DAMAGES.find(
           (type) => type.type.toUpperCase() == damage.toUpperCase()
         );
-        effects = effects.concat(typeEffects?.effects!);
+        effects = effects.concat(
+          JSON.parse(JSON.stringify(typeEffects?.effects!))
+        );
       });
       effects.forEach((effect) => {
         if (
@@ -317,6 +324,11 @@ export class CharacterViewComponent {
           this.currentWeapon.effects.push(
             typeEffects.find((typeEffect) => typeEffect.rank == bestEffect)
           );
+          this.currentWeapon.effects[
+            this.currentWeapon.effects.length - 1
+          ].rank +=
+            (weaponSize?.effects ? weaponSize?.effects : 0) +
+            (weaponQuality?.effects ? weaponQuality?.effects : 0);
         }
       });
     }

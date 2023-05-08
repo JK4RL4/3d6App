@@ -24,11 +24,13 @@ export class CharacterLoadComponent {
   }
 
   load(): void {
-    this.savedCharacters = JSON.parse(localStorage.getItem('chracters')!);
+    this.savedCharacters = JSON.parse(localStorage.getItem('chracters')!)?.sort(
+      (a: any, b: any) => a.name.localeCompare(b.name)
+    );
     if (!this.savedCharacters) {
       this.savedCharacters = [];
     }
-    this.selectedCharacter = this.savedCharacters[0].name;
+    this.selectedCharacter = this.savedCharacters[0]?.name;
   }
 
   loadFromFile(event: any): void {

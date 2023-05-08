@@ -47,8 +47,8 @@ export const EMPTY_CHARACTER = {
   name: null,
   lore: null,
   image: null,
-  energy: 12,
-  health: 20,
+  energy: null,
+  health: null,
   confidence: 1,
   archetype: {
     concept: null,
@@ -131,9 +131,9 @@ export const GEAR = {
   ],
   shield: [
     { name: 'Sin escudo', defense: 0, strength: 1, weight: 0 },
-    { name: 'Escudo pequeño', defense: 2, strength: 2, weight: 0 },
-    { name: 'Escudo mediano', defense: 3, strength: 3, weight: 1 },
-    { name: 'Escudo grande', defense: 4, strength: 4, weight: 2 },
+    { name: 'Escudo pequeño', defense: 3, strength: 2, weight: 0 },
+    { name: 'Escudo mediano', defense: 4, strength: 3, weight: 1 },
+    { name: 'Escudo grande', defense: 5, strength: 4, weight: 2 },
   ],
   helmet: [
     { name: 'Sin yelmo', defense: 0, strength: 1, weight: 0 },
@@ -186,7 +186,7 @@ export const WEAPON_SIZES = [
     damage: 0,
     crit: 0,
     effects: 0,
-    def: 0,
+    def: 1,
     energy: 0,
   },
   {
@@ -195,7 +195,7 @@ export const WEAPON_SIZES = [
     damage: 2,
     crit: 0,
     effects: -1,
-    def: 1,
+    def: 2,
     energy: 1,
   },
   {
@@ -204,7 +204,7 @@ export const WEAPON_SIZES = [
     damage: 4,
     crit: 0,
     effects: -3,
-    def: 2,
+    def: 3,
     energy: 3,
   },
 ];

@@ -32,12 +32,12 @@
       ></app-character-view
     ></mat-tab>
     <!-- Spells -->
-    <mat-tab>
+    <mat-tab [disabled]="true">
       <ng-template mat-tab-label>
         <fa-icon [icon]="faWandSparkles" class="mat-tab-icon"></fa-icon>
       </ng-template>
       <app-character-spells [character]="character"></app-character-spells>
     </mat-tab>
   </mat-tab-group>
-  <div class="version">v0.23</div>
+  <div class="version">v0.26</div>
 </div>
