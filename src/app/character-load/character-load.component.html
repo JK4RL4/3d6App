@@ -16,6 +16,10 @@
   <input
     #input
     type="file"
+    accept=".txt"
+    class="file-upload"
+    (click)="resetFile($event)"
+    (change)="loadFromFile($event)"
   />
   <button mat-button (click)="loadCharacter()">Cargar</button>
   <button mat-button mat-dialog-close cdkFocusInitial>Cerrar</button>
