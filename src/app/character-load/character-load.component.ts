@@ -10,7 +10,7 @@ import { CharacterService } from '../character.service';
 })
 export class CharacterLoadComponent {
   savedCharacters!: Character[];
-  selectedCharacter!: string;
+  selectedCharacter: string | null = null;
   file!: File | null;
   @ViewChild('input') input!: ElementRef;
 
@@ -30,7 +30,9 @@ export class CharacterLoadComponent {
     if (!this.savedCharacters) {
       this.savedCharacters = [];
     }
-    this.selectedCharacter = this.savedCharacters[0]?.name;
+    this.selectedCharacter = this.savedCharacters[0]?.name
+      ? this.savedCharacters[0]?.name
+      : null;
   }
 
   loadFromFile(event: any): void {
@@ -63,11 +65,5 @@ export class CharacterLoadComponent {
   resetFile(event: any): void {
     event.target.value = null;
     this.file = null;
-  }
-
-  selectChange(event: any): void {
-    if (event.target.value == 'file') {
-      this.input.nativeElement.click();
-    }
   }
 }

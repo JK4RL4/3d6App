@@ -1,10 +1,6 @@
 <div mat-dialog-content>
   <!-- Personajes -->
-  <select
-    name="select"
-    [(ngModel)]="selectedCharacter"
-    (change)="selectChange($event)"
-  >
+  <select name="select" [(ngModel)]="selectedCharacter">
     <option value="null" disabled selected>Selecciona personaje</option>
     <option *ngFor="let char of savedCharacters" [value]="char.name">
       {{ char.name }}
