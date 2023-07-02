@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { Character, EMPTY_CHARACTER } from './character';
+import { Character } from './character.type';
 import { CharacterService } from './character.service';
 import {
   faWandSparkles,
@@ -16,12 +16,10 @@ import {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass'],
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   title = '3d6App';
   selectedLanguage = 'es';
-  character: Character = JSON.parse(JSON.stringify(EMPTY_CHARACTER));
   index: number = 0;
-  characterUpdates!: Subscription;
   actionCompleted!: Subscription;
   faWandSparkles = faWandSparkles;
   faPen = faPen;
@@ -38,14 +36,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.characterUpdates = this.characterService
-      .getCharacterUpdates()
-      .subscribe((character: Character) => {
-        character
-          ? (this.character = character)
-          : (this.character = JSON.parse(JSON.stringify(EMPTY_CHARACTER)));
-      });
-
     this.actionCompleted = this.characterService
       .getActionCompleted()
       .subscribe((action: string) => {
@@ -56,8 +46,11 @@ export class AppComponent implements OnInit, OnDestroy {
       });
   }
 
+  ngAfterViewInit(): void {
+    setTimeout(() => this.characterService.sendCharacter(new Character()), 0);
+  }
+
   ngOnDestroy(): void {
-    this.characterUpdates.unsubscribe();
     this.actionCompleted.unsubscribe();
   }
 
@@ -67,8 +60,5 @@ export class AppComponent implements OnInit, OnDestroy {
 
   updateCharacter(e: any): void {
     this.index = e.index;
-    if (e.index != 0) {
-      this.character = JSON.parse(JSON.stringify(this.character));
-    }
   }
 }

@@ -1,37 +1,37 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { Character, EMPTY_CHARACTER } from './character';
+import { Character } from './character.type';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CharacterService {
   currentCharacter!: Character;
-  characterUpdate = new Subject<Character>();
-
+  character = new Subject<Character>();
   currentActionCompleted!: string;
   actionCompleted = new Subject<string>();
 
   constructor() {}
 
-  getCharacterUpdates(): Observable<Character> {
-    return this.characterUpdate.asObservable();
+  // Personaje
+  getCharacter(): Observable<Character> {
+    return this.character.asObservable();
   }
 
   getCurrentCharacter(): Character {
     return this.currentCharacter;
   }
 
-  sendCharacterUpdates(character: Character): void {
-    this.characterUpdate.next(character);
+  sendCharacter(character: Character): void {
     this.currentCharacter = character;
+    this.character.next(character);
   }
 
-  clearCharacterUpdates(): void {
-    this.characterUpdate.next(JSON.parse(JSON.stringify(EMPTY_CHARACTER)));
-    this.currentCharacter = JSON.parse(JSON.stringify(EMPTY_CHARACTER));
+  clearCharacter(): void {
+    this.character.next(new Character());
   }
 
+  // Acción de carga
   getActionCompleted(): Observable<string> {
     return this.actionCompleted.asObservable();
   }

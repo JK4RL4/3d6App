@@ -1,32 +1,13 @@
 .character-lore-container
     position: relative
-    width: 100%
     height: calc(100vh - 104px)
-    display: flex
-    flex-direction: row
-    justify-content: center
-    align-items: flex-start
-    background-image: url(../../assets/img/background_lore.jpg)
-    background-size: 100% 100%
-    background-repeat: no-repeat
-    background-position: 50% 100%
+    max-height: calc(100vh - 104px)
+    overflow: auto
     border-top: 2px solid white
     border-bottom: 2px solid white
 
-.char-box
-    width: 100%
-    max-height: calc(100vh - 150px)
-    margin: 5px
-    padding: 1rem
-    border: 1px solid black
-    border-radius: 4px
-    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)
-    opacity: 0.9
-    background: GhostWhite
-    overflow: auto
-
 .char-lore
-    width: 100%
+    padding: 1rem
     display: flex
     flex-direction: column
 

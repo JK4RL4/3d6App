@@ -1,78 +1,11 @@
-export interface Character {
-  name: string;
-  image: string;
-  lore: string;
-  energy: number;
-  health: number;
-  confidence: number;
-  archetype: {
-    concept: string;
-    nature: string;
-    conduct: string;
-  };
-  attributes: [
-    { name: 'strength'; rank: string },
-    { name: 'dexterity'; rank: string },
-    { name: 'constitution'; rank: string },
-    { name: 'intelligence'; rank: string },
-    { name: 'wisdom'; rank: string },
-    { name: 'charisma'; rank: string }
-  ];
-  skills: { name: string; rank: string }[];
-  gear: {
-    clothes: string;
-    armor: string;
-    shield: string;
-    helmet: string;
-  };
-  weapons: {
-    name: string | null;
-    size: string | null;
-    range: string | null;
-    quality: string | null;
-    damageType: string[];
-    impactAtt: string | null;
-    damageAtt: string | null;
-  }[];
-  spells: {
-    name: string | null;
-    description: string | null;
-    type: string | null;
-    cost: number | null;
-    lost: number | null;
-  }[];
-}
-
-export const EMPTY_CHARACTER = {
-  name: null,
-  lore: null,
-  image: null,
-  energy: null,
-  health: null,
-  confidence: 1,
-  archetype: {
-    concept: null,
-    nature: null,
-    conduct: null,
-  },
-  attributes: [
-    { name: 'strength', rank: 2 },
-    { name: 'dexterity', rank: 2 },
-    { name: 'constitution', rank: 2 },
-    { name: 'intelligence', rank: 2 },
-    { name: 'wisdom', rank: 2 },
-    { name: 'charisma', rank: 2 },
-  ],
-  skills: [],
-  gear: {
-    clothes: null,
-    armor: null,
-    shield: null,
-    helmet: null,
-  },
-  weapons: [],
-  spells: [],
-};
+export const ATTRIBUTES = [
+  'strength',
+  'dexterity',
+  'constitution',
+  'intelligence',
+  'wisdom',
+  'charisma',
+];
 
 export const SKILLS = [
   { name: 'Academicismo', attribute: 'intelligence' },

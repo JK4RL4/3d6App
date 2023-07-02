@@ -1,5 +1,5 @@
 <div class="character-creator">
-  <div class="character-creator-wrapper">
+  <div *ngIf="character" class="character-creator-wrapper">
     <mat-accordion class="edit-container" multi>
       <mat-expansion-panel>
         <!-- Arquetipo -->
@@ -27,13 +27,13 @@
         <!-- Concepto -->
         <input
           matInput
-          [(ngModel)]="character.archetype.concept"
+          [(ngModel)]="character.archetype!.concept"
           maxlength="25"
           [placeholder]="'concept' | translate"
         />
 
         <!-- Naturaleza -->
-        <select name="select" [(ngModel)]="character.archetype.nature">
+        <select name="select" [(ngModel)]="character.archetype!.nature">
           <span matPrefix>{{ "nature" | translate }} &nbsp;</span>
           <option value="null" disabled selected>Selecciona naturaleza</option>
           <option *ngFor="let nature of NATURE" [value]="nature">
@@ -42,7 +42,7 @@
         </select>
 
         <!-- Conducta -->
-        <select name="select" [(ngModel)]="character.archetype.conduct">
+        <select name="select" [(ngModel)]="character.archetype!.conduct">
           <option value="null" disabled selected>Selecciona conducta</option>
           <option *ngFor="let nature of NATURE" [value]="nature">
             {{ nature }}
@@ -67,7 +67,7 @@
 
         <!-- Atributos -->
         <div
-          *ngFor="let attribute of character.attributes; index as i"
+          *ngFor="let attribute of ATTRIBUTES; index as i"
           class="character-creator-attribute"
         >
           <select
@@ -75,19 +75,19 @@
             id="{{ 'select' + i }}"
             name="select"
             class="align-right"
-            [(ngModel)]="attribute.rank"
+            [(ngModel)]="character.attributes[attribute]"
           >
-            <option value="null" disabled selected>Rango</option>
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
+            <option [value]="null" disabled selected>Rango</option>
+            <option [value]="0">0</option>
+            <option [value]="1">1</option>
+            <option [value]="2">2</option>
+            <option [value]="3">3</option>
+            <option [value]="4">4</option>
+            <option [value]="5">5</option>
+            <option [value]="6">6</option>
           </select>
           <mat-label class="attribute-name">
-            {{ attribute.name | translate }}</mat-label
+            {{ attribute | translate }}</mat-label
           >
         </div>
       </mat-expansion-panel>
@@ -106,7 +106,7 @@
         >
           <mat-icon
             class="skill-remove-icon"
-            (click)="character.skills.splice(i, 1)"
+            (click)="character.skills?.splice(i, 1)"
             >close</mat-icon
           >
           <select
@@ -120,16 +120,16 @@
             </option>
           </select>
           <select name="select" class="align-right" [(ngModel)]="skill.rank">
-            <option value="null" disabled selected>Rango</option>
-            <option value="-2">-2</option>
-            <option value="-1">-1</option>
-            <option value="0" selected>0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
+            <option [value]="null" disabled selected>Rango</option>
+            <option [value]="-2">-2</option>
+            <option [value]="-1">-1</option>
+            <option [value]="0" selected>0</option>
+            <option [value]="1">1</option>
+            <option [value]="2">2</option>
+            <option [value]="3">3</option>
+            <option [value]="4">4</option>
+            <option [value]="5">5</option>
+            <option [value]="6">6</option>
           </select>
         </div>
         <!-- Añadir habilidad -->
@@ -148,29 +148,31 @@
 
         <div class="gear">
           <!-- Ropa -->
-          <select name="select" [(ngModel)]="character.gear.clothes">
-            <option value="null" disabled selected>Selecciona ropa</option>
+          <select name="select" [(ngModel)]="character.gear!.clothes">
+            <option [value]="null" disabled selected>Selecciona ropa</option>
             <option *ngFor="let clothes of GEAR.clothes" [value]="clothes.name">
               {{ clothes.name }}
             </option>
           </select>
           <!-- Armadura -->
-          <select name="select" [(ngModel)]="character.gear.armor">
-            <option value="null" disabled selected>Selecciona armadura</option>
+          <select name="select" [(ngModel)]="character.gear!.armor">
+            <option [value]="null" disabled selected>
+              Selecciona armadura
+            </option>
             <option *ngFor="let armor of GEAR.armor" [value]="armor.name">
               {{ armor.name }}
             </option>
           </select>
           <!-- Yelmo -->
-          <select name="select" [(ngModel)]="character.gear.helmet">
-            <option value="null" disabled selected>Selecciona yelmo</option>
+          <select name="select" [(ngModel)]="character.gear!.helmet">
+            <option [value]="null" disabled selected>Selecciona yelmo</option>
             <option *ngFor="let helmet of GEAR.helmet" [value]="helmet.name">
               {{ helmet.name }}
             </option>
           </select>
           <!-- Escudo -->
-          <select name="select" [(ngModel)]="character.gear.shield">
-            <option value="null" disabled selected>Selecciona escudo</option>
+          <select name="select" [(ngModel)]="character.gear!.shield">
+            <option [value]="null" disabled selected>Selecciona escudo</option>
             <option *ngFor="let shield of GEAR.shield" [value]="shield.name">
               {{ shield.name }}
             </option>
@@ -196,7 +198,7 @@
             <mat-icon
               *ngIf="weapon.name != 'Sin arma'"
               class="skill-remove-icon"
-              (click)="character.weapons.splice(i, 1)"
+              (click)="character.weapons?.splice(i, 1)"
               >close</mat-icon
             >
             <input
@@ -220,38 +222,36 @@
           >
             <!-- Atributo de impacto -->
             <select name="select" [(ngModel)]="weapon.impactAtt">
-              <option value="null" disabled selected>
+              <option [value]="null" disabled selected>
                 Selecciona atributo de impacto
               </option>
-              <option
-                *ngFor="let attribute of character.attributes"
-                [value]="attribute.name"
-              >
-                {{ "Impacto: " + (attribute.name | translate) }}
+              <option *ngFor="let attribute of ATTRIBUTES" [value]="attribute">
+                {{ "Impacto: " + (attribute | translate) }}
               </option>
             </select>
             <!-- Atributo de daño -->
             <select name="select" [(ngModel)]="weapon.damageAtt">
-              <option value="null" disabled selected>
+              <option [value]="null" disabled selected>
                 Selecciona atributo de daño
               </option>
-              <option
-                *ngFor="let attribute of character.attributes"
-                [value]="attribute.name"
-              >
-                {{ "Daño: " + (attribute.name | translate) }}
+              <option *ngFor="let attribute of ATTRIBUTES" [value]="attribute">
+                {{ "Daño: " + (attribute | translate) }}
               </option>
             </select>
             <!-- Tamaño -->
             <select name="select" [(ngModel)]="weapon.size">
-              <option value="null" disabled selected>Selecciona tamaño</option>
+              <option [value]="null" disabled selected>
+                Selecciona tamaño
+              </option>
               <option *ngFor="let size of WEAPON.size" [value]="size.size">
                 {{ "Tamaño " + size.size }}
               </option>
             </select>
             <!-- Calidad -->
             <select name="select" [(ngModel)]="weapon.quality">
-              <option value="null" disabled selected>Selecciona calidad</option>
+              <option [value]="null" disabled selected>
+                Selecciona calidad
+              </option>
               <option
                 *ngFor="let quality of WEAPON.quality"
                 [value]="quality.quality"
@@ -261,7 +261,9 @@
             </select>
             <!-- Alcance -->
             <select name="select" [(ngModel)]="weapon.range">
-              <option value="null" disabled selected>Selecciona alcance</option>
+              <option [value]="null" disabled selected>
+                Selecciona alcance
+              </option>
               <option *ngFor="let range of WEAPON.range" [value]="range">
                 {{ "Alcance " + range }}
               </option>
@@ -280,8 +282,8 @@
                 *ngFor="let damage of WEAPON.damageType"
                 [value]="damage.type"
                 [disabled]="
-                  weapon.damageType.length == 3 &&
-                  !weapon.damageType.includes(damage.type)
+                  weapon.damageType?.length == 3 &&
+                  !weapon.damageType?.includes(damage.type)
                 "
               >
                 {{ "Daño " + damage.type }}
@@ -297,7 +299,7 @@
       </mat-expansion-panel>
 
       <!-- Habilidades especiales -->
-      <mat-expansion-panel class="add-panel" [disabled]="true">
+      <mat-expansion-panel class="add-panel">
         <mat-expansion-panel-header>
           <mat-panel-title class="character-creator-title">
             {{ "esp-skills" | translate }}
@@ -313,7 +315,7 @@
           <div class="weapon-name">
             <mat-icon
               class="skill-remove-icon"
-              (click)="character.spells.splice(i, 1)"
+              (click)="character.spells?.splice(i, 1)"
               >close</mat-icon
             >
             <input

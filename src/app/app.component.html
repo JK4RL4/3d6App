@@ -1,43 +1,40 @@
 <div class="app-container">
   <!-- Menu -->
-  <app-menu class="menu" [index]="index" [character]="character"></app-menu>
+  <app-menu class="menu" [index]="index"></app-menu>
 
   <mat-tab-group
     headerPosition="below"
-    (focusChange)="updateCharacter($event)"
+    (focusChange)="index = $event.index"
     class="menu-tabs"
   >
     <!-- Creator -->
-    <mat-tab class="menu-tab">
+    <mat-tab>
       <ng-template mat-tab-label>
         <fa-icon [icon]="faPen" class="mat-tab-icon"></fa-icon>
       </ng-template>
-      <app-character-creator [character]="character"></app-character-creator>
+      <app-character-creator></app-character-creator>
     </mat-tab>
     <!-- Lore -->
     <mat-tab>
       <ng-template mat-tab-label>
         <fa-icon [icon]="faScroll" class="mat-tab-icon"></fa-icon>
       </ng-template>
-      <app-character-lore [character]="character"></app-character-lore>
+      <app-character-lore></app-character-lore>
     </mat-tab>
     <!-- View -->
     <mat-tab>
       <ng-template mat-tab-label>
         <fa-icon [icon]="faDice" class="mat-tab-icon"></fa-icon>
       </ng-template>
-      <app-character-view
-        [character]="character"
-        (statsUpdated)="character = $event"
-      ></app-character-view
+      <app-character-view></app-character-view
     ></mat-tab>
     <!-- Spells -->
-    <mat-tab [disabled]="true">
+    <mat-tab>
       <ng-template mat-tab-label>
         <fa-icon [icon]="faWandSparkles" class="mat-tab-icon"></fa-icon>
       </ng-template>
-      <app-character-spells [character]="character"></app-character-spells>
+      <app-character-spells></app-character-spells>
     </mat-tab>
   </mat-tab-group>
-  <div class="version">v0.43</div>
+  <div class="version">v0.44</div>
 </div>

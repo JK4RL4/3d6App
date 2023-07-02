@@ -1,16 +1,20 @@
 <div class="char-sheet">
   <!-- Columna izquierda -->
-  <div class="char-sheet-column">
+  <div *ngIf="character" class="char-sheet-column">
     <!-- Atributos -->
     <div class="char-attributes char-box">
       <h3>{{ "salvations" | translate }}</h3>
       <ul>
-        <li *ngFor="let attribute of _character.attributes">
-          <span>{{ attribute.name | translate }}</span>
-          <span>{{ parseInt(attribute.rank) + 10 }}</span>
+        <li *ngFor="let attribute of ATTRIBUTES">
+          <span>{{ attribute | translate }}</span>
+          <span>{{
+            parseInt(String(character.attributes[attribute])) + 10
+          }}</span>
         </li>
       </ul>
     </div>
+
+    <hr />
 
     <!-- Ataque -->
     <div class="char-attack char-box">
@@ -24,7 +28,7 @@
       >
         <option value="null" disabled selected>Selecciona arma</option>
         <option
-          *ngFor="let weapon of _character.weapons; index as i"
+          *ngFor="let weapon of character.weapons; index as i"
           [value]="i"
         >
           {{ weapon.name }}
@@ -60,86 +64,14 @@
         </li>
       </ul>
     </div>
-
-    <!-- Energía -->
-    <div class="char-energy char-box">
-      <div class="char-stat">
-        <div></div>
-        <div>
-          <img
-            src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/fist_hand_energy_power_thunder_bolt_strength_lightning-512.png"
-          />
-          <span
-            [ngClass]="{
-              overMax: _character.energy > maxEnergy,
-              overMin: _character.energy == 0
-            }"
-            >{{ _character.energy }}
-          </span>
-        </div>
-        <div class="char-controls">
-          <mat-icon class="stat-icon" (click)="updateEnergy(1)">add</mat-icon>
-          <mat-icon class="stat-icon" (click)="updateEnergy(-1)"
-            >remove</mat-icon
-          >
-        </div>
-      </div>
-
-      <div class="char-stat">
-        <div></div>
-        <div>
-          <img
-            src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/ability_skill_swords_game_mastery_hand-512.png"
-          />
-          <span
-            [ngClass]="{
-              overMin: _character.confidence == 0
-            }"
-            >{{ _character.confidence }}
-          </span>
-        </div>
-        <div class="char-controls">
-          <mat-icon class="stat-icon" (click)="updateConfidence(1)"
-            >add</mat-icon
-          >
-          <mat-icon class="stat-icon" (click)="updateConfidence(-1)"
-            >remove</mat-icon
-          >
-        </div>
-      </div>
-
-      <!-- Vida -->
-      <div class="char-stat">
-        <div></div>
-        <div>
-          <img
-            src="https://cdn1.iconfinder.com/data/icons/game-ui-set-part-2/96/Heart_red-512.png"
-          />
-          <span
-            [ngClass]="{
-              overMax: _character.health > maxHealth,
-              overMid:
-                _character.health < maxHealth / 2 &&
-                _character.health >= maxHealth / 4,
-              overMin: _character.health < maxHealth / 4
-            }"
-            >{{ _character.health }}</span
-          >
-        </div>
-        <div class="char-controls">
-          <mat-icon class="stat-icon" (click)="updateHealth(1)"> add</mat-icon>
-          <mat-icon class="stat-icon" (click)="updateHealth(-1)"
-            >remove</mat-icon
-          >
-        </div>
-      </div>
-    </div>
   </div>
 
+  <hr class="hr-vertical" />
+
   <!-- Columna derecha -->
-  <div class="char-sheet-column">
-    <!-- Estadísticas -->
-    <div class="char-stats char-box">
+  <div *ngIf="character" class="char-sheet-column">
+    <!-- Pasivas -->
+    <div class="char-box">
       <h3>{{ "stats" | translate }}</h3>
       <ul class="char-stats-data">
         <li>
@@ -169,15 +101,85 @@
       </ul>
     </div>
 
+    <hr />
+
     <!-- Habilidades -->
     <div class="char-skills char-box">
       <h3>{{ "skills" | translate }}</h3>
       <ul>
-        <li *ngFor="let skill of parsedSkills">
+        <li *ngFor="let skill of character.skills">
           <span>{{ skill.name }}</span>
-          <span>{{ skill.rank }}</span>
+          <span>{{ parseInt(String(skill.rank)) + 8 }}</span>
         </li>
       </ul>
+    </div>
+  </div>
+
+  <!-- Estadísticas -->
+  <div *ngIf="character" class="char-stats">
+    <div class="char-stat">
+      <div></div>
+      <div>
+        <img
+          src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/fist_hand_energy_power_thunder_bolt_strength_lightning-512.png"
+        />
+        <span
+          [ngClass]="{
+            overMax: character.energy! > maxEnergy,
+            overMin: character.energy! == 0
+          }"
+          >{{ character.energy }}
+        </span>
+      </div>
+      <div class="char-controls">
+        <mat-icon class="stat-icon" (click)="updateEnergy(1)">add</mat-icon>
+        <mat-icon class="stat-icon" (click)="updateEnergy(-1)">remove</mat-icon>
+      </div>
+    </div>
+
+    <div class="char-stat">
+      <div></div>
+      <div>
+        <img
+          src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/ability_skill_swords_game_mastery_hand-512.png"
+        />
+        <span
+          [ngClass]="{
+            overMin: character.destiny == 0
+          }"
+          >{{ character.destiny }}
+        </span>
+      </div>
+      <div class="char-controls">
+        <mat-icon class="stat-icon" (click)="updateDestiny(1)">add</mat-icon>
+        <mat-icon class="stat-icon" (click)="updateDestiny(-1)"
+          >remove</mat-icon
+        >
+      </div>
+    </div>
+
+    <!-- Vida -->
+    <div class="char-stat">
+      <div></div>
+      <div>
+        <img
+          src="https://cdn1.iconfinder.com/data/icons/game-ui-set-part-2/96/Heart_red-512.png"
+        />
+        <span
+          [ngClass]="{
+            overMax: character.health! > maxHealth,
+            overMid:
+              character.health! < maxHealth / 2 &&
+              character.health! >= maxHealth / 4,
+            overMin: character.health! < maxHealth / 4
+          }"
+          >{{ character.health }}</span
+        >
+      </div>
+      <div class="char-controls">
+        <mat-icon class="stat-icon" (click)="updateHealth(1)"> add</mat-icon>
+        <mat-icon class="stat-icon" (click)="updateHealth(-1)">remove</mat-icon>
+      </div>
     </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Character } from '../character';
+import { Character } from '../character.type';
 import { MatDialog } from '@angular/material/dialog';
 import { saveAs } from 'file-saver';
 import { CharacterLoadComponent } from '../character-load/character-load.component';

@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Character } from '../character';
+import { Character } from '../character.type';
 import { CharacterService } from '../character.service';
 
 @Component({
@@ -40,7 +40,7 @@ export class CharacterLoadComponent {
     if (this.file) {
       let fileReader = new FileReader();
       fileReader.onload = (e) => {
-        this.characterService.sendCharacterUpdates(
+        this.characterService.sendCharacter(
           JSON.parse(fileReader.result?.toString()!)
         );
         this.characterService.sendActionCompleted('Personaje cargado');
@@ -51,7 +51,7 @@ export class CharacterLoadComponent {
   }
 
   loadCharacter(): void {
-    this.characterService.sendCharacterUpdates(
+    this.characterService.sendCharacter(
       this.savedCharacters.find(
         (char) =>
           char.name ==

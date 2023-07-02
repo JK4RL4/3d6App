@@ -1,26 +1,34 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { CharacterService } from '../character.service';
 import {
-  Character,
+  ATTRIBUTES,
   GEAR,
   SKILLS,
   WEAPON_DAMAGES,
   WEAPON_QUALITIES,
   WEAPON_RANGES,
   WEAPON_SIZES,
-} from '../character';
+} from '../character.const';
+import { Character } from '../character.type';
 
 @Component({
   selector: 'app-character-view',
   templateUrl: './character-view.component.html',
   styleUrls: ['./character-view.component.sass'],
 })
-export class CharacterViewComponent {
-  strength!: number;
-  dexterity!: number;
-  constitution!: number;
-  intelligence!: number;
-  wisdom!: number;
-  charisma!: number;
+export class CharacterViewComponent implements OnInit, OnDestroy {
+  character!: Character;
+  characterSub!: Subscription;
+
+  readonly GEAR = GEAR;
+  readonly SIZES = WEAPON_SIZES;
+  readonly RANGES = WEAPON_RANGES;
+  readonly QUALITIES = WEAPON_QUALITIES;
+  readonly DAMAGES = WEAPON_DAMAGES;
+  readonly SKILLS = SKILLS;
+  readonly ATTRIBUTES = ATTRIBUTES;
+
   maxHealth!: number;
   maxEnergy!: number;
   speed!: number;
@@ -31,155 +39,122 @@ export class CharacterViewComponent {
   weaponDefense!: number;
   shieldDefense!: number;
   defense!: number;
-  confidence!: number;
-  GEAR = GEAR;
-  SIZES = WEAPON_SIZES;
-  RANGES = WEAPON_RANGES;
-  QUALITIES = WEAPON_QUALITIES;
-  DAMAGES = WEAPON_DAMAGES;
-  SKILLS = SKILLS;
+
   parsedSkills!: { name: string; rank: number }[];
-  @Output() statsUpdated = new EventEmitter<Character>();
   parseInt = parseInt;
+  String = String;
 
-  _character!: Character;
-  get character(): Character {
-    return this._character;
-  }
-  @Input('character') set character(character: Character) {
-    this._character = character;
-    this.currentWeaponIndex = this._character.weapons?.length > 0 ? '0' : null;
-    this.currentWeapon = this.currentWeaponIndex
-      ? this._character.weapons[0]
-      : null;
-    this.getAttributes();
-    this.calculateCharPasives();
-    this.calculateCharStats();
-    this.calculateSkills();
-    this.setFight();
-    this.updateWeapon(0);
+  constructor(private characterService: CharacterService) {}
+
+  ngOnInit(): void {
+    this.characterSub = this.characterService
+      .getCharacter()
+      .subscribe((character: Character) => {
+        this.character = character;
+        this.currentWeaponIndex =
+          this.character?.weapons?.length! > 0 ? '0' : null;
+        this.currentWeapon = this.currentWeaponIndex
+          ? this.character?.weapons![0]
+          : null;
+        this.calculateCharPasives();
+        this.calculateCharStats();
+        this.setFight();
+        this.updateWeapon(0);
+      });
   }
 
-  getAttributes(): void {
-    // Confianza
-    this.confidence = this._character.confidence;
-    // Fuerza
-    this.strength = parseInt(
-      this._character.attributes.find(
-        (attribute) => attribute.name.toUpperCase() == 'STRENGTH'
-      )?.rank!
-    );
-    // Destreza
-    this.dexterity = parseInt(
-      this._character.attributes.find(
-        (attribute) => attribute.name.toUpperCase() == 'DEXTERITY'
-      )?.rank!
-    );
-    // Constitución
-    this.constitution = parseInt(
-      this._character.attributes.find(
-        (attribute) => attribute.name.toUpperCase() == 'CONSTITUTION'
-      )?.rank!
-    );
-    // Inteligencia
-    this.intelligence = parseInt(
-      this._character.attributes.find(
-        (attribute) => attribute.name.toUpperCase() == 'INTELLIGENCE'
-      )?.rank!
-    );
-    // Sabiduría
-    this.wisdom = parseInt(
-      this._character.attributes.find(
-        (attribute) => attribute.name.toUpperCase() == 'WISDOM'
-      )?.rank!
-    );
-    // Carisma
-    this.charisma = parseInt(
-      this._character.attributes.find(
-        (attribute) => attribute.name.toUpperCase() == 'CHARISMA'
-      )?.rank!
-    );
+  ngOnDestroy(): void {
+    this.characterSub.unsubscribe();
   }
 
   updateHealth(x: number): void {
-    this._character.health += x;
-    if (this._character.health < 0) {
-      this._character.health = 0;
+    this.character.health! += x;
+    if (this.character.health! < 0) {
+      this.character.health = 0;
     }
-    this.statsUpdated.emit(this._character);
   }
 
   updateEnergy(x: number): void {
-    this._character.energy += x;
-    if (this._character.energy < 0) {
-      this._character.energy = 0;
+    this.character.energy! += x;
+    if (this.character.energy! < 0) {
+      this.character.energy = 0;
     }
-    this.statsUpdated.emit(this._character);
   }
 
-  updateConfidence(x: number): void {
-    this._character.confidence += x;
-    if (this._character.confidence < 0) {
-      this._character.confidence = 0;
+  updateDestiny(x: number): void {
+    this.character.destiny! += x;
+    if (this.character.destiny! < 0) {
+      this.character.destiny = 0;
     }
-    this.statsUpdated.emit(this._character);
   }
 
   calculateCharPasives(): void {
-    let alert = parseInt(
-      this._character.skills.find(
-        (skill) => skill.name.toUpperCase() == 'ALERTA'
-      )?.rank!
-    );
+    // Alerta
+    let alert = this.character.skills?.find(
+      (skill) => skill?.name?.toUpperCase() == 'ALERTA'
+    )?.rank!;
+    // Penalización de casco
     let helmetPen =
-      this.strength! -
+      this.character.attributes['strength'] -
       this.GEAR.helmet.find(
-        (helmet) => helmet.name == this._character.gear.helmet
+        (helmet) => helmet.name == this.character?.gear?.helmet
       )?.strength!;
+    // Penalización de armadura
     let armorPen =
-      this.strength! -
-      this.GEAR.armor.find((armor) => armor.name == this._character.gear.armor)
+      this.character.attributes['strength'] -
+      this.GEAR.armor.find((armor) => armor.name == this.character?.gear?.armor)
         ?.strength!;
+    // Penalización de escudo
     let shieldPen =
-      this.strength! -
+      this.character.attributes['strength'] -
       this.GEAR.shield.find(
-        (shield) => shield.name == this._character.gear.shield
+        (shield) => shield.name == this.character?.gear?.shield
       )?.strength!;
+    // Armadura
     let armor = this.GEAR.armor.find(
-      (armor) => armor.name == this._character.gear.armor
+      (armor) => armor.name == this.character?.gear?.armor
     )?.defense!;
+    // Escudo
     let shield = this.GEAR.shield.find(
-      (shield) => shield.name == this._character.gear.shield
+      (shield) => shield.name == this.character?.gear?.shield
     )?.defense!;
-    let cc = parseInt(
-      this._character.skills.find(
-        (skill) => skill.name.toUpperCase() == 'ARMAS CUERPO A CUERPO'
-      )?.rank!
-    );
-    let fight = parseInt(
-      this._character.skills.find(
-        (skill) => skill.name.toUpperCase() == 'PELEA'
-      )?.rank!
-    );
+    // Armas cuerpo a cuerpo
+    let cc = this.character?.skills?.find(
+      (skill) => skill?.name?.toUpperCase() == 'ARMAS CUERPO A CUERPO'
+    )?.rank!;
+
+    // Pelea
+    let fight = this.character?.skills?.find(
+      (skill) => skill?.name?.toUpperCase() == 'PELEA'
+    )?.rank!;
+
+    // Modificador de tamaño
     let sizeMod = this.SIZES.find(
       (size) => size.size == this.currentWeapon?.size
     )?.def;
+    // Modificador de calidad
     let qualityMod = this.QUALITIES.find(
       (quality) => quality.quality == this.currentWeapon?.quality
     )?.def;
     // Percepción
     this.perception =
       8 +
-      this.wisdom! +
+      this.character.attributes['wisdom'] +
       (helmetPen < 0 ? helmetPen : 0) +
       (alert > 0 ? alert : 0);
     // Voluntad
     this.will =
-      8 + Math.round((this.wisdom * 2 + this.intelligence + this.strength) / 2);
+      8 +
+      Math.round(
+        (this.character.attributes['wisdom'] * 2 +
+          this.character.attributes['intelligence'] +
+          this.character.attributes['strength']) /
+          2
+      );
     // Velocidad
     this.speed =
-      this.dexterity * 2 +
-      this.intelligence +
+      this.character.attributes['dexterity'] * 2 +
+      this.character.attributes['intelligence'] +
       (armorPen < 0 ? armorPen : 0) +
       (shieldPen < 0 ? shieldPen : 0);
     // Defensa con arma
@@ -190,7 +165,7 @@ export class CharacterViewComponent {
         ? Math.round(
             weaponDefense *
               Math.round(
-                (this.dexterity +
+                (this.character.attributes['dexterity'] +
                   (this.currentWeapon.name.toUpperCase() == 'SIN ARMA'
                     ? fight
                       ? fight
@@ -209,7 +184,10 @@ export class CharacterViewComponent {
     this.shieldDefense =
       shield > 0
         ? Math.round(
-            shield * Math.round((this.dexterity + (cc ? cc : 0)) / 10)
+            shield *
+              Math.round(
+                (this.character.attributes['dexterity'] + (cc ? cc : 0)) / 10
+              )
           ) - shieldPen
         : 0;
     if (this.shieldDefense < 0) {
@@ -220,61 +198,40 @@ export class CharacterViewComponent {
   }
 
   calculateCharStats(): void {
-    this.maxHealth = this.constitution * 10;
-    this._character.health = this.maxHealth;
+    this.maxHealth = this.character.attributes['constitution'] * 10;
+    this.character.health = this.maxHealth;
     this.maxEnergy =
-      this.strength * 3 + this.constitution * 2 + this.dexterity * 2;
-    this._character.energy = this.maxEnergy;
-  }
-
-  calculateSkills(): void {
-    this.parsedSkills = [];
-    this.character.skills.forEach((skill) => {
-      let skillFound = this.SKILLS.find(
-        (skillData) => skillData.name == skill.name
-      );
-      this.parsedSkills.push({
-        name: skill.name,
-        rank:
-          8 +
-          parseInt(skill.rank!) +
-          parseInt(
-            this._character.attributes.find(
-              (attribute) => attribute.name == skillFound?.attribute
-            )?.rank!
-          ),
-      });
-    });
-    this.parsedSkills.sort((a, b) => a.name.localeCompare(b.name));
+      this.character.attributes['strength'] * 3 +
+      this.character.attributes['constitution'] * 2 +
+      this.character.attributes['dexterity'] * 2;
+    this.character.energy = this.maxEnergy;
   }
 
   updateWeapon(weaponIndex: any): void {
-    this.currentWeapon = this._character.weapons[weaponIndex]
-      ? JSON.parse(JSON.stringify(this._character.weapons[weaponIndex]))
-      : null;
+    this.currentWeapon = this.character?.weapons![weaponIndex];
 
     if (this.currentWeapon) {
+      // Calidad de arma
       let weaponQuality = this.QUALITIES.find(
         (quality) => quality.quality == this.currentWeapon.quality
       );
+      // Tamaño de arma
       let weaponSize = this.SIZES.find(
         (size) => size.size == this.currentWeapon.size
       );
-      let cc = parseInt(
-        this._character.skills.find(
-          (skill) => skill.name?.toUpperCase() == 'ARMAS CUERPO A CUERPO'
-        )?.rank!
-      );
-      let fight = parseInt(
-        this._character.skills.find(
-          (skill) => skill.name.toUpperCase() == 'PELEA'
-        )?.rank!
-      );
-      let ad = parseInt(
-        this._character.skills.find(
-          (skill) => skill.name?.toUpperCase() == 'ARMAS A DISTANCIA'
-        )?.rank!
-      );
+      // Cuerpo a cuerpo
+      let cc = this.character?.skills?.find(
+        (skill) => skill.name?.toUpperCase() == 'ARMAS CUERPO A CUERPO'
+      )?.rank!;
+      // Pelea
+      let fight = this.character?.skills?.find(
+        (skill) => skill?.name?.toUpperCase() == 'PELEA'
+      )?.rank!;
+      // A distancia
+      let ad = this.character?.skills?.find(
+        (skill) => skill?.name?.toUpperCase() == 'ARMAS A DISTANCIA'
+      )?.rank!;
+      // Impactar
       let hit = !this.currentWeapon.range?.toUpperCase().includes('MELÉ')
         ? ad
         : this.currentWeapon.name?.toUpperCase() == 'SIN ARMA'
@@ -285,17 +242,20 @@ export class CharacterViewComponent {
       // Impacto
       this.currentWeapon.impact =
         8 +
-        this.getAttributeByName(this.currentWeapon.impactAtt) +
+        this.character.attributes[this.currentWeapon.impactAtt] +
         (hit ? hit : 0) +
         weaponQuality?.hit! +
-        (weaponSize?.hit! + Math.round(this.strength / 2) >= 0
+        (weaponSize?.hit! +
+          Math.round(this.character.attributes['strength'] / 2) >=
+        0
           ? 0
-          : weaponSize?.hit! + Math.round(this.strength / 2));
+          : weaponSize?.hit! +
+            Math.round(this.character.attributes['strength'] / 2));
       // Daño
       this.currentWeapon.damage =
         4 +
-        (this.getAttributeByName(this.currentWeapon.damageAtt)
-          ? this.getAttributeByName(this.currentWeapon.damageAtt)
+        (this.character.attributes[this.currentWeapon.damageAtt]
+          ? this.character.attributes[this.currentWeapon.damageAtt]
           : 0) +
         weaponSize?.damage! +
         weaponQuality?.damage!;
@@ -335,8 +295,8 @@ export class CharacterViewComponent {
   }
 
   setFight(): void {
-    if (!this._character.weapons.some((weapon) => weapon.name == 'Sin arma')) {
-      this._character.weapons.push({
+    if (!this.character?.weapons?.some((weapon) => weapon.name == 'Sin arma')) {
+      this.character?.weapons?.push({
         name: 'Sin arma',
         size: 'pequeño',
         range: 'melé(1)',
@@ -345,25 +305,6 @@ export class CharacterViewComponent {
         impactAtt: 'dexterity',
         damageAtt: 'strength',
       });
-    }
-  }
-
-  getAttributeByName(att: string): number {
-    switch (att) {
-      case 'strength':
-        return this.strength;
-      case 'dexterity':
-        return this.dexterity;
-      case 'constitution':
-        return this.constitution;
-      case 'intelligence':
-        return this.intelligence;
-      case 'wisdom':
-        return this.wisdom;
-      case 'charisma':
-        return this.charisma;
-      default:
-        return 0;
     }
   }
 }
