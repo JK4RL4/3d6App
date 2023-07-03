@@ -29,16 +29,33 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
   readonly SKILLS = SKILLS;
   readonly ATTRIBUTES = ATTRIBUTES;
 
+  // Vida y energía
   maxHealth!: number;
   maxEnergy!: number;
+
+  // Pasivas
   speed!: number;
   perception!: number;
   will!: number;
+
+  // Arma
   currentWeapon!: any;
   currentWeaponIndex!: string | null;
+
+  // Estadísticas intermedias
   weaponDefense!: number;
   shieldDefense!: number;
   defense!: number;
+  alert!: number;
+  helmetPen!: number;
+  armorPen!: number;
+  shieldPen!: number;
+  armor!: number;
+  shield!: number;
+  cc!: number;
+  fight!: number;
+  sizeMod!: number;
+  qualityMod!: number;
 
   parsedSkills!: { name: string; rank: number }[];
   parseInt = parseInt;
@@ -88,60 +105,61 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
     }
   }
 
-  calculateCharPasives(): void {
+  getCharIntermediateStats(): void {
     // Alerta
-    let alert = this.character.skills?.find(
+    this.alert = this.character.skills?.find(
       (skill) => skill?.name?.toUpperCase() == 'ALERTA'
     )?.rank!;
     // Penalización de casco
-    let helmetPen =
+    this.helmetPen =
       this.character.attributes['strength'] -
       this.GEAR.helmet.find(
         (helmet) => helmet.name == this.character?.gear?.helmet
       )?.strength!;
     // Penalización de armadura
-    let armorPen =
+    this.armorPen =
       this.character.attributes['strength'] -
       this.GEAR.armor.find((armor) => armor.name == this.character?.gear?.armor)
         ?.strength!;
     // Penalización de escudo
-    let shieldPen =
+    this.shieldPen =
       this.character.attributes['strength'] -
       this.GEAR.shield.find(
         (shield) => shield.name == this.character?.gear?.shield
       )?.strength!;
     // Armadura
-    let armor = this.GEAR.armor.find(
+    this.armor = this.GEAR.armor.find(
       (armor) => armor.name == this.character?.gear?.armor
     )?.defense!;
     // Escudo
-    let shield = this.GEAR.shield.find(
+    this.shield = this.GEAR.shield.find(
       (shield) => shield.name == this.character?.gear?.shield
     )?.defense!;
     // Armas cuerpo a cuerpo
-    let cc = this.character?.skills?.find(
+    this.cc = this.character?.skills?.find(
       (skill) => skill?.name?.toUpperCase() == 'ARMAS CUERPO A CUERPO'
     )?.rank!;
-
     // Pelea
-    let fight = this.character?.skills?.find(
+    this.fight = this.character?.skills?.find(
       (skill) => skill?.name?.toUpperCase() == 'PELEA'
     )?.rank!;
-
     // Modificador de tamaño
-    let sizeMod = this.SIZES.find(
+    this.sizeMod = this.SIZES.find(
       (size) => size.size == this.currentWeapon?.size
-    )?.def;
+    )?.def!;
     // Modificador de calidad
-    let qualityMod = this.QUALITIES.find(
+    this.qualityMod = this.QUALITIES.find(
       (quality) => quality.quality == this.currentWeapon?.quality
-    )?.def;
+    )?.def!;
+  }
+
+  calculateCharPasives(): void {
     // Percepción
     this.perception =
       8 +
       this.character.attributes['wisdom'] +
-      (helmetPen < 0 ? helmetPen : 0) +
-      (alert > 0 ? alert : 0);
+      (this.helmetPen < 0 ? this.helmetPen : 0) +
+      (this.alert > 0 ? this.alert : 0);
     // Voluntad
     this.will =
       8 +
@@ -155,10 +173,12 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
     this.speed =
       this.character.attributes['dexterity'] * 2 +
       this.character.attributes['intelligence'] +
-      (armorPen < 0 ? armorPen : 0) +
-      (shieldPen < 0 ? shieldPen : 0);
+      (this.armorPen < 0 ? this.armorPen : 0) +
+      (this.shieldPen < 0 ? this.shieldPen : 0);
     // Defensa con arma
-    let weaponDefense = (sizeMod ? sizeMod : 0) + (qualityMod ? qualityMod : 0);
+    let weaponDefense =
+      (this.sizeMod ? this.sizeMod : 0) +
+      (this.qualityMod ? this.qualityMod : 0);
     this.weaponDefense =
       this.currentWeapon &&
       this.currentWeapon.range?.toUpperCase().includes('MELÉ')
@@ -167,11 +187,11 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
               Math.round(
                 (this.character.attributes['dexterity'] +
                   (this.currentWeapon.name.toUpperCase() == 'SIN ARMA'
-                    ? fight
-                      ? fight
+                    ? this.fight
+                      ? this.fight
                       : 0
-                    : cc
-                    ? cc
+                    : this.cc
+                    ? this.cc
                     : 0)) /
                   10
               )
@@ -182,19 +202,21 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
     }
     // Defensa con escudo
     this.shieldDefense =
-      shield > 0
+      this.shield > 0
         ? Math.round(
-            shield *
+            this.shield *
               Math.round(
-                (this.character.attributes['dexterity'] + (cc ? cc : 0)) / 10
+                (this.character.attributes['dexterity'] +
+                  (this.cc ? this.cc : 0)) /
+                  10
               )
-          ) - shieldPen
+          ) - this.shieldPen
         : 0;
     if (this.shieldDefense < 0) {
       this.shieldDefense = 0;
     }
     // Defensa
-    this.defense = armor ? armor : 0;
+    this.defense = this.armor ? this.armor : 0;
   }
 
   calculateCharStats(): void {
@@ -219,14 +241,6 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
       let weaponSize = this.SIZES.find(
         (size) => size.size == this.currentWeapon.size
       );
-      // Cuerpo a cuerpo
-      let cc = this.character?.skills?.find(
-        (skill) => skill.name?.toUpperCase() == 'ARMAS CUERPO A CUERPO'
-      )?.rank!;
-      // Pelea
-      let fight = this.character?.skills?.find(
-        (skill) => skill?.name?.toUpperCase() == 'PELEA'
-      )?.rank!;
       // A distancia
       let ad = this.character?.skills?.find(
         (skill) => skill?.name?.toUpperCase() == 'ARMAS A DISTANCIA'
@@ -235,8 +249,8 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
       let hit = !this.currentWeapon.range?.toUpperCase().includes('MELÉ')
         ? ad
         : this.currentWeapon.name?.toUpperCase() == 'SIN ARMA'
-        ? fight
-        : cc;
+        ? this.fight
+        : this.cc;
       // Energía
       this.currentWeapon.energy = 2 + weaponSize?.energy!;
       // Impacto
