@@ -1,7 +1,7 @@
 {
   "name": "3d6-app",
   "homepage": "https://JK4RL4.github.io/3d6App",
-  "version": "0.49",
+  "version": "0.50",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
