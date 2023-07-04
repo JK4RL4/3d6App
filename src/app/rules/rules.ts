@@ -1,6 +1,6 @@
 export const RULES = {
   Destino:
-    'Por cada punto de destino, el personaje puede repetir una tirada. Ninguna tirada puede repetirse más de una vez. El resultado de la repetición sustituye por completo al de la tirada original.',
+    'Por cada punto de destino, el personaje puede: <br> - Repetir una tirada. Ninguna tirada puede repetirse más de una vez. El resultado de la repetición sustituye por completo al de la tirada original. <br> - Superar automáticamente una tirada de Dificultad menor o igual a 16 con Margen de éxito 0. <br> - Ignorar todos los estados y penalizaciones por heridas, además de reducir cualquier Coste o Pérdida de Energía de Ataque o Habilidad a 0 durante 1 turno.',
   'Fallo crítico':
     'Si se falla una tirada de Habilidad/Salvación con un Margen de éxito de -10 o menos, se obtiene un fallo crítico. Cuando ocurra, el personaje perderá 1 punto de Destino y puede tener efectos adicionales a discreción del narrador.',
   'Éxito crítico':
@@ -42,7 +42,7 @@ export const RULES = {
   Pérdida:
     'Reducción permanente del valor de Energía máxima que tiene efecto hasta realizar un descanso largo fuera de combate.',
   Agotado:
-    'Ocurre cuando la Energía del personaje se reduce a 0. El personaje deberá descansar un turno sin realizar acciones de combate para recuperar la Energía a su valor máximo.',
+    'Ocurre cuando la Energía del personaje se reduce a 0. El personaje deberá descansar un turno sin realizar acciones de combate para recuperar la Energía a su valor máximo, tras lo que sufrirá la Pérdida de 1 punto de Energía.',
   Exhausto:
     'Ocurre cuando la Energía máxima del personaje es 0. El personaje no puede realizar acciones de combate.',
   Fuerza:

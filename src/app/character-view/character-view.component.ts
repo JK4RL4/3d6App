@@ -235,11 +235,14 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
   }
 
   calculateCharStats(): void {
+    let initiated = this.maxHealth != null;
     this.maxHealth = this.constitution * 10;
-    this.character.health = this.maxHealth;
     this.maxEnergy =
       this.strength * 3 + this.constitution * 2 + this.dexterity * 2;
-    this.character.energy = this.maxEnergy;
+    if (!initiated) {
+      this.character.health = this.maxHealth;
+      this.character.energy = this.maxEnergy;
+    }
   }
 
   updateWeapon(weaponIndex: any): void {
@@ -301,24 +304,28 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
         );
       });
       effects.forEach((effect) => {
-        if (
-          !this.currentWeapon.effects.some(
-            (weaponEffect: { type: string; rank: number }) =>
-              weaponEffect.type == effect.type
-          )
-        ) {
-          let typeEffects = effects.filter(
-            (filteredEffect) => filteredEffect.type == effect.type
-          );
-          let bestEffect = Math.min(...typeEffects.map((item) => item.rank));
-          this.currentWeapon.effects.push(
-            typeEffects.find((typeEffect) => typeEffect.rank == bestEffect)
-          );
-          this.currentWeapon.effects[
-            this.currentWeapon.effects.length - 1
-          ].rank +=
-            (weaponSize?.effects ? weaponSize?.effects : 0) +
-            (weaponQuality?.effects ? weaponQuality?.effects : 0);
+        if (effect.type == 'Perforar') {
+          this.currentWeapon.piercing = effect.rank;
+        } else {
+          if (
+            !this.currentWeapon.effects.some(
+              (weaponEffect: { type: string; rank: number }) =>
+                weaponEffect.type == effect.type
+            )
+          ) {
+            let typeEffects = effects.filter(
+              (filteredEffect) => filteredEffect.type == effect.type
+            );
+            let bestEffect = Math.min(...typeEffects.map((item) => item.rank));
+            this.currentWeapon.effects.push(
+              typeEffects.find((typeEffect) => typeEffect.rank == bestEffect)
+            );
+            this.currentWeapon.effects[
+              this.currentWeapon.effects.length - 1
+            ].rank +=
+              (weaponSize?.effects ? weaponSize?.effects : 0) +
+              (weaponQuality?.effects ? weaponQuality?.effects : 0);
+          }
         }
       });
     }

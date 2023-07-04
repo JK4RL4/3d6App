@@ -49,6 +49,12 @@
           <span>{{ currentWeapon?.impact }}</span>
         </li>
         <li>
+          <span>Perforante</span>
+          <span>{{
+            currentWeapon?.piercing ? currentWeapon?.piercing : 0
+          }}</span>
+        </li>
+        <li>
           <span>Daño</span>
           <span>{{ currentWeapon?.damage }}</span>
         </li>
@@ -123,7 +129,9 @@
         <img
           src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/fist_hand_energy_power_thunder_bolt_strength_lightning-512.png"
         />
+        <span class="char-stat-max">{{ "/" + maxEnergy }}</span>
         <span
+          class="char-stat-current"
           [ngClass]="{
             overMax: character.energy! > maxEnergy,
             overMin: character.energy! == 0
@@ -165,7 +173,9 @@
         <img
           src="https://cdn1.iconfinder.com/data/icons/game-ui-set-part-2/96/Heart_red-512.png"
         />
+        <span class="char-stat-max">{{ "/" + maxHealth }}</span>
         <span
+          class="char-stat-current"
           [ngClass]="{
             overMax: character.health! > maxHealth,
             overMid:
