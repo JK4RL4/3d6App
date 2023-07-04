@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Character } from '../character.type';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,9 +12,10 @@ import { CharacterService } from '../character.service';
   templateUrl: './app-menu.component.html',
   styleUrls: ['./app-menu.component.sass'],
 })
-export class AppMenuComponent {
+export class AppMenuComponent implements OnInit, OnDestroy {
   @Input() index!: number;
-  @Input() character!: Character;
+  character!: Character;
+  characterSub!: Subscription;
   savedCharacters!: Character[];
   characterLoaded!: Subscription;
   fileUrl: any;
@@ -23,6 +24,18 @@ export class AppMenuComponent {
     private characterService: CharacterService,
     private dialog: MatDialog
   ) {}
+
+  ngOnInit(): void {
+    this.characterSub = this.characterService
+      .getCharacter()
+      .subscribe((character: Character) => {
+        this.character = character;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.characterSub.unsubscribe();
+  }
 
   openDialog(
     enterAnimationDuration: string,

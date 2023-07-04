@@ -25,6 +25,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   faPen = faPen;
   faDice = faDice;
   faScroll = faScroll;
+  character = new Character();
 
   constructor(
     private snackBar: MatSnackBar,
@@ -47,7 +48,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => this.characterService.sendCharacter(new Character()), 0);
+    setTimeout(() => this.characterService.sendCharacter(this.character), 0);
   }
 
   ngOnDestroy(): void {
@@ -60,5 +61,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   updateCharacter(e: any): void {
     this.index = e.index;
+  }
+
+  tabUpdate(): void {
+    this.characterService.sendCharacter(this.character);
   }
 }

@@ -90,8 +90,8 @@ export const WEAPON_QUALITIES = [
   { quality: 'baja', damage: -1, crit: 0, effects: -1, hit: -1, def: -2 },
   { quality: 'estándar', damage: 0, crit: 0, effects: 0, hit: 0, def: 1 },
   { quality: 'alta', damage: 1, crit: 0, effects: 0, hit: 1, def: 1 },
-  { quality: 'legendaria', damage: 2, crit: 1, effects: 1, hit: 2, def: 2 },
-  { quality: 'única', damage: 3, crit: 2, effects: 2, hit: 3, def: 3 },
+  { quality: 'legendaria', damage: 2, crit: 1, effects: -1, hit: 2, def: 2 },
+  { quality: 'única', damage: 3, crit: 2, effects: -1, hit: 3, def: 2 },
 ];
 
 export const WEAPON_SIZES = [
@@ -135,9 +135,9 @@ export const WEAPON_SIZES = [
     size: 'colosal',
     hit: -3,
     damage: 4,
-    crit: 0,
+    crit: 1,
     effects: -3,
-    def: 3,
+    def: 0,
     energy: 3,
   },
 ];
@@ -146,15 +146,15 @@ export const WEAPON_DAMAGES = [
   {
     type: 'cortante',
     effects: [
-      { type: 'Sangrado', rank: 4 },
-      { type: 'Impedimento', rank: 6 },
+      { type: 'Sangrado', rank: 3 },
+      { type: 'Impedimento', rank: 3 },
     ],
   },
   {
     type: 'contundente',
     effects: [
-      { type: 'Aturdir', rank: 8 },
-      { type: 'Impedimento', rank: 4 },
+      { type: 'Aturdir', rank: 6 },
+      { type: 'Impedimento', rank: 2 },
     ],
   },
   { type: 'perforante', effects: [{ type: 'Perforar', rank: 2 }] },
@@ -162,7 +162,7 @@ export const WEAPON_DAMAGES = [
   {
     type: 'frío',
     effects: [
-      { type: 'Aturdir', rank: 8 },
+      { type: 'Aturdir', rank: 4 },
       { type: 'Impedimento', rank: 2 },
     ],
   },
@@ -174,9 +174,9 @@ export const WEAPON_DAMAGES = [
       { type: 'Quemar', rank: 5 },
     ],
   },
-  { type: 'veneno', effects: [{ type: 'Envenenar', rank: 4 }] },
-  { type: 'destructor', effects: [{ type: 'Romper', rank: 4 }] },
-  // { type: 'mágico', effects: [{ type: 'canalizar', rank: 4 }] },
+  { type: 'veneno', effects: [{ type: 'Envenenar', rank: 3 }] },
+  { type: 'destructor', effects: [{ type: 'Romper', rank: 3 }] },
+  { type: 'mágico', effects: [{ type: 'Sofocar', rank: 2 }] },
 ];
 
 export const NATURE = [

@@ -57,6 +57,13 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
   sizeMod!: number;
   qualityMod!: number;
 
+  strength!: number;
+  dexterity!: number;
+  constitution!: number;
+  intelligence!: number;
+  wisdom!: number;
+  charisma!: number;
+
   parsedSkills!: { name: string; rank: number }[];
   parseInt = parseInt;
   String = String;
@@ -73,6 +80,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
         this.currentWeapon = this.currentWeaponIndex
           ? this.character?.weapons![0]
           : null;
+        this.getCharIntermediateStats();
         this.calculateCharPasives();
         this.calculateCharStats();
         this.setFight();
@@ -106,24 +114,35 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
   }
 
   getCharIntermediateStats(): void {
+    // Atributos
+    this.strength = parseInt(String(this.character.attributes['strength']));
+    this.dexterity = parseInt(String(this.character.attributes['dexterity']));
+    this.constitution = parseInt(
+      String(this.character.attributes['constitution'])
+    );
+    this.intelligence = parseInt(
+      String(this.character.attributes['intelligence'])
+    );
+    this.wisdom = parseInt(String(this.character.attributes['wisdom']));
+    this.charisma = parseInt(String(this.character.attributes['charisma']));
     // Alerta
     this.alert = this.character.skills?.find(
       (skill) => skill?.name?.toUpperCase() == 'ALERTA'
     )?.rank!;
     // Penalización de casco
     this.helmetPen =
-      this.character.attributes['strength'] -
+      this.strength -
       this.GEAR.helmet.find(
         (helmet) => helmet.name == this.character?.gear?.helmet
       )?.strength!;
     // Penalización de armadura
     this.armorPen =
-      this.character.attributes['strength'] -
+      this.strength -
       this.GEAR.armor.find((armor) => armor.name == this.character?.gear?.armor)
         ?.strength!;
     // Penalización de escudo
     this.shieldPen =
-      this.character.attributes['strength'] -
+      this.strength -
       this.GEAR.shield.find(
         (shield) => shield.name == this.character?.gear?.shield
       )?.strength!;
@@ -136,13 +155,21 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
       (shield) => shield.name == this.character?.gear?.shield
     )?.defense!;
     // Armas cuerpo a cuerpo
-    this.cc = this.character?.skills?.find(
-      (skill) => skill?.name?.toUpperCase() == 'ARMAS CUERPO A CUERPO'
-    )?.rank!;
+    this.cc = parseInt(
+      String(
+        this.character?.skills?.find(
+          (skill) => skill?.name?.toUpperCase() == 'ARMAS CUERPO A CUERPO'
+        )?.rank!
+      )
+    );
     // Pelea
-    this.fight = this.character?.skills?.find(
-      (skill) => skill?.name?.toUpperCase() == 'PELEA'
-    )?.rank!;
+    this.fight = parseInt(
+      String(
+        this.character?.skills?.find(
+          (skill) => skill?.name?.toUpperCase() == 'PELEA'
+        )?.rank!
+      )
+    );
     // Modificador de tamaño
     this.sizeMod = this.SIZES.find(
       (size) => size.size == this.currentWeapon?.size
@@ -157,22 +184,16 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
     // Percepción
     this.perception =
       8 +
-      this.character.attributes['wisdom'] +
+      this.wisdom +
       (this.helmetPen < 0 ? this.helmetPen : 0) +
       (this.alert > 0 ? this.alert : 0);
     // Voluntad
     this.will =
-      8 +
-      Math.round(
-        (this.character.attributes['wisdom'] * 2 +
-          this.character.attributes['intelligence'] +
-          this.character.attributes['strength']) /
-          2
-      );
+      8 + Math.round((this.wisdom * 2 + this.intelligence + this.strength) / 2);
     // Velocidad
     this.speed =
-      this.character.attributes['dexterity'] * 2 +
-      this.character.attributes['intelligence'] +
+      this.dexterity * 2 +
+      this.intelligence +
       (this.armorPen < 0 ? this.armorPen : 0) +
       (this.shieldPen < 0 ? this.shieldPen : 0);
     // Defensa con arma
@@ -184,8 +205,8 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
       this.currentWeapon.range?.toUpperCase().includes('MELÉ')
         ? Math.round(
             weaponDefense *
-              Math.round(
-                (this.character.attributes['dexterity'] +
+              (1 +
+                (this.dexterity +
                   (this.currentWeapon.name.toUpperCase() == 'SIN ARMA'
                     ? this.fight
                       ? this.fight
@@ -193,8 +214,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
                     : this.cc
                     ? this.cc
                     : 0)) /
-                  10
-              )
+                  10)
           )
         : 0;
     if (this.weaponDefense < 0) {
@@ -204,13 +224,8 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
     this.shieldDefense =
       this.shield > 0
         ? Math.round(
-            this.shield *
-              Math.round(
-                (this.character.attributes['dexterity'] +
-                  (this.cc ? this.cc : 0)) /
-                  10
-              )
-          ) - this.shieldPen
+            this.shield * (1 + (this.dexterity + (this.cc ? this.cc : 0)) / 10)
+          ) + this.shieldPen
         : 0;
     if (this.shieldDefense < 0) {
       this.shieldDefense = 0;
@@ -220,12 +235,10 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
   }
 
   calculateCharStats(): void {
-    this.maxHealth = this.character.attributes['constitution'] * 10;
+    this.maxHealth = this.constitution * 10;
     this.character.health = this.maxHealth;
     this.maxEnergy =
-      this.character.attributes['strength'] * 3 +
-      this.character.attributes['constitution'] * 2 +
-      this.character.attributes['dexterity'] * 2;
+      this.strength * 3 + this.constitution * 2 + this.dexterity * 2;
     this.character.energy = this.maxEnergy;
   }
 
@@ -242,9 +255,13 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
         (size) => size.size == this.currentWeapon.size
       );
       // A distancia
-      let ad = this.character?.skills?.find(
-        (skill) => skill?.name?.toUpperCase() == 'ARMAS A DISTANCIA'
-      )?.rank!;
+      let ad = parseInt(
+        String(
+          this.character?.skills?.find(
+            (skill) => skill?.name?.toUpperCase() == 'ARMAS A DISTANCIA'
+          )?.rank!
+        )
+      );
       // Impactar
       let hit = !this.currentWeapon.range?.toUpperCase().includes('MELÉ')
         ? ad
@@ -256,15 +273,14 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
       // Impacto
       this.currentWeapon.impact =
         8 +
-        this.character.attributes[this.currentWeapon.impactAtt] +
+        this.parseInt(
+          String(this.character.attributes[this.currentWeapon.impactAtt])
+        ) +
         (hit ? hit : 0) +
         weaponQuality?.hit! +
-        (weaponSize?.hit! +
-          Math.round(this.character.attributes['strength'] / 2) >=
-        0
+        (weaponSize?.hit! + Math.round(this.strength / 2) >= 0
           ? 0
-          : weaponSize?.hit! +
-            Math.round(this.character.attributes['strength'] / 2));
+          : weaponSize?.hit! + Math.round(this.strength / 2));
       // Daño
       this.currentWeapon.damage =
         4 +
@@ -306,6 +322,8 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
         }
       });
     }
+    this.getCharIntermediateStats();
+    this.calculateCharPasives();
   }
 
   setFight(): void {
