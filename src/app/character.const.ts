@@ -98,7 +98,7 @@ export const WEAPON_SIZES = [
   {
     size: 'diminuto',
     hit: 2,
-    damage: -2,
+    damage: 1,
     crit: 2,
     effects: 2,
     def: -2,
@@ -107,7 +107,7 @@ export const WEAPON_SIZES = [
   {
     size: 'pequeño',
     hit: 1,
-    damage: -1,
+    damage: 2,
     crit: 1,
     effects: 1,
     def: -1,
@@ -116,7 +116,7 @@ export const WEAPON_SIZES = [
   {
     size: 'medio',
     hit: 0,
-    damage: 0,
+    damage: 4,
     crit: 0,
     effects: 0,
     def: 1,
@@ -125,7 +125,7 @@ export const WEAPON_SIZES = [
   {
     size: 'grande',
     hit: -1,
-    damage: 2,
+    damage: 6,
     crit: 0,
     effects: -1,
     def: 2,
@@ -134,7 +134,7 @@ export const WEAPON_SIZES = [
   {
     size: 'colosal',
     hit: -3,
-    damage: 4,
+    damage: 10,
     crit: 1,
     effects: -3,
     def: 0,

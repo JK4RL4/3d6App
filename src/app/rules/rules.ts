@@ -14,7 +14,7 @@ export const RULES = {
   Salvación:
     'Capacidades innatas del personaje que le permiten evitar situaciones de peligro.',
   Habilidad:
-    'Capacidades entrenadas o aprendidas del personaje que le permiten realizar acciones en diferente ámbitos.',
+    'Capacidades entrenadas o aprendidas del personaje que le permiten realizar acciones en diferentes ámbitos. Si no se posee la habilidad, se puede realizar la tirada como una Salvación del Atributo relacionado con un Penalizador de -2 en el caso de ser una habilidad innata o -4 en el caso de ser una habilidad aprendida. Si se trata de un conocimiento, no se puede realizar tirada si no se posee una habilidad relacionada con él mismo.',
   Dificultad:
     'Número objetivo de la tirada indicado en el valor de Impacto/Habilidad/Salvación y que puede ser modificado por un Penalizador/Bonificador a discreción del narrador.',
   'Mecánica de juego':
@@ -46,9 +46,9 @@ export const RULES = {
   Exhausto:
     'Ocurre cuando la Energía máxima del personaje es 0. El personaje no puede realizar acciones de combate.',
   Fuerza:
-    'Condiciona el Daño de Pelea y con armas de Alcance Melé, la capacidad de carga y en menor medida la Voluntad.',
-  Destreza: 'Condiciona el Impacto de los ataques y la Iniciativa.',
-  Constitución: 'Condiciona el Aguante del personaje.',
+    'Condiciona el Daño de Pelea y con armas de Alcance Melé, la Energía, la capacidad de carga y en menor medida la Voluntad.',
+  Destreza: 'Condiciona el Impacto de los ataques, la Energía y la Iniciativa.',
+  Constitución: 'Condiciona el Aguante y la Energía del personaje.',
   Inteligencia: 'Condiciona en menor medida la Iniciativa y la Voluntad.',
   Sabiduría: 'Condiciona la Voluntad y la Percepción.',
   Carisma:

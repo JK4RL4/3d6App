@@ -89,12 +89,16 @@
           <span>{{ will }}</span>
         </li>
         <li>
-          <span>{{ "speed" | translate }}</span>
+          <span>Velocidad</span>
           <span>{{ speed }}</span>
         </li>
         <li>
           <span>Defensa</span>
           <span>{{ defense }}</span>
+        </li>
+        <li>
+          <span>Evasión</span>
+          <span>{{ evasion }}</span>
         </li>
         <li>
           <span>Bloqueo</span>
@@ -113,10 +117,12 @@
     <div class="char-skills char-box">
       <h3>{{ "skills" | translate }}</h3>
       <ul>
-        <li *ngFor="let skill of character.skills">
-          <span>{{ skill.name }}</span>
-          <span>{{ parseInt(String(skill.rank)) + 8 }}</span>
-        </li>
+        <ng-container *ngFor="let skill of character.skills">
+          <li *ngIf="skill?.rank! != null">
+            <span>{{ skill.name }}</span>
+            <span>{{ parseInt(String(skill.rank)) + 8 }}</span>
+          </li></ng-container
+        >
       </ul>
     </div>
   </div>

@@ -51,6 +51,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
   armorPen!: number;
   shieldPen!: number;
   armor!: number;
+  evasion!: number;
   shield!: number;
   cc!: number;
   fight!: number;
@@ -126,9 +127,20 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
     this.wisdom = parseInt(String(this.character.attributes['wisdom']));
     this.charisma = parseInt(String(this.character.attributes['charisma']));
     // Alerta
-    this.alert = this.character.skills?.find(
-      (skill) => skill?.name?.toUpperCase() == 'ALERTA'
-    )?.rank!;
+    this.alert = parseInt(
+      String(
+        this.character.skills?.find(
+          (skill) => skill?.name?.toUpperCase() == 'ALERTA'
+        )?.rank!
+      )
+    );
+    let dodge = parseInt(
+      String(
+        this.character.skills?.find(
+          (skill) => skill?.name?.toUpperCase() == 'ESQUIVA'
+        )?.rank!
+      )
+    );
     // Penalización de casco
     this.helmetPen =
       this.strength -
@@ -150,6 +162,8 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
     this.armor = this.GEAR.armor.find(
       (armor) => armor.name == this.character?.gear?.armor
     )?.defense!;
+    // Evasión
+    this.evasion = (this.dexterity + (dodge ? dodge : 0)) / 2;
     // Escudo
     this.shield = this.GEAR.shield.find(
       (shield) => shield.name == this.character?.gear?.shield
@@ -237,8 +251,9 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
   calculateCharStats(): void {
     let initiated = this.maxHealth != null;
     this.maxHealth = this.constitution * 10;
-    this.maxEnergy =
-      this.strength * 3 + this.constitution * 2 + this.dexterity * 2;
+    this.maxEnergy = Math.round(
+      this.constitution * 2 + this.strength + this.dexterity
+    );
     if (!initiated) {
       this.character.health = this.maxHealth;
       this.character.energy = this.maxEnergy;
@@ -272,7 +287,12 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
         ? this.fight
         : this.cc;
       // Energía
-      this.currentWeapon.energy = 2 + weaponSize?.energy!;
+      this.currentWeapon.energy =
+        2 +
+        weaponSize?.energy! -
+        (this.armorPen < 0 ? this.armorPen : 0) -
+        (this.helmetPen < 0 ? this.helmetPen : 0) -
+        (this.shieldPen < 0 ? this.shieldPen : 0);
       // Impacto
       this.currentWeapon.impact =
         8 +
@@ -286,7 +306,6 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
           : weaponSize?.hit! + Math.round(this.strength / 2));
       // Daño
       this.currentWeapon.damage =
-        4 +
         (this.character.attributes[this.currentWeapon.damageAtt]
           ? this.character.attributes[this.currentWeapon.damageAtt]
           : 0) +
