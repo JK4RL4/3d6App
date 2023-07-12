@@ -163,7 +163,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
       (armor) => armor.name == this.character?.gear?.armor
     )?.defense!;
     // Evasión
-    this.evasion = (this.dexterity + (dodge ? dodge : 0)) / 2;
+    this.evasion = Math.round((this.dexterity + (dodge ? dodge : 0)) / 2);
     // Escudo
     this.shield = this.GEAR.shield.find(
       (shield) => shield.name == this.character?.gear?.shield
@@ -307,7 +307,9 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
       // Daño
       this.currentWeapon.damage =
         (this.character.attributes[this.currentWeapon.damageAtt]
-          ? this.character.attributes[this.currentWeapon.damageAtt]
+          ? parseInt(
+              String(this.character.attributes[this.currentWeapon.damageAtt])
+            )
           : 0) +
         weaponSize?.damage! +
         weaponQuality?.damage!;
