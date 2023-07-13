@@ -26,6 +26,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   faDice = faDice;
   faScroll = faScroll;
   character = new Character();
+  characterSub!: Subscription;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -45,6 +46,12 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
           this.snackBar.dismiss();
         }, 1000);
       });
+
+    this.characterSub = this.characterService
+      .getCharacter()
+      .subscribe((character: Character) => {
+        this.character = character;
+      });
   }
 
   ngAfterViewInit(): void {
@@ -52,6 +59,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
+    this.characterSub.unsubscribe();
     this.actionCompleted.unsubscribe();
   }
 

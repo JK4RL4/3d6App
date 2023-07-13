@@ -50,6 +50,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
   helmetPen!: number;
   armorPen!: number;
   shieldPen!: number;
+  weaponPen!: number;
   armor!: number;
   evasion!: number;
   shield!: number;
@@ -57,6 +58,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
   fight!: number;
   sizeMod!: number;
   qualityMod!: number;
+  evadeCost!: number;
 
   strength!: number;
   dexterity!: number;
@@ -65,7 +67,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
   wisdom!: number;
   charisma!: number;
 
-  parsedSkills!: { name: string; rank: number }[];
+  parsedSkills!: any;
   parseInt = parseInt;
   String = String;
 
@@ -126,6 +128,18 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
     );
     this.wisdom = parseInt(String(this.character.attributes['wisdom']));
     this.charisma = parseInt(String(this.character.attributes['charisma']));
+    // Habilidades
+    this.parsedSkills = this.character.skills?.map((skill) => {
+      let skillAttribute = this.SKILLS.find(
+        (skillBase) => skillBase.name == skill.name
+      )?.attribute!;
+      return {
+        name: skill.name,
+        rank:
+          this.parseInt(String(skill.rank)) +
+          this.parseInt(String(this.character.attributes[skillAttribute])),
+      };
+    });
     // Alerta
     this.alert = parseInt(
       String(
@@ -158,6 +172,15 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
       this.GEAR.shield.find(
         (shield) => shield.name == this.character?.gear?.shield
       )?.strength!;
+    // Penalización de arma
+    this.weaponPen =
+      this.strength -
+      this.SIZES.find((type) => type.size == this.currentWeapon?.size)
+        ?.strength!;
+    // Evasión
+    this.evadeCost = Math.round(
+      ((5 - (this.armorPen ? this.armorPen : 0)) * 2 - this.dexterity) / 3
+    );
     // Armadura
     this.armor = this.GEAR.armor.find(
       (armor) => armor.name == this.character?.gear?.armor
@@ -349,6 +372,10 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
           }
         }
       });
+      this.currentWeapon.effects.map(
+        (effect: { type: string; rank: number }) =>
+          (effect.rank = effect.rank < 1 ? 1 : effect.rank)
+      );
     }
     this.getCharIntermediateStats();
     this.calculateCharPasives();

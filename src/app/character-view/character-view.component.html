@@ -37,7 +37,7 @@
 
       <ul class="char-attack-data">
         <li>
-          <span>Energía</span>
+          <span>Coste</span>
           <span>{{ currentWeapon?.energy }}</span>
         </li>
         <li>
@@ -96,17 +96,23 @@
           <span>Defensa</span>
           <span>{{ defense }}</span>
         </li>
-        <li>
+        <li class="char-stats-cost">
           <span>Evasión</span>
           <span>{{ evasion }}</span>
+          <span>Coste</span>
+          <span>{{ evadeCost }}</span>
         </li>
-        <li>
+        <li class="char-stats-cost">
           <span>Bloqueo</span>
           <span>{{ shieldDefense }}</span>
+          <span>Coste</span>
+          <span>{{ 1 - (shieldPen ? shieldPen : 0) }}</span>
         </li>
-        <li>
+        <li class="char-stats-cost">
           <span>Desvío</span>
           <span>{{ weaponDefense }}</span>
+          <span>Coste</span>
+          <span>{{ 1 - (weaponPen ? weaponPen : 0) }}</span>
         </li>
       </ul>
     </div>
@@ -117,7 +123,7 @@
     <div class="char-skills char-box">
       <h3>{{ "skills" | translate }}</h3>
       <ul>
-        <ng-container *ngFor="let skill of character.skills">
+        <ng-container *ngFor="let skill of parsedSkills">
           <li *ngIf="skill?.rank! != null">
             <span>{{ skill.name }}</span>
             <span>{{ parseInt(String(skill.rank)) + 8 }}</span>

@@ -43,6 +43,7 @@ export class CharacterCreatorComponent implements OnInit {
       .getCharacter()
       .subscribe((character: Character) => {
         this.character = character;
+        console.log(this.character);
       });
   }
 

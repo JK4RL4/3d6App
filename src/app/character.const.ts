@@ -103,6 +103,7 @@ export const WEAPON_SIZES = [
     effects: 2,
     def: -2,
     energy: -1,
+    strength: 1,
   },
   {
     size: 'pequeño',
@@ -112,6 +113,7 @@ export const WEAPON_SIZES = [
     effects: 1,
     def: -1,
     energy: 0,
+    strength: 2,
   },
   {
     size: 'medio',
@@ -121,6 +123,7 @@ export const WEAPON_SIZES = [
     effects: 0,
     def: 1,
     energy: 0,
+    strength: 3,
   },
   {
     size: 'grande',
@@ -130,6 +133,7 @@ export const WEAPON_SIZES = [
     effects: -1,
     def: 2,
     energy: 1,
+    strength: 4,
   },
   {
     size: 'colosal',
@@ -139,6 +143,7 @@ export const WEAPON_SIZES = [
     effects: -3,
     def: 0,
     energy: 3,
+    strength: 5,
   },
 ];
 
