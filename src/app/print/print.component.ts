@@ -47,13 +47,14 @@ export class PrintComponent implements OnInit {
 
   printCharacterSheet(): void {
     const self = this;
-    html2canvas(document.getElementById('char-print-container')!).then(
-      function (canvas) {
-        canvas?.toBlob((blob: any) => {
-          saveAs(blob, self.printCharacter.character.name + '.png');
-        });
-        self.dialogRef.close();
-      }
-    );
+    html2canvas(document.getElementById('char-print-container')!, {
+      allowTaint: true,
+      useCORS: true,
+    }).then(function (canvas) {
+      canvas?.toBlob((blob: any) => {
+        saveAs(blob, self.printCharacter.character.name + '.png');
+      });
+      self.dialogRef.close();
+    });
   }
 }
