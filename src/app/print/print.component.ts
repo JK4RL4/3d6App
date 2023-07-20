@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription, Observable, Observer } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
 import { saveAs } from 'file-saver';
 import html2canvas from 'html2canvas';
@@ -26,19 +26,18 @@ export class PrintComponent implements OnInit {
 
   constructor(
     private characterService: CharacterService,
-    public dialogRef: MatDialogRef<PrintComponent> // private httpClient: HttpClient,
-  ) // private sanitizer: DomSanitizer
-  {}
+    public dialogRef: MatDialogRef<PrintComponent> // private httpClient: HttpClient, // private sanitizer: DomSanitizer
+  ) {}
 
   ngOnInit(): void {
     this.printCharacter = this.characterService.getCurrentPrintCharacter();
-    // this.getBase64ImageFromUrl(this.printCharacter.character.image).then(
-    //   (result) => {
-    //     this.characterImage = result;
-    //     console.log(result);
-    //   }
-    // );
-    // this.getImage(this.printCharacter.character.image).subscribe(img => console.log(img))
+
+    this.getBase64ImageFromURL(this.printCharacter.character.image).subscribe(
+      (characterImage: any) => {
+        // this is the image as dataUrl
+        this.characterImage = 'data:image/jpg;base64,' + characterImage;
+      }
+    );
   }
 
   getSkill(skill: string): number | null {
@@ -69,28 +68,38 @@ export class PrintComponent implements OnInit {
     });
   }
 
-  // async getBase64ImageFromUrl(imageUrl: string) {
-  //   let res = await fetch(imageUrl);
-  //   let blob = await res.blob();
+  getBase64ImageFromURL(url: string) {
+    return Observable.create((observer: Observer<string>) => {
+      // create an image object
+      let img = new Image();
+      img.crossOrigin = 'Anonymous';
+      img.src = url;
+      if (!img.complete) {
+        // This will call another method that will create image from url
+        img.onload = () => {
+          observer.next(this.getBase64Image(img));
+          observer.complete();
+        };
+        img.onerror = (err) => {
+          observer.error(err);
+        };
+      } else {
+        observer.next(this.getBase64Image(img));
+        observer.complete();
+      }
+    });
+  }
 
-  //   return new Promise((resolve, reject) => {
-  //     var reader = new FileReader();
-  //     reader.addEventListener(
-  //       'load',
-  //       function () {
-  //         resolve(reader.result);
-  //       },
-  //       false
-  //     );
-
-  //     reader.onerror = () => {
-  //       return reject(this);
-  //     };
-  //     reader.readAsDataURL(blob);
-  //   });
-  // }
-
-  // getImage(imageUrl: string): Observable<Blob> {
-  //   return this.httpClient.get(imageUrl, { responseType: 'blob' });
-  // }
+  getBase64Image(img: HTMLImageElement) {
+    // We create a HTML canvas object that will create a 2d image
+    let canvas = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    let ctx = canvas.getContext('2d');
+    // This will draw image
+    ctx?.drawImage(img, 0, 0);
+    // Convert the drawn image to Data URL
+    let dataURL = canvas.toDataURL('image/png');
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
+  }
 }
