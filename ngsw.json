@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1689271284639,
+  "timestamp": 1689870693984,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,10 +13,10 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.d2f01410282bc252.js",
+        "/main.e87017ef523dcd55.js",
         "/manifest.webmanifest",
         "/polyfills.17d5aa6a20a47184.js",
-        "/runtime.171786d2261c142f.js",
+        "/runtime.8f9cbf8bb1dd267c.js",
         "/styles.5e9de4beb5d3d760.css"
       ],
       "patterns": []
@@ -44,7 +44,14 @@
         "/assets/img/background.jpg",
         "/assets/img/background_dice.jpg",
         "/assets/img/background_lore.jpg",
-        "/assets/img/background_spell.jpg"
+        "/assets/img/background_spell.jpg",
+        "/assets/img/background_team.jpg",
+        "/assets/img/destiny.png",
+        "/assets/img/energy.png",
+        "/assets/img/health.png",
+        "/assets/img/lost.png",
+        "/assets/img/spent.png",
+        "/background_team.17c939eb97e79802.jpg"
       ],
       "patterns": []
     }
@@ -67,12 +74,19 @@
     "/assets/img/background_dice.jpg": "47d45bf7cb2eb721e4153544e826c82cb1ad8522",
     "/assets/img/background_lore.jpg": "50cf6b887a7bab237d1b3534458694e8272cf495",
     "/assets/img/background_spell.jpg": "149f542d9cfdef58cd6aaad3804e31207ebc1c8a",
+    "/assets/img/background_team.jpg": "a7d2cad1644b9862d9394191faec50142dfef8f2",
+    "/assets/img/destiny.png": "5d17da7d0694504b1f2f74ee019f069806ea3557",
+    "/assets/img/energy.png": "7f982616155ea2d03455be01249320ceac925cd5",
+    "/assets/img/health.png": "2e475477838e06eeb856b8041171651e720bc861",
+    "/assets/img/lost.png": "1d120522bc7b7a3852191652bacd1ef6da884234",
+    "/assets/img/spent.png": "58a460c680ee3918dd94d47a9f37fe5ade9586e0",
+    "/background_team.17c939eb97e79802.jpg": "a7d2cad1644b9862d9394191faec50142dfef8f2",
     "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/index.html": "c134280b10a72ad52d40bc0f5fbe8371cc5f4cb1",
-    "/main.d2f01410282bc252.js": "ea1867ebc62b4943bfa8311f02229e7a6b4a5bda",
+    "/index.html": "04d3289da206c39f801c5b2e16e6a4b9d15265c4",
+    "/main.e87017ef523dcd55.js": "875988d515b610cd4d9105a7ddede1e2b9e8f514",
     "/manifest.webmanifest": "ea04f457fe941242b4335dec63887615f5e54a6f",
     "/polyfills.17d5aa6a20a47184.js": "b81d32043cd5b4a8e68b95a25c5471e7ffb5a08e",
-    "/runtime.171786d2261c142f.js": "36e9fbc2ccb671b66ea14d10b46cfcef0e3b17ee",
+    "/runtime.8f9cbf8bb1dd267c.js": "5683836c573d3ec0222c9714f430d2f5f42c73fd",
     "/styles.5e9de4beb5d3d760.css": "1a22a2d531e30fc4a2a361efcc2100cda019e225"
   },
   "navigationUrls": [
