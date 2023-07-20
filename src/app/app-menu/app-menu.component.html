@@ -31,6 +31,14 @@
           <mat-icon>help</mat-icon>
           <span>Reglas</span>
         </button>
+        <button
+          mat-menu-item
+          (click)="openPrintDialog('0ms', '0ms')"
+          [disabled]="index != 2"
+        >
+          <mat-icon>print</mat-icon>
+          <span>Imprimir</span>
+        </button>
       </mat-menu>
     </mat-toolbar-row>
   </mat-toolbar>

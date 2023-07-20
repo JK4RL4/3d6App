@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { saveAs } from 'file-saver';
 import { CharacterLoadComponent } from '../character-load/character-load.component';
 import { RulesComponent } from '../rules/rules.component';
+import { PrintComponent } from '../print/print.component';
 import { CharacterService } from '../character.service';
 
 @Component({
@@ -54,6 +55,16 @@ export class AppMenuComponent implements OnInit, OnDestroy {
   ): void {
     this.dialog.open(RulesComponent, {
       width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+
+  openPrintDialog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
+    this.dialog.open(PrintComponent, {
       enterAnimationDuration,
       exitAnimationDuration,
     });

@@ -1,0 +1,288 @@
+<div id="char-print-container" class="char-print-container">
+  <div class="char-tokens">
+    <div>
+      <img src="../../assets//img/health.png" />
+      <span>Vida</span><span>{{ printCharacter?.maxHealth }}</span>
+    </div>
+    <div>
+      <img src="../../assets//img/energy.png" />
+      <span>Energía</span><span>{{ printCharacter?.maxEnergy }}</span>
+    </div>
+    <div>
+      <img src="../../assets//img/destiny.png" />
+      <span>Destino</span><span>{{ printCharacter?.character?.destiny }}</span>
+    </div>
+    <div>
+      <img src="../../assets//img/spent.png" />
+      <span>Gasto</span>
+    </div>
+    <div>
+      <img src="../../assets//img/lost.png" />
+      <span>Pérdida</span>
+    </div>
+  </div>
+  <div class="char-stats">
+    <div class="char-stats-container">
+      <div
+        class="char-skills"
+        *ngFor="let attribute of ['strength', 'constitution', 'intelligence']"
+      >
+        <div class="char-attribute">
+          <span>{{ attribute | translate }}</span
+          ><span>{{
+            parseInt(String(printCharacter?.character?.attributes[attribute])) +
+              10
+          }}</span>
+        </div>
+        <ng-container *ngFor="let skill of SKILLS">
+          <div class="char-skill" *ngIf="skill.attribute == attribute">
+            <span
+              ><span>({{ skill.type }})</span> {{ skill.name }}</span
+            ><span>{{ getSkill(skill.name) }}</span>
+          </div></ng-container
+        >
+        <ng-container *ngFor="let i of [0, 1]">
+          <div class="char-skill char-custom-skill">
+            <span>__________________</span><span>___</span>
+          </div></ng-container
+        >
+      </div>
+    </div>
+    <div class="char-stats-container">
+      <div
+        class="char-skills"
+        *ngFor="let attribute of ['dexterity', 'wisdom']"
+      >
+        <div class="char-attribute">
+          <span>{{ attribute | translate }}</span
+          ><span>{{
+            parseInt(String(printCharacter?.character?.attributes[attribute])) +
+              10
+          }}</span>
+        </div>
+        <ng-container *ngFor="let skill of SKILLS">
+          <div class="char-skill" *ngIf="skill.attribute == attribute">
+            <span
+              ><span>({{ skill.type }})</span> {{ skill.name }}</span
+            ><span>{{ getSkill(skill.name) }}</span>
+          </div></ng-container
+        >
+        <ng-container *ngFor="let i of [0, 1]">
+          <div class="char-skill char-custom-skill">
+            <span>__________________</span><span>___</span>
+          </div></ng-container
+        >
+      </div>
+    </div>
+    <div class="char-stats-container">
+      <div class="char-skills" *ngFor="let attribute of ['charisma']">
+        <div class="char-attribute">
+          <span>{{ attribute | translate }}</span
+          ><span>{{
+            parseInt(String(printCharacter?.character?.attributes[attribute])) +
+              10
+          }}</span>
+        </div>
+        <ng-container *ngFor="let skill of SKILLS">
+          <div class="char-skill" *ngIf="skill.attribute == attribute">
+            <span
+              ><span>({{ skill.type }})</span> {{ skill.name }}</span
+            ><span>{{ getSkill(skill.name) }}</span>
+          </div></ng-container
+        >
+        <ng-container *ngFor="let i of [0, 1]">
+          <div class="char-skill char-custom-skill">
+            <span>__________________</span><span>___</span>
+          </div></ng-container
+        >
+      </div>
+
+      <!-- Pasivas -->
+      <div class="char-skills">
+        <div class="char-attribute">
+          <span>Pasivas</span>
+        </div>
+        <div class="char-skill">
+          <span>Percepción</span><span>{{ printCharacter?.perception }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Velocidad</span><span>{{ printCharacter?.speed }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Voluntad</span><span>{{ printCharacter?.will }}</span>
+        </div>
+      </div>
+
+      <!-- Defensa -->
+      <div class="char-skills">
+        <div class="char-attribute">
+          <span>Defensa</span><span>{{ printCharacter?.defense }}</span>
+        </div>
+        <div class="char-def char-skill">
+          <span>Bloqueo</span><span>{{ printCharacter?.shieldDefense }}</span
+          ><span><b>Coste</b></span
+          ><span>{{
+            1 - printCharacter?.shieldPen >= 0
+              ? 1 - printCharacter?.shieldPen
+              : 0
+          }}</span>
+        </div>
+        <div class="char-def char-skill">
+          <span>Desvío</span><span>{{ printCharacter?.weaponDefense }}</span
+          ><span><b>Coste</b></span
+          ><span>{{
+            1 - printCharacter?.weaponPen >= 0
+              ? 1 - printCharacter?.weaponPen
+              : 0
+          }}</span>
+        </div>
+        <div class="char-def char-skill">
+          <span>Evasión</span><span>{{ printCharacter?.evasion }}</span
+          ><span><b>Coste</b></span
+          ><span>{{ printCharacter?.evadeCost }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Armas -->
+    <div class="char-stats-container">
+      <div class="char-skills char-weapon">
+        <div class="char-attribute">
+          <span>{{ printCharacter?.parsedWeapons[0]?.name }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Coste</span
+          ><span>{{ printCharacter?.parsedWeapons[0]?.energy }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Alcance</span
+          ><span>{{ printCharacter?.parsedWeapons[0]?.range }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Impacto</span
+          ><span>{{ printCharacter?.parsedWeapons[0]?.impact }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Perforante</span
+          ><span>{{
+            printCharacter?.parsedWeapons[0]?.piercing
+              ? printCharacter?.parsedWeapons[0]?.piercing
+              : 0
+          }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Daño</span
+          ><span>{{ printCharacter?.parsedWeapons[0]?.damage }}</span>
+        </div>
+        <div class="char-skill char-weapon-effects">
+          <span>Efectos</span
+          ><span>{{ printCharacter?.parsedWeapons[0]?.printEffects }}</span>
+        </div>
+      </div>
+      <div
+        class="char-skills char-weapon"
+        *ngIf="printCharacter?.parsedWeapons[1]"
+      >
+        <div class="char-attribute">
+          <span>{{ printCharacter?.parsedWeapons[1]?.name }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Coste</span
+          ><span>{{ printCharacter?.parsedWeapons[1]?.energy }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Alcance</span
+          ><span>{{ printCharacter?.parsedWeapons[1]?.range }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Impacto</span
+          ><span>{{ printCharacter?.parsedWeapons[1]?.impact }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Perforante</span
+          ><span>{{
+            printCharacter?.parsedWeapons[1]?.piercing
+              ? printCharacter?.parsedWeapons[1]?.piercing
+              : 0
+          }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Daño</span
+          ><span>{{ printCharacter?.parsedWeapons[1]?.damage }}</span>
+        </div>
+        <div class="char-skill char-weapon-effects">
+          <span>Efectos</span
+          ><span>{{ printCharacter?.parsedWeapons[1]?.printEffects }}</span>
+        </div>
+      </div>
+      <div
+        class="char-skills char-weapon"
+        *ngIf="printCharacter?.parsedWeapons[2]"
+      >
+        <div class="char-attribute">
+          <span>{{ printCharacter?.parsedWeapons[2]?.name }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Coste</span
+          ><span>{{ printCharacter?.parsedWeapons[2]?.energy }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Alcance</span
+          ><span>{{ printCharacter?.parsedWeapons[2]?.range }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Impacto</span
+          ><span>{{ printCharacter?.parsedWeapons[2]?.impact }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Perforante</span
+          ><span>{{
+            printCharacter?.parsedWeapons[2]?.piercing
+              ? printCharacter?.parsedWeapons[2]?.piercing
+              : 0
+          }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Daño</span
+          ><span>{{ printCharacter?.parsedWeapons[2]?.damage }}</span>
+        </div>
+        <div class="char-skill char-weapon-effects">
+          <span>Efectos</span
+          ><span>{{ printCharacter?.parsedWeapons[2]?.printEffects }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Perfil -->
+    <div class="char-stats-container">
+      <div class="char-skills char-profile">
+        <div class="char-name">
+          <span
+            ><b>{{ printCharacter?.character?.name }}</b></span
+          >
+        </div>
+        <div class="char-image">
+          <img [src]="printCharacter?.character?.image" />
+        </div>
+        <div class="char-name">
+          <span><b>Concepto</b></span>
+        </div>
+        <div class="char-profile-stat">
+          {{ printCharacter?.character?.archetype.concept }}
+        </div>
+        <div class="char-name">
+          <span><b>Naturaleza</b></span>
+        </div>
+        <div class="char-profile-stat">
+          {{ printCharacter?.character?.archetype.nature }}
+        </div>
+        <div class="char-name">
+          <span><b>Conducta</b></span>
+        </div>
+        <div class="char-profile-stat">
+          {{ printCharacter?.character?.archetype.conduct }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

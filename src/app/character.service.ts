@@ -8,6 +8,8 @@ import { Character } from './character.type';
 export class CharacterService {
   currentCharacter!: Character;
   character = new Subject<Character>();
+  currentPrintCharacter!: any;
+  printCharacter = new Subject<any>();
   currentActionCompleted!: string;
   actionCompleted = new Subject<string>();
 
@@ -47,5 +49,23 @@ export class CharacterService {
   clearActionCompleted(): void {
     this.actionCompleted.next('');
     this.currentActionCompleted = '';
+  }
+
+  // Personaje para imprimir
+  getPrintCharacter(): Observable<any> {
+    return this.printCharacter.asObservable();
+  }
+
+  getCurrentPrintCharacter(): any {
+    return this.currentPrintCharacter;
+  }
+
+  sendPrintCharacter(printCharacter: any): void {
+    this.currentPrintCharacter = printCharacter;
+    this.printCharacter.next(printCharacter);
+  }
+
+  clearPrintCharacter(): void {
+    this.printCharacter.next(null);
   }
 }

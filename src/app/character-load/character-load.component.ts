@@ -25,7 +25,7 @@ export class CharacterLoadComponent {
 
   load(): void {
     this.savedCharacters = JSON.parse(localStorage.getItem('chracters')!)?.sort(
-      (a: any, b: any) => a.name.localeCompare(b.name)
+      (a: any, b: any) => a?.name?.localeCompare(b?.name)
     );
     if (!this.savedCharacters) {
       this.savedCharacters = [];
