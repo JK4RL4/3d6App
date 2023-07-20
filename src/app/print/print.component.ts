@@ -25,10 +25,9 @@ export class PrintComponent implements OnInit, AfterViewInit {
 
   constructor(
     private characterService: CharacterService,
-    public dialogRef: MatDialogRef<PrintComponent>,
-    // private httpClient: HttpClient,
-    // private sanitizer: DomSanitizer
-  ) {}
+    public dialogRef: MatDialogRef<PrintComponent> // private httpClient: HttpClient,
+  ) // private sanitizer: DomSanitizer
+  {}
 
   ngOnInit(): void {
     this.printCharacter = this.characterService.getCurrentPrintCharacter();
@@ -57,15 +56,14 @@ export class PrintComponent implements OnInit, AfterViewInit {
 
   printCharacterSheet(): void {
     const self = this;
-    html2canvas(document.getElementById('char-print-container')!, {
-      allowTaint: true,
-      useCORS: true,
-    }).then(function (canvas) {
-      canvas?.toBlob((blob: any) => {
-        saveAs(blob, self.printCharacter.character.name + '.png');
-      });
-      self.dialogRef.close();
-    });
+    html2canvas(document.getElementById('char-print-container')!).then(
+      function (canvas) {
+        canvas?.toBlob((blob: any) => {
+          saveAs(blob, self.printCharacter.character.name + '.png');
+        });
+        self.dialogRef.close();
+      }
+    );
   }
 
   // async getBase64ImageFromUrl(imageUrl: string) {
