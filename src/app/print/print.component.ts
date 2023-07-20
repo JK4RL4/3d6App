@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription, Observable } from 'rxjs';
+import { MatDialogRef } from '@angular/material/dialog';
 import { saveAs } from 'file-saver';
 import html2canvas from 'html2canvas';
 import { CharacterService } from '../character.service';
@@ -24,8 +25,9 @@ export class PrintComponent implements OnInit, AfterViewInit {
 
   constructor(
     private characterService: CharacterService,
-    private httpClient: HttpClient,
-    private sanitizer: DomSanitizer
+    public dialogRef: MatDialogRef<PrintComponent>,
+    // private httpClient: HttpClient,
+    // private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -56,12 +58,13 @@ export class PrintComponent implements OnInit, AfterViewInit {
   printCharacterSheet(): void {
     const self = this;
     html2canvas(document.getElementById('char-print-container')!, {
-      // allowTaint: true,
-      // useCORS: true,
+      allowTaint: true,
+      useCORS: true,
     }).then(function (canvas) {
       canvas?.toBlob((blob: any) => {
         saveAs(blob, self.printCharacter.character.name + '.png');
       });
+      self.dialogRef.close();
     });
   }
 
