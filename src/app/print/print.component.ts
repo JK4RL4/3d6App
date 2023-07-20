@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription, Observable, Observer } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
 import { saveAs } from 'file-saver';
@@ -26,7 +24,7 @@ export class PrintComponent implements OnInit {
 
   constructor(
     private characterService: CharacterService,
-    public dialogRef: MatDialogRef<PrintComponent> // private httpClient: HttpClient, // private sanitizer: DomSanitizer
+    public dialogRef: MatDialogRef<PrintComponent>
   ) {}
 
   ngOnInit(): void {
