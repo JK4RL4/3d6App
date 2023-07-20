@@ -1,4 +1,7 @@
 <div id="char-print-container" class="char-print-container">
+  <div *ngIf="!printed" class="char-print-button">
+    <button (click)="print()"><mat-icon>print</mat-icon></button>
+  </div>
   <div class="char-tokens">
     <div>
       <img src="../../assets//img/health.png" />

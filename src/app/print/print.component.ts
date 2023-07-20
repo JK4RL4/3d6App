@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription, Observable } from 'rxjs';
@@ -14,12 +14,13 @@ import { SKILLS } from '../character.const';
   templateUrl: './print.component.html',
   styleUrls: ['./print.component.sass'],
 })
-export class PrintComponent implements OnInit, AfterViewInit {
+export class PrintComponent implements OnInit {
   readonly ATTRIBUTES = ATTRIBUTES;
   readonly SKILLS = SKILLS;
   printCharacterSub!: Subscription;
   printCharacter: any;
   characterImage: any;
+  printed!: boolean;
   parseInt = parseInt;
   String = String;
 
@@ -40,10 +41,6 @@ export class PrintComponent implements OnInit, AfterViewInit {
     // this.getImage(this.printCharacter.character.image).subscribe(img => console.log(img))
   }
 
-  ngAfterViewInit(): void {
-    setTimeout(() => this.printCharacterSheet(), 0);
-  }
-
   getSkill(skill: string): number | null {
     let skillFound = this.printCharacter.parsedSkills.find(
       (parsedSkill: any) => parsedSkill.name == skill
@@ -54,16 +51,22 @@ export class PrintComponent implements OnInit, AfterViewInit {
     return null;
   }
 
+  print(): void {
+    this.printed = true;
+    setTimeout(() => this.printCharacterSheet(), 0);
+  }
+
   printCharacterSheet(): void {
     const self = this;
-    html2canvas(document.getElementById('char-print-container')!).then(
-      function (canvas) {
-        canvas?.toBlob((blob: any) => {
-          saveAs(blob, self.printCharacter.character.name + '.png');
-        });
-        self.dialogRef.close();
-      }
-    );
+    html2canvas(document.getElementById('char-print-container')!, {
+      // allowTaint: true,
+      useCORS: true,
+    }).then(function (canvas) {
+      canvas?.toBlob((blob: any) => {
+        saveAs(blob, self.printCharacter.character.name + '.png');
+      });
+      self.dialogRef.close();
+    });
   }
 
   // async getBase64ImageFromUrl(imageUrl: string) {
