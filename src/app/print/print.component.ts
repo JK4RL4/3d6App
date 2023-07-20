@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription, Observable, Observer } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
 import { saveAs } from 'file-saver';
 import html2canvas from 'html2canvas';
@@ -17,7 +17,6 @@ export class PrintComponent implements OnInit {
   readonly SKILLS = SKILLS;
   printCharacterSub!: Subscription;
   printCharacter: any;
-  characterImage: any;
   printed!: boolean;
   parseInt = parseInt;
   String = String;
@@ -29,13 +28,6 @@ export class PrintComponent implements OnInit {
 
   ngOnInit(): void {
     this.printCharacter = this.characterService.getCurrentPrintCharacter();
-
-    this.getBase64ImageFromURL(this.printCharacter.character.image).subscribe(
-      (characterImage: any) => {
-        // this is the image as dataUrl
-        this.characterImage = 'data:image/jpg;base64,' + characterImage;
-      }
-    );
   }
 
   getSkill(skill: string): number | null {
@@ -64,40 +56,5 @@ export class PrintComponent implements OnInit {
       });
       self.dialogRef.close();
     });
-  }
-
-  getBase64ImageFromURL(url: string) {
-    return Observable.create((observer: Observer<string>) => {
-      // create an image object
-      let img = new Image();
-      img.crossOrigin = 'Anonymous';
-      img.src = url;
-      if (!img.complete) {
-        // This will call another method that will create image from url
-        img.onload = () => {
-          observer.next(this.getBase64Image(img));
-          observer.complete();
-        };
-        img.onerror = (err) => {
-          observer.error(err);
-        };
-      } else {
-        observer.next(this.getBase64Image(img));
-        observer.complete();
-      }
-    });
-  }
-
-  getBase64Image(img: HTMLImageElement) {
-    // We create a HTML canvas object that will create a 2d image
-    let canvas = document.createElement('canvas');
-    canvas.width = img.width;
-    canvas.height = img.height;
-    let ctx = canvas.getContext('2d');
-    // This will draw image
-    ctx?.drawImage(img, 0, 0);
-    // Convert the drawn image to Data URL
-    let dataURL = canvas.toDataURL('image/png');
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
   }
 }
