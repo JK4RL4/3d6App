@@ -89,7 +89,7 @@ export const WEAPON_RANGES = [
 ];
 
 export const WEAPON_QUALITIES = [
-  { quality: 'baja', damage: -1, crit: 0, effects: -1, hit: -1, def: -2 },
+  { quality: 'baja', damage: -1, crit: 0, effects: 1, hit: -1, def: -2 },
   { quality: 'estándar', damage: 0, crit: 0, effects: 0, hit: 0, def: 1 },
   { quality: 'alta', damage: 1, crit: 0, effects: 0, hit: 1, def: 1 },
   { quality: 'legendaria', damage: 2, crit: 1, effects: -1, hit: 2, def: 2 },

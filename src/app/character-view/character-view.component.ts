@@ -186,7 +186,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
       ((5 - (this.armorPen ? this.armorPen : 0)) * 2 - this.dexterity) / 3
     );
     if (this.evadeCost < 0) {
-      this.evadeCost = 0;
+      this.evadeCost = 1;
     }
     // Armadura
     this.armor = this.GEAR.armor.find(
@@ -393,6 +393,33 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
             return effect.type + ' (' + effect.rank + ')';
           })
           .join(', ');
+        let weaponDefense =
+          (this.sizeMod ? this.sizeMod : 0) +
+          (this.qualityMod ? this.qualityMod : 0);
+        currentWeapon.weaponDefense =
+          this.currentWeapon &&
+          this.currentWeapon.range?.toUpperCase().includes('MELÉ')
+            ? Math.round(
+                weaponDefense *
+                  (1 +
+                    (this.dexterity +
+                      (this.currentWeapon.name.toUpperCase() == 'SIN ARMA'
+                        ? this.fight
+                          ? this.fight
+                          : 0
+                        : this.cc
+                        ? this.cc
+                        : 0)) /
+                      10)
+              )
+            : 0;
+        if (currentWeapon.weaponDefense < 0) {
+          currentWeapon.weaponDefense = 0;
+        }
+        currentWeapon.weaponPen =
+          this.strength -
+          this.SIZES.find((type) => type.size == currentWeapon?.size)
+            ?.strength!;
       }
     }
 
@@ -430,8 +457,6 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
       evadeCost: this.evadeCost,
       shieldDefense: this.shieldDefense,
       shieldPen: this.shieldPen,
-      weaponDefense: this.weaponDefense,
-      weaponPen: this.weaponPen,
       parsedSkills: this.parsedSkills,
       parsedWeapons: this.parsedWeapons,
       maxHealth: this.maxHealth,

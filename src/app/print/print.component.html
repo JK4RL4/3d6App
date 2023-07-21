@@ -56,7 +56,7 @@
         >
         <ng-container *ngFor="let i of [0, 1]">
           <div class="char-skill char-custom-skill">
-            <span>__________________</span><span>___</span>
+            <span>( ) ___________________</span><span>___</span>
           </div></ng-container
         >
       </div>
@@ -82,7 +82,7 @@
         >
         <ng-container *ngFor="let i of [0, 1]">
           <div class="char-skill char-custom-skill">
-            <span>__________________</span><span>___</span>
+            <span>( ) ___________________</span><span>___</span>
           </div></ng-container
         >
       </div>
@@ -105,7 +105,7 @@
         >
         <ng-container *ngFor="let i of [0, 1]">
           <div class="char-skill char-custom-skill">
-            <span>__________________</span><span>___</span>
+            <span>( ) ___________________</span><span>___</span>
           </div></ng-container
         >
       </div>
@@ -137,16 +137,43 @@
           ><span>{{
             1 - printCharacter?.shieldPen >= 0
               ? 1 - printCharacter?.shieldPen
-              : 0
+              : 1
           }}</span>
         </div>
         <div class="char-def char-skill">
-          <span>Desvío</span><span>{{ printCharacter?.weaponDefense }}</span
+          <span>Desvío <sup> (1)</sup></span
+          ><span>{{ printCharacter?.parsedWeapons[0]?.weaponDefense }}</span
           ><span><b>Coste</b></span
           ><span>{{
-            1 - printCharacter?.weaponPen >= 0
-              ? 1 - printCharacter?.weaponPen
-              : 0
+            1 - printCharacter?.parsedWeapons[0]?.weaponPen > 0
+              ? 1 - printCharacter?.parsedWeapons[0]?.weaponPen
+              : 1
+          }}</span>
+        </div>
+        <div
+          *ngIf="printCharacter?.parsedWeapons[1]"
+          class="char-def char-skill"
+        >
+          <span>Desvío <sup> (2)</sup></span
+          ><span>{{ printCharacter?.parsedWeapons[1]?.weaponDefense }}</span
+          ><span><b>Coste</b></span
+          ><span>{{
+            1 - printCharacter?.parsedWeapons[1]?.weaponPen > 0
+              ? 1 - printCharacter?.parsedWeapons[1]?.weaponPen
+              : 1
+          }}</span>
+        </div>
+        <div
+          *ngIf="printCharacter?.parsedWeapons[2]"
+          class="char-def char-skill"
+        >
+          <span>Desvío <sup> (3)</sup></span
+          ><span>{{ printCharacter?.parsedWeapons[2]?.weaponDefense }}</span
+          ><span><b>Coste</b></span
+          ><span>{{
+            1 - printCharacter?.parsedWeapons[2]?.weaponPen > 0
+              ? 1 - printCharacter?.parsedWeapons[2]?.weaponPen
+              : 1
           }}</span>
         </div>
         <div class="char-def char-skill">
@@ -161,7 +188,9 @@
     <div class="char-stats-container">
       <div class="char-skills char-weapon">
         <div class="char-attribute">
-          <span>{{ printCharacter?.parsedWeapons[0]?.name }}</span>
+          <span
+            ><sup>(1) </sup>{{ printCharacter?.parsedWeapons[0]?.name }}</span
+          >
         </div>
         <div class="char-skill">
           <span>Coste</span
@@ -197,7 +226,9 @@
         *ngIf="printCharacter?.parsedWeapons[1]"
       >
         <div class="char-attribute">
-          <span>{{ printCharacter?.parsedWeapons[1]?.name }}</span>
+          <span
+            ><sup>(2) </sup>{{ printCharacter?.parsedWeapons[1]?.name }}</span
+          >
         </div>
         <div class="char-skill">
           <span>Coste</span
@@ -233,7 +264,9 @@
         *ngIf="printCharacter?.parsedWeapons[2]"
       >
         <div class="char-attribute">
-          <span>{{ printCharacter?.parsedWeapons[2]?.name }}</span>
+          <span
+            ><sup>(3) </sup>{{ printCharacter?.parsedWeapons[2]?.name }}</span
+          >
         </div>
         <div class="char-skill">
           <span>Coste</span
@@ -275,10 +308,7 @@
           >
         </div>
         <div class="char-image">
-          <img
-            [src]="printCharacter?.character?.image"
-            crossorigin="use-credentials"
-          />
+          <img [src]="printCharacter?.character?.image" />
         </div>
         <div class="char-name">
           <span><b>Concepto</b></span>
