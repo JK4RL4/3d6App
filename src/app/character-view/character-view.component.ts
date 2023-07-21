@@ -185,7 +185,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
     this.evadeCost = Math.round(
       ((5 - (this.armorPen ? this.armorPen : 0)) * 2 - this.dexterity) / 3
     );
-    if (this.evadeCost < 0) {
+    if (this.evadeCost <= 0) {
       this.evadeCost = 1;
     }
     // Armadura
@@ -393,17 +393,23 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
             return effect.type + ' (' + effect.rank + ')';
           })
           .join(', ');
+        // Modificador de tamaño
+        let sizeMod = this.SIZES.find(
+          (size) => size.size == currentWeapon?.size
+        )?.def!;
+        // Modificador de calidad
+        let qualityMod = this.QUALITIES.find(
+          (quality) => quality.quality == currentWeapon?.quality
+        )?.def!;
         let weaponDefense =
-          (this.sizeMod ? this.sizeMod : 0) +
-          (this.qualityMod ? this.qualityMod : 0);
+          (sizeMod ? sizeMod : 0) + (qualityMod ? qualityMod : 0);
         currentWeapon.weaponDefense =
-          this.currentWeapon &&
-          this.currentWeapon.range?.toUpperCase().includes('MELÉ')
+          currentWeapon && currentWeapon.range?.toUpperCase().includes('MELÉ')
             ? Math.round(
-                weaponDefense *
+                (weaponDefense > 0 ? weaponDefense : 1) *
                   (1 +
                     (this.dexterity +
-                      (this.currentWeapon.name.toUpperCase() == 'SIN ARMA'
+                      (currentWeapon.name.toUpperCase() == 'SIN ARMA'
                         ? this.fight
                           ? this.fight
                           : 0

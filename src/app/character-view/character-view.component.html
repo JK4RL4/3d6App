@@ -106,13 +106,13 @@
           <span>Bloqueo</span>
           <span>{{ shieldDefense }}</span>
           <span>Coste</span>
-          <span>{{ 1 - (shieldPen ? shieldPen : 0) }}</span>
+          <span>{{ 1 - shieldPen > 0 ? 1 - shieldPen : 1 }}</span>
         </li>
         <li class="char-stats-cost">
           <span>Desvío</span>
           <span>{{ weaponDefense }}</span>
           <span>Coste</span>
-          <span>{{ 1 - (weaponPen ? weaponPen : 0) }}</span>
+          <span>{{ 1 - weaponPen > 0 ? 1 - weaponPen : 1 }}</span>
         </li>
       </ul>
     </div>

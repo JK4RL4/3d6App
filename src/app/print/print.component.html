@@ -11,7 +11,7 @@
     </div>
     <div>
       <img
-        src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/game_magic_fantasy_spell_lightning_shock-512.png"
+        src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/game_magic_fantasy_spell_wind_storm_blast-512.png"
       />
       <span>Energía</span><span>{{ printCharacter?.maxEnergy }}</span>
     </div>
@@ -29,7 +29,7 @@
     </div>
     <div>
       <img
-        src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/horror_skeleton_skull_spirit_fantasy_undead-512.png"
+        src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/horror_skull_halloween_dark_death_evil_skeleton-512.png"
       />
       <span>Pérdida</span>
     </div>
@@ -176,6 +176,14 @@
               : 1
           }}</span>
         </div>
+        <div
+          *ngIf="!printCharacter?.parsedWeapons[2]"
+          class="char-def char-skill"
+        >
+          <span>Desvío <sup> (3)</sup></span
+          ><span class="char-custom-skill">__</span><span><b>Coste</b></span
+          ><span class="char-custom-skill">__</span>
+        </div>
         <div class="char-def char-skill">
           <span>Evasión</span><span>{{ printCharacter?.evasion }}</span
           ><span><b>Coste</b></span
@@ -297,6 +305,36 @@
           ><span>{{ printCharacter?.parsedWeapons[2]?.printEffects }}</span>
         </div>
       </div>
+
+      <div
+        class="char-skills char-weapon"
+        *ngIf="!printCharacter?.parsedWeapons[2]"
+      >
+        <div class="char-attribute">
+          <span class="char-custom-skill"
+            ><sup>(3) </sup>__________________</span
+          >
+        </div>
+        <div class="char-skill">
+          <span>Coste</span><span class="char-custom-skill">___</span>
+        </div>
+        <div class="char-skill">
+          <span>Alcance</span><span class="char-custom-skill">___</span>
+        </div>
+        <div class="char-skill">
+          <span>Impacto</span><span class="char-custom-skill">___</span>
+        </div>
+        <div class="char-skill">
+          <span>Perforante</span><span class="char-custom-skill">___</span>
+        </div>
+        <div class="char-skill">
+          <span>Daño</span><span class="char-custom-skill">___</span>
+        </div>
+        <div class="char-skill char-weapon-effects">
+          <span>Efectos</span
+          ><span class="char-custom-skill">________________</span>
+        </div>
+      </div>
     </div>
 
     <!-- Perfil -->
@@ -327,6 +365,24 @@
         </div>
         <div class="char-profile-stat">
           {{ printCharacter?.character?.archetype.conduct }}
+        </div>
+      </div>
+
+      <div class="char-skills">
+        <div class="char-attribute">
+          <span>Equipo</span>
+        </div>
+        <div class="char-skill">
+          <span>Armadura</span
+          ><span>{{ printCharacter?.character?.gear?.armor }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Casco</span
+          ><span>{{ printCharacter?.character?.gear?.helmet }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Escudo</span
+          ><span>{{ printCharacter?.character?.gear?.shield }}</span>
         </div>
       </div>
     </div>
