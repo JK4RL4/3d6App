@@ -34,7 +34,59 @@
       <span>Pérdida</span>
     </div>
   </div>
+
   <div class="char-stats">
+    <!-- Perfil -->
+    <div class="char-stats-container">
+      <div class="char-skills char-profile">
+        <div class="char-name">
+          <span
+            ><b>{{ printCharacter?.character?.name }}</b></span
+          >
+        </div>
+        <div class="char-image">
+          <img [src]="printCharacter?.character?.image" />
+        </div>
+        <div class="char-name">
+          <span><b>Concepto</b></span>
+        </div>
+        <div class="char-profile-stat">
+          {{ printCharacter?.character?.archetype.concept }}
+        </div>
+        <div class="char-name">
+          <span><b>Naturaleza</b></span>
+        </div>
+        <div class="char-profile-stat">
+          {{ printCharacter?.character?.archetype.nature }}
+        </div>
+        <div class="char-name">
+          <span><b>Conducta</b></span>
+        </div>
+        <div class="char-profile-stat">
+          {{ printCharacter?.character?.archetype.conduct }}
+        </div>
+      </div>
+
+      <div class="char-skills">
+        <div class="char-attribute">
+          <span>Equipo</span>
+        </div>
+        <div class="char-skill">
+          <span>Armadura</span
+          ><span>{{ printCharacter?.character?.gear?.armor }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Casco</span
+          ><span>{{ printCharacter?.character?.gear?.helmet }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Escudo</span
+          ><span>{{ printCharacter?.character?.gear?.shield }}</span>
+        </div>
+        <div class="char-gear"></div>
+      </div>
+    </div>
+
     <div class="char-stats-container">
       <div
         class="char-skills"
@@ -333,56 +385,6 @@
         <div class="char-skill char-weapon-effects">
           <span>Efectos</span
           ><span class="char-custom-skill">________________</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Perfil -->
-    <div class="char-stats-container">
-      <div class="char-skills char-profile">
-        <div class="char-name">
-          <span
-            ><b>{{ printCharacter?.character?.name }}</b></span
-          >
-        </div>
-        <div class="char-image">
-          <img [src]="printCharacter?.character?.image" />
-        </div>
-        <div class="char-name">
-          <span><b>Concepto</b></span>
-        </div>
-        <div class="char-profile-stat">
-          {{ printCharacter?.character?.archetype.concept }}
-        </div>
-        <div class="char-name">
-          <span><b>Naturaleza</b></span>
-        </div>
-        <div class="char-profile-stat">
-          {{ printCharacter?.character?.archetype.nature }}
-        </div>
-        <div class="char-name">
-          <span><b>Conducta</b></span>
-        </div>
-        <div class="char-profile-stat">
-          {{ printCharacter?.character?.archetype.conduct }}
-        </div>
-      </div>
-
-      <div class="char-skills">
-        <div class="char-attribute">
-          <span>Equipo</span>
-        </div>
-        <div class="char-skill">
-          <span>Armadura</span
-          ><span>{{ printCharacter?.character?.gear?.armor }}</span>
-        </div>
-        <div class="char-skill">
-          <span>Casco</span
-          ><span>{{ printCharacter?.character?.gear?.helmet }}</span>
-        </div>
-        <div class="char-skill">
-          <span>Escudo</span
-          ><span>{{ printCharacter?.character?.gear?.shield }}</span>
         </div>
       </div>
     </div>

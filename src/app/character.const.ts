@@ -160,7 +160,7 @@ export const WEAPON_DAMAGES = [
   {
     type: 'contundente',
     effects: [
-      { type: 'Aturdir', rank: 6 },
+      { type: 'Aturdir', rank: 4 },
       { type: 'Impedimento', rank: 2 },
     ],
   },
@@ -176,9 +176,9 @@ export const WEAPON_DAMAGES = [
   {
     type: 'eléctrico',
     effects: [
-      { type: 'Aturdir', rank: 6 },
+      { type: 'Aturdir', rank: 5 },
       { type: 'Impedimento', rank: 3 },
-      { type: 'Quemar', rank: 5 },
+      { type: 'Quemar', rank: 4 },
     ],
   },
   { type: 'veneno', effects: [{ type: 'Envenenar', rank: 3 }] },
