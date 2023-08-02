@@ -67,7 +67,7 @@
         </div>
       </div>
 
-      <div class="char-skills">
+      <div class="char-skills char-gear-container">
         <div class="char-attribute">
           <span>Equipo</span>
         </div>
@@ -206,7 +206,7 @@
       >
         <div class="char-attribute">
           <span class="char-custom-skill"
-            ><sup>(3) </sup>__________________</span
+            ><sup>(3) </sup>______________</span
           >
         </div>
         <div class="char-skill">
@@ -233,7 +233,7 @@
 
     <div class="char-stats-container">
       <!-- Pasivas -->
-      <div class="char-skills">
+      <div class="char-skills char-passives-container">
         <div class="char-attribute">
           <span>Pasivas</span>
         </div>
@@ -249,7 +249,7 @@
       </div>
 
       <!-- Defensa -->
-      <div class="char-skills">
+      <div class="char-skills char-def-container">
         <div class="char-attribute">
           <span>Defensa</span><span>{{ printCharacter?.defense }}</span>
         </div>
@@ -333,7 +333,7 @@
         >
         <ng-container *ngFor="let i of [0, 1]">
           <div class="char-skill char-custom-skill">
-            <span>( ) ___________________</span><span>___</span>
+            <span>(__) __________________</span><span>___</span>
           </div></ng-container
         >
       </div>
@@ -359,7 +359,7 @@
         >
         <ng-container *ngFor="let i of [0, 1]">
           <div class="char-skill char-custom-skill">
-            <span>( ) ___________________</span><span>___</span>
+            <span>(__) __________________</span><span>___</span>
           </div></ng-container
         >
       </div>
@@ -385,7 +385,7 @@
         >
         <ng-container *ngFor="let i of [0, 1]">
           <div class="char-skill char-custom-skill">
-            <span>( ) ___________________</span><span>___</span>
+            <span>(__) __________________</span><span>___</span>
           </div></ng-container
         >
       </div>
