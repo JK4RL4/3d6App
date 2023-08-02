@@ -83,164 +83,6 @@
           <span>Escudo</span
           ><span>{{ printCharacter?.character?.gear?.shield }}</span>
         </div>
-        <div class="char-gear"></div>
-      </div>
-    </div>
-
-    <div class="char-stats-container">
-      <div
-        class="char-skills"
-        *ngFor="let attribute of ['strength', 'constitution', 'intelligence']"
-      >
-        <div class="char-attribute">
-          <span>{{ attribute | translate }}</span
-          ><span>{{
-            parseInt(String(printCharacter?.character?.attributes[attribute])) +
-              10
-          }}</span>
-        </div>
-        <ng-container *ngFor="let skill of SKILLS">
-          <div class="char-skill" *ngIf="skill.attribute == attribute">
-            <span
-              ><span>({{ skill.type }})</span> {{ skill.name }}</span
-            ><span>{{ getSkill(skill.name) }}</span>
-          </div></ng-container
-        >
-        <ng-container *ngFor="let i of [0, 1]">
-          <div class="char-skill char-custom-skill">
-            <span>( ) ___________________</span><span>___</span>
-          </div></ng-container
-        >
-      </div>
-    </div>
-    <div class="char-stats-container">
-      <div
-        class="char-skills"
-        *ngFor="let attribute of ['dexterity', 'wisdom']"
-      >
-        <div class="char-attribute">
-          <span>{{ attribute | translate }}</span
-          ><span>{{
-            parseInt(String(printCharacter?.character?.attributes[attribute])) +
-              10
-          }}</span>
-        </div>
-        <ng-container *ngFor="let skill of SKILLS">
-          <div class="char-skill" *ngIf="skill.attribute == attribute">
-            <span
-              ><span>({{ skill.type }})</span> {{ skill.name }}</span
-            ><span>{{ getSkill(skill.name) }}</span>
-          </div></ng-container
-        >
-        <ng-container *ngFor="let i of [0, 1]">
-          <div class="char-skill char-custom-skill">
-            <span>( ) ___________________</span><span>___</span>
-          </div></ng-container
-        >
-      </div>
-    </div>
-    <div class="char-stats-container">
-      <div class="char-skills" *ngFor="let attribute of ['charisma']">
-        <div class="char-attribute">
-          <span>{{ attribute | translate }}</span
-          ><span>{{
-            parseInt(String(printCharacter?.character?.attributes[attribute])) +
-              10
-          }}</span>
-        </div>
-        <ng-container *ngFor="let skill of SKILLS">
-          <div class="char-skill" *ngIf="skill.attribute == attribute">
-            <span
-              ><span>({{ skill.type }})</span> {{ skill.name }}</span
-            ><span>{{ getSkill(skill.name) }}</span>
-          </div></ng-container
-        >
-        <ng-container *ngFor="let i of [0, 1]">
-          <div class="char-skill char-custom-skill">
-            <span>( ) ___________________</span><span>___</span>
-          </div></ng-container
-        >
-      </div>
-
-      <!-- Pasivas -->
-      <div class="char-skills">
-        <div class="char-attribute">
-          <span>Pasivas</span>
-        </div>
-        <div class="char-skill">
-          <span>Percepción</span><span>{{ printCharacter?.perception }}</span>
-        </div>
-        <div class="char-skill">
-          <span>Velocidad</span><span>{{ printCharacter?.speed }}</span>
-        </div>
-        <div class="char-skill">
-          <span>Voluntad</span><span>{{ printCharacter?.will }}</span>
-        </div>
-      </div>
-
-      <!-- Defensa -->
-      <div class="char-skills">
-        <div class="char-attribute">
-          <span>Defensa</span><span>{{ printCharacter?.defense }}</span>
-        </div>
-        <div class="char-def char-skill">
-          <span>Bloqueo</span><span>{{ printCharacter?.shieldDefense }}</span
-          ><span><b>Coste</b></span
-          ><span>{{
-            1 - printCharacter?.shieldPen >= 0
-              ? 1 - printCharacter?.shieldPen
-              : 1
-          }}</span>
-        </div>
-        <div class="char-def char-skill">
-          <span>Desvío <sup> (1)</sup></span
-          ><span>{{ printCharacter?.parsedWeapons[0]?.weaponDefense }}</span
-          ><span><b>Coste</b></span
-          ><span>{{
-            1 - printCharacter?.parsedWeapons[0]?.weaponPen > 0
-              ? 1 - printCharacter?.parsedWeapons[0]?.weaponPen
-              : 1
-          }}</span>
-        </div>
-        <div
-          *ngIf="printCharacter?.parsedWeapons[1]"
-          class="char-def char-skill"
-        >
-          <span>Desvío <sup> (2)</sup></span
-          ><span>{{ printCharacter?.parsedWeapons[1]?.weaponDefense }}</span
-          ><span><b>Coste</b></span
-          ><span>{{
-            1 - printCharacter?.parsedWeapons[1]?.weaponPen > 0
-              ? 1 - printCharacter?.parsedWeapons[1]?.weaponPen
-              : 1
-          }}</span>
-        </div>
-        <div
-          *ngIf="printCharacter?.parsedWeapons[2]"
-          class="char-def char-skill"
-        >
-          <span>Desvío <sup> (3)</sup></span
-          ><span>{{ printCharacter?.parsedWeapons[2]?.weaponDefense }}</span
-          ><span><b>Coste</b></span
-          ><span>{{
-            1 - printCharacter?.parsedWeapons[2]?.weaponPen > 0
-              ? 1 - printCharacter?.parsedWeapons[2]?.weaponPen
-              : 1
-          }}</span>
-        </div>
-        <div
-          *ngIf="!printCharacter?.parsedWeapons[2]"
-          class="char-def char-skill"
-        >
-          <span>Desvío <sup> (3)</sup></span
-          ><span class="char-custom-skill">__</span><span><b>Coste</b></span
-          ><span class="char-custom-skill">__</span>
-        </div>
-        <div class="char-def char-skill">
-          <span>Evasión</span><span>{{ printCharacter?.evasion }}</span
-          ><span><b>Coste</b></span
-          ><span>{{ printCharacter?.evadeCost }}</span>
-        </div>
       </div>
     </div>
 
@@ -386,6 +228,166 @@
           <span>Efectos</span
           ><span class="char-custom-skill">________________</span>
         </div>
+      </div>
+    </div>
+
+    <div class="char-stats-container">
+      <!-- Pasivas -->
+      <div class="char-skills">
+        <div class="char-attribute">
+          <span>Pasivas</span>
+        </div>
+        <div class="char-skill">
+          <span>Percepción</span><span>{{ printCharacter?.perception }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Velocidad</span><span>{{ printCharacter?.speed }}</span>
+        </div>
+        <div class="char-skill">
+          <span>Voluntad</span><span>{{ printCharacter?.will }}</span>
+        </div>
+      </div>
+
+      <!-- Defensa -->
+      <div class="char-skills">
+        <div class="char-attribute">
+          <span>Defensa</span><span>{{ printCharacter?.defense }}</span>
+        </div>
+        <div class="char-def char-skill">
+          <span>Bloqueo</span><span>{{ printCharacter?.shieldDefense }}</span
+          ><span><b>Coste</b></span
+          ><span>{{
+            1 - printCharacter?.shieldPen >= 0
+              ? 1 - printCharacter?.shieldPen
+              : 1
+          }}</span>
+        </div>
+        <div class="char-def char-skill">
+          <span>Desvío <sup> (1)</sup></span
+          ><span>{{ printCharacter?.parsedWeapons[0]?.weaponDefense }}</span
+          ><span><b>Coste</b></span
+          ><span>{{
+            1 - printCharacter?.parsedWeapons[0]?.weaponPen > 0
+              ? 1 - printCharacter?.parsedWeapons[0]?.weaponPen
+              : 1
+          }}</span>
+        </div>
+        <div
+          *ngIf="printCharacter?.parsedWeapons[1]"
+          class="char-def char-skill"
+        >
+          <span>Desvío <sup> (2)</sup></span
+          ><span>{{ printCharacter?.parsedWeapons[1]?.weaponDefense }}</span
+          ><span><b>Coste</b></span
+          ><span>{{
+            1 - printCharacter?.parsedWeapons[1]?.weaponPen > 0
+              ? 1 - printCharacter?.parsedWeapons[1]?.weaponPen
+              : 1
+          }}</span>
+        </div>
+        <div
+          *ngIf="printCharacter?.parsedWeapons[2]"
+          class="char-def char-skill"
+        >
+          <span>Desvío <sup> (3)</sup></span
+          ><span>{{ printCharacter?.parsedWeapons[2]?.weaponDefense }}</span
+          ><span><b>Coste</b></span
+          ><span>{{
+            1 - printCharacter?.parsedWeapons[2]?.weaponPen > 0
+              ? 1 - printCharacter?.parsedWeapons[2]?.weaponPen
+              : 1
+          }}</span>
+        </div>
+        <div
+          *ngIf="!printCharacter?.parsedWeapons[2]"
+          class="char-def char-skill"
+        >
+          <span>Desvío <sup> (3)</sup></span
+          ><span class="char-custom-skill">__</span><span><b>Coste</b></span
+          ><span class="char-custom-skill">__</span>
+        </div>
+        <div class="char-def char-skill">
+          <span>Evasión</span><span>{{ printCharacter?.evasion }}</span
+          ><span><b>Coste</b></span
+          ><span>{{ printCharacter?.evadeCost }}</span>
+        </div>
+      </div>
+
+      <div
+        class="char-skills"
+        *ngFor="let attribute of ['strength', 'constitution']"
+      >
+        <div class="char-attribute">
+          <span>{{ attribute | translate }}</span
+          ><span>{{
+            parseInt(String(printCharacter?.character?.attributes[attribute])) +
+              10
+          }}</span>
+        </div>
+        <ng-container *ngFor="let skill of SKILLS">
+          <div class="char-skill" *ngIf="skill.attribute == attribute">
+            <span
+              ><span>({{ skill.type }})</span> {{ skill.name }}</span
+            ><span>{{ getSkill(skill.name) }}</span>
+          </div></ng-container
+        >
+        <ng-container *ngFor="let i of [0, 1]">
+          <div class="char-skill char-custom-skill">
+            <span>( ) ___________________</span><span>___</span>
+          </div></ng-container
+        >
+      </div>
+    </div>
+    <div class="char-stats-container">
+      <div
+        class="char-skills"
+        *ngFor="let attribute of ['dexterity', 'wisdom']"
+      >
+        <div class="char-attribute">
+          <span>{{ attribute | translate }}</span
+          ><span>{{
+            parseInt(String(printCharacter?.character?.attributes[attribute])) +
+              10
+          }}</span>
+        </div>
+        <ng-container *ngFor="let skill of SKILLS">
+          <div class="char-skill" *ngIf="skill.attribute == attribute">
+            <span
+              ><span>({{ skill.type }})</span> {{ skill.name }}</span
+            ><span>{{ getSkill(skill.name) }}</span>
+          </div></ng-container
+        >
+        <ng-container *ngFor="let i of [0, 1]">
+          <div class="char-skill char-custom-skill">
+            <span>( ) ___________________</span><span>___</span>
+          </div></ng-container
+        >
+      </div>
+    </div>
+    <div class="char-stats-container">
+      <div
+        class="char-skills"
+        *ngFor="let attribute of ['intelligence', 'charisma']"
+      >
+        <div class="char-attribute">
+          <span>{{ attribute | translate }}</span
+          ><span>{{
+            parseInt(String(printCharacter?.character?.attributes[attribute])) +
+              10
+          }}</span>
+        </div>
+        <ng-container *ngFor="let skill of SKILLS">
+          <div class="char-skill" *ngIf="skill.attribute == attribute">
+            <span
+              ><span>({{ skill.type }})</span> {{ skill.name }}</span
+            ><span>{{ getSkill(skill.name) }}</span>
+          </div></ng-container
+        >
+        <ng-container *ngFor="let i of [0, 1]">
+          <div class="char-skill char-custom-skill">
+            <span>( ) ___________________</span><span>___</span>
+          </div></ng-container
+        >
       </div>
     </div>
   </div>

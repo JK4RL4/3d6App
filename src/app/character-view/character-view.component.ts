@@ -228,7 +228,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
     // Percepción
     this.perception =
       8 +
-      this.wisdom +
+      Math.round((2 * this.wisdom + this.intelligence) / 3) +
       (this.helmetPen < 0 ? this.helmetPen : 0) +
       (this.alert > 0 ? Math.round(this.alert / 2) : 0);
     // Voluntad
@@ -268,7 +268,8 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
     this.shieldDefense =
       this.shield > 0
         ? Math.round(
-            this.shield * (1 + (this.dexterity + (this.cc ? this.cc : 0)) / 10)
+            this.shield *
+              (0.5 + (this.dexterity + (this.cc ? this.cc : 0)) / 10)
           ) + this.shieldPen
         : 0;
     if (this.shieldDefense < 0) {
@@ -402,12 +403,13 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
           (quality) => quality.quality == currentWeapon?.quality
         )?.def!;
         let weaponDefense =
-          (sizeMod ? sizeMod : 0) + (qualityMod ? qualityMod : 0);
+          (sizeMod != null ? sizeMod : 0) +
+          (qualityMod != null ? qualityMod : 0);
         currentWeapon.weaponDefense =
           currentWeapon && currentWeapon.range?.toUpperCase().includes('MELÉ')
             ? Math.round(
                 (weaponDefense > 0 ? weaponDefense : 1) *
-                  (1 +
+                  (0.5 +
                     (this.dexterity +
                       (currentWeapon.name.toUpperCase() == 'SIN ARMA'
                         ? this.fight

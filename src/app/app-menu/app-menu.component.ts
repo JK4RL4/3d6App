@@ -43,7 +43,6 @@ export class AppMenuComponent implements OnInit, OnDestroy {
     exitAnimationDuration: string
   ): void {
     this.dialog.open(CharacterLoadComponent, {
-      width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
     });
@@ -54,7 +53,6 @@ export class AppMenuComponent implements OnInit, OnDestroy {
     exitAnimationDuration: string
   ): void {
     this.dialog.open(RulesComponent, {
-      width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
     });
