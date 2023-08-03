@@ -27,7 +27,7 @@ export const RULES = {
   'Defensa activa':
     'Se realiza cuando el personaje elige defender como acción de turno. Puede llevarse a cabo contra cualquier ataque frontal durante el turno en el que se declara, pero reduciendo en 1 punto su efecto por cada ataque por encima del primero.',
   Destino:
-    'Por cada punto de destino, el personaje puede: <br> - Repetir una tirada. Ninguna tirada puede repetirse más de una vez. El resultado de la repetición sustituye por completo al de la tirada original. <br> - Superar automáticamente una tirada de Dificultad menor o igual a 16 con Margen de éxito 0. <br> - Ignorar todos los estados y penalizaciones por heridas, además de reducir cualquier Coste o Pérdida de Energía de Ataque o Habilidad a 0 durante 1 turno.',
+    'Por cada punto de destino, el personaje puede: <br> - Repetir una tirada. Ninguna tirada puede repetirse más de una vez. El resultado de la repetición sustituye por completo al de la tirada original. <br> - Superar automáticamente una tirada de Dificultad mayor o igual a 8 con Margen de éxito 0. <br> - Ignorar todos los estados y penalizaciones por heridas, además de reducir cualquier Coste o Pérdida de Energía de Ataque o Habilidad a 0 durante 1 turno.',
   Destreza: 'Condiciona el Impacto de los ataques, la Energía y la Iniciativa.',
   Destruir:
     'Por cada efecto aplicado, la Defensa del enemigo se reduce permanentemente en 1 punto.',
@@ -58,7 +58,7 @@ export const RULES = {
   'Golpe crítico':
     'Si se consigue un Margen de éxito de 10 o más en una tirada de ataque, se produce un golpe crítico. Los golpes críticos duplican el Daño del ataque y pueden tener efectos adicionales a discreción del narrador.',
   Habilidad:
-    'Capacidades entrenadas o aprendidas del personaje que le permiten realizar acciones en diferentes ámbitos. Si no se posee la habilidad, se puede realizar la tirada como una Salvación del Atributo relacionado con un Penalizador de -2 en el caso de ser una habilidad innata o -4 en el caso de ser una habilidad aprendida. Si se trata de un conocimiento, no se puede realizar tirada si no se posee una habilidad relacionada con él mismo.',
+    'Capacidades entrenadas o aprendidas del personaje que le permiten realizar acciones en diferentes ámbitos. Si no se posee la habilidad, se puede realizar la tirada como una Salvación del Atributo relacionado con un Penalizador de -2 en el caso de ser una habilidad innata (i) o -4 en el caso de ser una técnica o habilidad aprendida (t). Si se trata de un conocimiento (c), no se puede realizar tirada si no se posee una habilidad relacionada con él mismo.',
   Inteligencia: 'Condiciona en menor medida la Iniciativa y la Voluntad.',
   Impedir:
     'Por cada efecto de impedimento aplicado a un personaje, éste debe gastar 1 punto de Energía o quedar Agotado.',
@@ -66,7 +66,7 @@ export const RULES = {
     'Velocidad a la que actúa el personaje. Puede incrementarse utilizando Energía al inicio de cada turno. Si la Iniciativa para el turno supera en 10 puntos o más a la del enemigo, el personaje puede realizar una Defensa activa además de su acción de combate.',
   Impacto: 'Dificultad de la tirada de ataque.',
   Lanzar:
-    'El rango se verá condicionado por el Tamaño del arma y la Fuerza del personaje.',
+    'Las armas con este rango pueden utilizarse también como armas de rango Melé(1). Si se lanza el arma, el rango se verá condicionado por el Tamaño del arma y la Fuerza del personaje. Si se intenta lanzar un arma que no posea este atributo de rango se aplicará un Penalizador de -4 al Impacto.',
   Largo: 'Alcance hasta 140 metros.',
   Letal:
     'El Margen de éxito necesario para obtener un Golpe crítico se reduce en el valor indicado.',
@@ -84,7 +84,6 @@ export const RULES = {
     'Valor que se suma a las tiradas percepción. Recibe un Bonificador de la Habilidad Alerta y un Penalizador por el yelmo equipado.',
   Pérdida:
     'Reducción permanente del valor de Energía máxima que tiene efecto hasta realizar un descanso largo fuera de combate.',
-
   Perforar: 'Por cada punto se ignora 1 punto de la Defensa del enemigo.',
   Pifia:
     'Si se falla una tirada de ataque con un Margen de éxito de -10 o más, se produce una pifia. Las pifias permiten al enemigo una oportunidad de contraataque, otorgándole una acción de combate adicional, y pueden tener efectos adicionales a discreción del narrador.',

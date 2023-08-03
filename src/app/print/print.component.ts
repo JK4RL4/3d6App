@@ -30,14 +30,15 @@ export class PrintComponent implements OnInit {
     this.printCharacter = this.characterService.getCurrentPrintCharacter();
   }
 
-  getSkill(skill: string): number | null {
+  getSkill(skill: string): number | string | null {
     let skillFound = this.printCharacter.parsedSkills.find(
       (parsedSkill: any) => parsedSkill.name == skill
     );
     if (skillFound) {
       return this.parseInt(String(skillFound.rank)) + 8;
+    } else {
+      return '__';
     }
-    return null;
   }
 
   print(): void {
@@ -48,6 +49,7 @@ export class PrintComponent implements OnInit {
   printCharacterSheet(): void {
     const self = this;
     html2canvas(document.getElementById('char-print-container')!, {
+      scale: 4,
       allowTaint: true,
       useCORS: true,
     }).then(function (canvas) {

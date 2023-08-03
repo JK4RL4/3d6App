@@ -229,8 +229,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
     this.perception =
       8 +
       Math.round((2 * this.wisdom + this.intelligence) / 3) +
-      (this.helmetPen < 0 ? this.helmetPen : 0) +
-      (this.alert > 0 ? Math.round(this.alert / 2) : 0);
+      (this.helmetPen < 0 ? this.helmetPen : 0);
     // Voluntad
     this.will =
       8 + Math.round((this.wisdom * 2 + this.intelligence + this.strength) / 2);
@@ -293,7 +292,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
 
   setPrintWeapons(): void {
     this.parsedWeapons = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
       this.updateWeapon(i, true);
     }
   }
