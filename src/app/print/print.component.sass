@@ -219,16 +219,33 @@
         display: flex
         justify-content: center
         align-items: center
-        background: lightgray
+        background: whitesmoke
         color: white
         font-size: 18px
         border: 1px solid black
         text-shadow: -1px -1px 0 #000, 0 -1px 0 #000, 1px -1px 0 #000, 1px 0 0 #000, 1px 1px 0 #000, 0 1px 0 #000, -1px 1px 0 #000, -1px 0 0 #000
 
     .char-title
+        position: relative
         margin-top: 5px
         font-family: BreatheFire
-        font-size: 24px
+        background: none
+        border: none
+
+        img
+            position: absolute
+            top: -11px
+            z-index: 0
+            width: 250px
+            height: auto
+
+        span
+            position: absolute
+            top: 0
+            z-index: 9
+            font-size: 18px
+            color: black
+            text-shadow: -1px -1px 0 white, 0 -1px 0 white, 1px -1px 0 white, 1px 0 0 white, 1px 1px 0 white, 0 1px 0 white, -1px 1px 0 white, -1px 0 0 white
 
     .char-profile-data
         margin: 0 0 10px 0
