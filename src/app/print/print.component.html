@@ -171,7 +171,7 @@
           <span>Bloqueo</span><span>{{ printCharacter?.shieldDefense }}</span
           ><span><b>Coste</b></span
           ><span>{{
-            1 - printCharacter?.shieldPen >= 0
+            1 - printCharacter?.shieldPen > 0
               ? 1 - printCharacter?.shieldPen
               : 1
           }}</span>

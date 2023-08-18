@@ -69,7 +69,7 @@ export const RULES = {
     'Las armas con este rango pueden utilizarse también como armas de rango Melé(1). Si se lanza el arma, el rango se verá condicionado por el Tamaño del arma y la Fuerza del personaje. Si se intenta lanzar un arma que no posea este atributo de rango se aplicará un Penalizador de -4 al Impacto.',
   Largo: 'Alcance hasta 140 metros.',
   Letal:
-    'El Margen de éxito necesario para obtener un Golpe crítico se reduce en el valor indicado.',
+    'El Margen de éxito necesario para añadir 1 punto de Daño al ataque. Acumulable.',
   'Margen de éxito':
     'Resultado de restar la Dificultad de una tirada menos la suma de los dados de la misma.',
   'Mecánica de juego':

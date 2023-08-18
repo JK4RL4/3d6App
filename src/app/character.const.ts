@@ -153,31 +153,47 @@ export const WEAPON_DAMAGES = [
   {
     type: 'cortante',
     effects: [
-      { type: 'Sangrado', rank: 3 },
-      { type: 'Impedimento', rank: 3 },
+      { type: 'Sangrar', rank: 3 },
+      { type: 'Impedir', rank: 3 },
+      { type: 'Letal', rank: 2 },
     ],
   },
   {
     type: 'contundente',
     effects: [
       { type: 'Aturdir', rank: 4 },
-      { type: 'Impedimento', rank: 2 },
+      { type: 'Impedir', rank: 2 },
+      { type: 'Letal', rank: 3 },
     ],
   },
-  { type: 'perforante', effects: [{ type: 'Perforar', rank: 2 }] },
-  { type: 'fuego', effects: [{ type: 'Quemar', rank: 3 }] },
+  {
+    type: 'perforante',
+    effects: [
+      { type: 'Perforar', rank: 2 },
+      { type: 'Impedir', rank: 4 },
+      { type: 'Letal', rank: 3 },
+    ],
+  },
+  {
+    type: 'fuego',
+    effects: [
+      { type: 'Quemar', rank: 3 },
+      { type: 'Letal', rank: 1 },
+    ],
+  },
   {
     type: 'frío',
     effects: [
       { type: 'Aturdir', rank: 4 },
-      { type: 'Impedimento', rank: 2 },
+      { type: 'Impedir', rank: 2 },
     ],
   },
   {
     type: 'eléctrico',
     effects: [
       { type: 'Aturdir', rank: 5 },
-      { type: 'Impedimento', rank: 3 },
+      { type: 'Impedir', rank: 3 },
+      { type: 'Letal', rank: 2 },
       { type: 'Quemar', rank: 4 },
     ],
   },
