@@ -292,7 +292,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
 
   setPrintWeapons(): void {
     this.parsedWeapons = [];
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 3; i++) {
       this.updateWeapon(i, true);
     }
   }
