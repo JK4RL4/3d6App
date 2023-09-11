@@ -28,7 +28,55 @@
           <span>Conducta</span
           ><span>{{ printCharacter?.character?.archetype.conduct }}</span>
         </div>
-        <div class="char-name char-gear">
+
+        <!-- Pasivas -->
+        <div class="char-skills char-passives-container">
+          <div class="char-name char-profile-data">
+            <span><b>Pasivas</b></span>
+          </div>
+          <div>
+            <div>
+              <img
+                src="https://cdn1.iconfinder.com/data/icons/game-ui-set-part-2/96/Heart_red-512.png"
+              />
+              <span>Vida</span>
+            </div>
+            <span>{{ printCharacter?.maxHealth }}</span>
+          </div>
+          <div>
+            <div>
+              <img
+                src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/vision_eye_focus_scanning_eyesight_accuracy-512.png"
+              />
+              <span>Percepción</span>
+            </div>
+            <span>{{ printCharacter?.perception }}</span>
+          </div>
+          <div>
+            <div>
+              <img
+                src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/speed_foot_motion_down_leg_skill-512.png"
+              />
+              <span>Velocidad</span>
+            </div>
+            <span>{{ printCharacter?.speed }}</span>
+          </div>
+          <div>
+            <div>
+              <img
+                src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/ability_skill_swords_game_mastery_hand-512.png"
+              />
+              <span>Voluntad</span>
+            </div>
+            <span>{{ printCharacter?.will }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="char-stats-container">
+      <div class="char-skills char-profile">
+        <div class="char-name char-profile-data char-gear">
           <span><b>Equipo base</b></span>
         </div>
         <div class="char-skill">
@@ -50,105 +98,75 @@
           <span class="char-custom-skill">__________________________</span>
         </div>
       </div>
-    </div>
 
-    <!-- Armas -->
-    <div class="char-stats-container">
-      <!-- Pasivas -->
-      <div class="char-skills char-passives-container">
-        <div>
-          <div>
-            <img
-              src="https://cdn1.iconfinder.com/data/icons/game-ui-set-part-2/96/Heart_red-512.png"
-            />
-            <span>Vida</span>
+      <!-- Armas -->
+      <div class="char-stats-container">
+        <ng-container
+          *ngFor="let weapon of printCharacter?.parsedWeapons; index as i"
+        >
+          <div class="char-skills char-weapon">
+            <div class="char-attribute">
+              <span [ngClass]="{ 'char-custom-skill': !weapon?.name }"
+                ><sup>({{ i + 1 }}) </sup
+                >{{ weapon?.name ? weapon?.name : "________________" }}</span
+              >
+            </div>
+            <div class="char-weapon-data">
+              <div>
+                <span [ngClass]="{ 'char-custom-skill': !weapon?.range }">{{
+                  weapon?.range ? weapon?.range : "_______"
+                }}</span>
+              </div>
+              <div>
+                <div>
+                  <img
+                    src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/speed_foot_motion_down_leg_skill-512.png"
+                  /><span
+                    [ngClass]="{ 'char-custom-skill': !weapon?.energy }"
+                    >{{ weapon?.energy ? -weapon?.energy : "__" }}</span
+                  >
+                </div>
+                <div>
+                  <img
+                    src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/ability_skill_swords_game_target_aim_shot_sniper_aiming-512.png"
+                  /><span
+                    [ngClass]="{ 'char-custom-skill': !weapon?.impact }"
+                    >{{ weapon?.impact ? weapon?.impact : "__" }}</span
+                  >
+                </div>
+                <div>
+                  <img
+                    src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/love_heart_break_relationship_skill_ability-512.png"
+                  /><span
+                    [ngClass]="{ 'char-custom-skill': !weapon?.damage }"
+                    >{{ weapon?.damage ? weapon?.damage : "__" }}</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="char-skill">
+              <span>Perforante</span
+              ><span [ngClass]="{ 'char-custom-skill': !weapon?.name }">{{
+                weapon?.name ? (weapon?.piercing ? weapon?.piercing : 0) : "___"
+              }}</span>
+            </div>
+            <div class="char-skill char-weapon-effects">
+              <span>Efectos</span
+              ><span
+                [ngClass]="{ 'char-custom-skill': !weapon?.printEffects }"
+                >{{
+                  weapon?.printEffects
+                    ? weapon?.printEffects
+                    : "________________"
+                }}</span
+              >
+            </div>
           </div>
-          <span>{{ printCharacter?.maxHealth }}</span>
-        </div>
-        <div>
-          <div>
-            <img
-              src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/vision_eye_focus_scanning_eyesight_accuracy-512.png"
-            />
-            <span>Percepción</span>
-          </div>
-          <span>{{ printCharacter?.perception }}</span>
-        </div>
-        <div>
-          <div>
-            <img
-              src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/speed_foot_motion_down_leg_skill-512.png"
-            />
-            <span>Velocidad</span>
-          </div>
-          <span>{{ printCharacter?.speed }}</span>
-        </div>
-        <div>
-          <div>
-            <img
-              src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/ability_skill_swords_game_mastery_hand-512.png"
-            />
-            <span>Voluntad</span>
-          </div>
-          <span>{{ printCharacter?.will }}</span>
-        </div>
+        </ng-container>
       </div>
-      <ng-container
-        *ngFor="let weapon of printCharacter?.parsedWeapons; index as i"
-      >
-        <div class="char-skills char-weapon">
-          <div class="char-attribute">
-            <span [ngClass]="{ 'char-custom-skill': !weapon?.name }"
-              ><sup>({{ i + 1 }}) </sup
-              >{{ weapon?.name ? weapon?.name : "________________" }}</span
-            >
-          </div>
-          <div class="char-weapon-data">
-            <div>
-              <span [ngClass]="{ 'char-custom-skill': !weapon?.range }">{{
-                weapon?.range ? weapon?.range : "_______"
-              }}</span>
-            </div>
-            <!-- <div>
-              <img
-                src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/game_magic_fantasy_spell_wind_storm_blast-512.png"
-              /><span [ngClass]="{ 'char-custom-skill': !weapon?.energy }">{{
-                weapon?.energy ? weapon?.energy : "__"
-              }}</span>
-            </div> -->
-            <div>
-              <div>
-                <img
-                  src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/ability_skill_swords_game_target_aim_shot_sniper_aiming-512.png"
-                /><span [ngClass]="{ 'char-custom-skill': !weapon?.impact }">{{
-                  weapon?.impact ? weapon?.impact : "__"
-                }}</span>
-              </div>
-              <div>
-                <img
-                  src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/love_heart_break_relationship_skill_ability-512.png"
-                /><span [ngClass]="{ 'char-custom-skill': !weapon?.damage }">{{
-                  weapon?.damage ? weapon?.damage : "__"
-                }}</span>
-              </div>
-            </div>
-          </div>
-          <div class="char-skill">
-            <span>Perforante</span
-            ><span [ngClass]="{ 'char-custom-skill': !weapon?.name }">{{
-              weapon?.name ? (weapon?.piercing ? weapon?.piercing : 0) : "___"
-            }}</span>
-          </div>
-          <div class="char-skill char-weapon-effects">
-            <span>Efectos</span
-            ><span [ngClass]="{ 'char-custom-skill': !weapon?.printEffects }">{{
-              weapon?.printEffects ? weapon?.printEffects : "________________"
-            }}</span>
-          </div>
-        </div>
-      </ng-container>
     </div>
 
+    <!-- Habilidades -->
     <div class="char-stats-container">
       <!-- Defensa -->
       <div class="char-skills char-def-container">
@@ -157,13 +175,13 @@
         </div>
         <!-- Bloqueo -->
         <div class="char-def char-skill">
-          <span>Bloqueo</span><span>{{ printCharacter?.shieldDefense }}</span
-          ><span><b>Coste</b></span
-          ><span>{{
-            1 - printCharacter?.shieldPen > 0
-              ? 1 - printCharacter?.shieldPen
-              : 1
-          }}</span>
+          <span>Bloqueo</span><span>{{ printCharacter?.shieldDefense }}</span>
+          <!-- <span><b>Coste</b></span
+                ><span>{{
+                  1 - printCharacter?.shieldPen > 0
+                    ? 1 - printCharacter?.shieldPen
+                    : 1
+                }}</span> -->
         </div>
         <!-- Desvío -->
         <ng-container
@@ -177,39 +195,43 @@
                 'char-custom-skill': weapon?.weaponPen == null
               }"
               >{{ weapon?.weaponDefense ? weapon?.weaponDefense : "__" }}</span
-            ><span><b>Coste</b></span
-            ><span
-              [ngClass]="{
-                'char-custom-skill': weapon?.weaponPen == null
-              }"
-              >{{
-                weapon?.weaponPen != null
-                  ? 1 - weapon?.weaponPen > 0
-                    ? 1 - weapon?.weaponPen
-                    : 1
-                  : "__"
-              }}</span
             >
+            <!-- <span><b>Coste</b></span
+                  ><span
+                    [ngClass]="{
+                      'char-custom-skill': weapon?.weaponPen == null
+                    }"
+                    >{{
+                      weapon?.weaponPen != null
+                        ? 1 - weapon?.weaponPen > 0
+                          ? 1 - weapon?.weaponPen
+                          : 1
+                        : "__"
+                    }}</span
+                  > -->
           </div>
         </ng-container>
         <!-- Evasión -->
         <div class="char-def char-skill">
-          <span>Evasión</span><span>{{ printCharacter?.evasion }}</span
-          ><span><b>Coste</b></span
-          ><span>{{ printCharacter?.evadeCost }}</span>
+          <span>Evasión</span><span>{{ printCharacter?.evasion }}</span>
+          <!-- <span><b>Coste</b></span
+                ><span>{{ printCharacter?.evadeCost }}</span> -->
         </div>
       </div>
-
-      <!-- Habilidades -->
       <div
         class="char-skills"
-        *ngFor="let attribute of ['strength', 'constitution']"
+        *ngFor="let attribute of ['arcana', 'strength', 'constitution']"
       >
         <div class="char-attribute">
-          <span>{{ attribute | translate }}</span
+          <span [ngClass]="{ 'char-arcana': attribute == 'arcana' }">{{
+            attribute | translate
+          }}</span
           ><span>{{
-            parseInt(String(printCharacter?.character?.attributes[attribute])) +
-              10
+            printCharacter?.character?.attributes[attribute]
+              ? parseInt(
+                  String(printCharacter?.character?.attributes[attribute])
+                ) + 10
+              : ""
           }}</span>
         </div>
         <ng-container *ngFor="let skill of SKILLS">
@@ -225,10 +247,17 @@
         <ng-container *ngFor="let i of [0, 1]">
           <div class="char-skill char-custom-skill">
             <span>(_) ____________________</span><span>__</span>
+          </div>
+          <div
+            *ngIf="attribute == 'arcana'"
+            class="char-skill char-custom-skill"
+          >
+            <span>(_) ____________________</span><span>__</span>
           </div></ng-container
         >
       </div>
     </div>
+
     <div class="char-stats-container">
       <div
         class="char-skills"
