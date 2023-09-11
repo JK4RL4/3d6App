@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1694377964917,
+  "timestamp": 1694462470888,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.f675275b98bc7441.js",
+        "/main.9426f720dc59ff66.js",
         "/manifest.webmanifest",
         "/polyfills.17d5aa6a20a47184.js",
         "/runtime.8f9cbf8bb1dd267c.js",
@@ -56,7 +56,7 @@
     "/BreatheFireIii.873900202b8b05f8.ttf": "26a950cf94cfc997809ecaa7037708b01d7ba82f",
     "/assets/fonts/BreatheFire.ttf": "c9409bf14efe49606bad808058c2ec650161f187",
     "/assets/fonts/BreatheFireIii.ttf": "26a950cf94cfc997809ecaa7037708b01d7ba82f",
-    "/assets/i18n/es.json": "a0dad9c49156ff3202f0bf8533b5848caeb97afb",
+    "/assets/i18n/es.json": "eba3fdc6aa1d24e6cf9c6cabef375b2467db2ae6",
     "/assets/icons/icon-128x128.png": "2ebb81bed9b1ffb33cc59517537085bdf50926d0",
     "/assets/icons/icon-144x144.png": "3bae5ca4da7c3e096ae45b21011617c975d6cb68",
     "/assets/icons/icon-152x152.png": "895c9586ed4142882fa75e140360bdfc3b6d561e",
@@ -72,8 +72,8 @@
     "/assets/img/background_team.jpg": "4ae27783fdc2b7e99e8ec99f7c78bdc009f9080f",
     "/assets/img/banner.png": "8cb89d50c451e40af62a1ea3316ea3109699a5ab",
     "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/index.html": "e7cf148726f985d40f88c6233482a1891e52f32c",
-    "/main.f675275b98bc7441.js": "67b42c5cbf51941c3d626b715dcd75e75a8bd91e",
+    "/index.html": "d3517855e7de6f8b475f84edaa0c6fa99245f587",
+    "/main.9426f720dc59ff66.js": "b38ae80fb2ff03d42d17ad86e6bedce8761d193a",
     "/manifest.webmanifest": "ea04f457fe941242b4335dec63887615f5e54a6f",
     "/polyfills.17d5aa6a20a47184.js": "b81d32043cd5b4a8e68b95a25c5471e7ffb5a08e",
     "/runtime.8f9cbf8bb1dd267c.js": "5683836c573d3ec0222c9714f430d2f5f42c73fd",
