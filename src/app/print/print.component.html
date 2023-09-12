@@ -74,8 +74,8 @@
       </div>
     </div>
 
-    <div class="char-stats-container">
-      <div class="char-skills char-gear-container">
+    <div class="char-stats-container char-gear-container">
+      <div class="char-skills char-gear">
         <div class="char-attribute">
           <span><b>Equipo base</b></span>
         </div>
@@ -91,12 +91,6 @@
           <span>Escudo</span
           ><span>{{ printCharacter?.character?.gear?.shield }}</span>
         </div>
-        <!-- <div class="char-skill">
-          <span class="char-custom-skill">__________________________</span>
-        </div>
-        <div class="char-skill">
-          <span class="char-custom-skill">__________________________</span>
-        </div> -->
       </div>
 
       <!-- Armas -->
@@ -108,8 +102,9 @@
             <div class="char-attribute">
               <span [ngClass]="{ 'char-custom-skill': !weapon?.name }"
                 ><sup>({{ i + 1 }}) </sup
-                >{{ weapon?.name ? weapon?.name : "________________" }}</span
+                >{{ weapon?.name ? weapon?.name : "______________" }}</span
               >
+              ><span>{{ weapon?.impact ? weapon?.impact : "" }}</span>
             </div>
             <div class="char-weapon-data">
               <div>
@@ -130,14 +125,6 @@
                         ? 0
                         : "__"
                     }}</span
-                  >
-                </div>
-                <div>
-                  <img
-                    src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/ability_skill_swords_game_target_aim_shot_sniper_aiming-512.png"
-                  /><span
-                    [ngClass]="{ 'char-custom-skill': !weapon?.impact }"
-                    >{{ weapon?.impact ? weapon?.impact : "__" }}</span
                   >
                 </div>
                 <div>
@@ -182,12 +169,6 @@
         <!-- Bloqueo -->
         <div class="char-def char-skill">
           <span>Bloqueo</span><span>{{ printCharacter?.shieldDefense }}</span>
-          <!-- <span><b>Coste</b></span
-                ><span>{{
-                  1 - printCharacter?.shieldPen > 0
-                    ? 1 - printCharacter?.shieldPen
-                    : 1
-                }}</span> -->
         </div>
         <!-- Desvío -->
         <ng-container
@@ -202,26 +183,11 @@
               }"
               >{{ weapon?.weaponDefense ? weapon?.weaponDefense : "__" }}</span
             >
-            <!-- <span><b>Coste</b></span
-                  ><span
-                    [ngClass]="{
-                      'char-custom-skill': weapon?.weaponPen == null
-                    }"
-                    >{{
-                      weapon?.weaponPen != null
-                        ? 1 - weapon?.weaponPen > 0
-                          ? 1 - weapon?.weaponPen
-                          : 1
-                        : "__"
-                    }}</span
-                  > -->
           </div>
         </ng-container>
         <!-- Evasión -->
         <div class="char-def char-skill">
           <span>Evasión</span><span>{{ printCharacter?.evasion }}</span>
-          <!-- <span><b>Coste</b></span
-                ><span>{{ printCharacter?.evadeCost }}</span> -->
         </div>
       </div>
       <div
