@@ -75,8 +75,8 @@
     </div>
 
     <div class="char-stats-container">
-      <div class="char-skills char-profile">
-        <div class="char-name char-profile-data char-gear">
+      <div class="char-skills char-gear-container">
+        <div class="char-attribute">
           <span><b>Equipo base</b></span>
         </div>
         <div class="char-skill">
@@ -91,12 +91,12 @@
           <span>Escudo</span
           ><span>{{ printCharacter?.character?.gear?.shield }}</span>
         </div>
-        <div class="char-skill">
+        <!-- <div class="char-skill">
           <span class="char-custom-skill">__________________________</span>
         </div>
         <div class="char-skill">
           <span class="char-custom-skill">__________________________</span>
-        </div>
+        </div> -->
       </div>
 
       <!-- Armas -->
@@ -123,7 +123,13 @@
                     src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/speed_foot_motion_down_leg_skill-512.png"
                   /><span
                     [ngClass]="{ 'char-custom-skill': !weapon?.energy }"
-                    >{{ weapon?.energy ? -weapon?.energy : "__" }}</span
+                    >{{
+                      weapon?.energy > 0
+                        ? -weapon?.energy
+                        : weapon?.energy != null
+                        ? 0
+                        : "__"
+                    }}</span
                   >
                 </div>
                 <div>
@@ -317,4 +323,34 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="character-spells">
+  <ng-container *ngIf="printCharacter?.character">
+    <div *ngFor="let spell of printCharacter?.character?.spells" class="spell">
+      <div class="spell-title">
+        <div class="spell-name">
+          <span>{{ spell?.type }}</span>
+          <span>{{ spell?.name }}</span>
+        </div>
+        <div class="spell-cost">
+          <span
+            >Velocidad
+            <ng-container *ngIf="spell?.lost != null"
+              >/ <span class="spell-lost">Karma</span></ng-container
+            ></span
+          ><span
+            >{{ spell?.cost > 0 ? -spell?.cost : 0 }}
+            <ng-container *ngIf="spell?.lost != null"
+              >/
+              <span class="spell-lost">{{
+                spell?.lost > 0 ? spell?.lost : 0
+              }}</span></ng-container
+            ></span
+          >
+        </div>
+      </div>
+      <div class="spell-description">{{ spell?.description }}</div>
+    </div>
+  </ng-container>
 </div>

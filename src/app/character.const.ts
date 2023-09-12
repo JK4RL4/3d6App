@@ -105,7 +105,7 @@ export const WEAPON_SIZES = [
     crit: 2,
     effects: 2,
     def: -2,
-    energy: -1,
+    energy: -2,
     strength: 1,
   },
   {
@@ -115,7 +115,7 @@ export const WEAPON_SIZES = [
     crit: 1,
     effects: 1,
     def: -1,
-    energy: 0,
+    energy: -1,
     strength: 2,
   },
   {
