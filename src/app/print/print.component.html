@@ -115,16 +115,10 @@
               <div>
                 <div>
                   <img
-                    src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/speed_foot_motion_down_leg_skill-512.png"
+                    src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/horror_skull_halloween_dark_death_evil_skeleton-512.png"
                   /><span
                     [ngClass]="{ 'char-custom-skill': !weapon?.energy }"
-                    >{{
-                      weapon?.energy > 0
-                        ? -weapon?.energy
-                        : weapon?.energy != null
-                        ? 0
-                        : "__"
-                    }}</span
+                    >{{ weapon?.energy != null ? weapon?.energy : "__" }}</span
                   >
                 </div>
                 <div>
@@ -220,13 +214,7 @@
           <div class="char-skill char-custom-skill">
             <span>(_) ____________________</span><span>__</span>
           </div>
-          <div
-            *ngIf="attribute == 'arcana'"
-            class="char-skill char-custom-skill"
-          >
-            <span>(_) ____________________</span><span>__</span>
-          </div></ng-container
-        >
+        </ng-container>
       </div>
     </div>
 
@@ -300,20 +288,10 @@
           <span>{{ spell?.name }}</span>
         </div>
         <div class="spell-cost">
-          <span
-            >Velocidad
-            <ng-container *ngIf="spell?.lost != null"
-              >/ <span class="spell-lost">Karma</span></ng-container
-            ></span
-          ><span
-            >{{ spell?.cost > 0 ? -spell?.cost : 0 }}
-            <ng-container *ngIf="spell?.lost != null"
-              >/
-              <span class="spell-lost">{{
-                spell?.lost > 0 ? spell?.lost : 0
-              }}</span></ng-container
-            ></span
-          >
+          <img
+            src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/horror_skull_halloween_dark_death_evil_skeleton-512.png"
+          />
+          <span>{{ spell?.cost }} </span>
         </div>
       </div>
       <div class="spell-description">{{ spell?.description }}</div>

@@ -16,6 +16,7 @@ export const SKILLS = [
   { name: 'Armas cuerpo a cuerpo', attribute: 'dexterity', type: 't' },
   { name: 'Atletismo', attribute: 'strength', type: 'i' },
   { name: 'Cerrajero', attribute: 'dexterity', type: 't' },
+  { name: 'Conocimiento arcano', attribute: 'arcana', type: 'c' },
   { name: 'Danza', attribute: 'dexterity', type: 't' },
   { name: 'Empatía', attribute: 'wisdom', type: 'i' },
   { name: 'Equitación', attribute: 'dexterity', type: 't' },
@@ -105,7 +106,7 @@ export const WEAPON_SIZES = [
     crit: 2,
     effects: 2,
     def: -2,
-    energy: -2,
+    energy: -1,
     strength: 1,
   },
   {
@@ -155,46 +156,46 @@ export const WEAPON_DAMAGES = [
     type: 'cortante',
     effects: [
       { type: 'Sangrar', rank: 3 },
-      { type: 'Impedir', rank: 3 },
-      { type: 'Letal', rank: 2 },
+      // { type: 'Impedir', rank: 3 },
+      // { type: 'Letal', rank: 2 },
     ],
   },
   {
     type: 'contundente',
     effects: [
       { type: 'Aturdir', rank: 4 },
-      { type: 'Impedir', rank: 2 },
-      { type: 'Letal', rank: 3 },
+      // { type: 'Impedir', rank: 2 },
+      // { type: 'Letal', rank: 3 },
     ],
   },
   {
     type: 'perforante',
     effects: [
       { type: 'Perforar', rank: 2 },
-      { type: 'Impedir', rank: 4 },
-      { type: 'Letal', rank: 3 },
+      // { type: 'Impedir', rank: 4 },
+      // { type: 'Letal', rank: 3 },
     ],
   },
   {
     type: 'fuego',
     effects: [
       { type: 'Quemar', rank: 3 },
-      { type: 'Letal', rank: 1 },
+      // { type: 'Letal', rank: 1 },
     ],
   },
   {
     type: 'frío',
     effects: [
       { type: 'Aturdir', rank: 4 },
-      { type: 'Impedir', rank: 2 },
+      // { type: 'Impedir', rank: 2 },
     ],
   },
   {
     type: 'eléctrico',
     effects: [
       { type: 'Aturdir', rank: 5 },
-      { type: 'Impedir', rank: 3 },
-      { type: 'Letal', rank: 2 },
+      // { type: 'Impedir', rank: 3 },
+      // { type: 'Letal', rank: 2 },
       { type: 'Quemar', rank: 4 },
     ],
   },
