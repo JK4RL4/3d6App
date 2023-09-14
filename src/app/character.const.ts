@@ -8,6 +8,23 @@ export const ATTRIBUTES = [
   'charisma',
 ];
 
+export const ATTRIBUTES_IMG: Record<string, string> = {
+  arcana:
+    'https://cdn4.iconfinder.com/data/icons/medieval-23/340/medieval_wizard_fantasy_magic_old_magician_staff-512.png',
+  strength:
+    'https://cdn2.iconfinder.com/data/icons/avatar-classes-role-playing-game-1/340/character_rpg_shield_knight_sword_medieval_weapon_warrior-512.png',
+  dexterity:
+    'https://cdn2.iconfinder.com/data/icons/avatar-classes-role-playing-game-1/340/character_rpg_fantasy_elf_hunter_bow_arrow_archer-512.png',
+  constitution:
+    'https://cdn2.iconfinder.com/data/icons/avatar-classes-role-playing-game-1/340/character_rpg_barbarian_warrior_axe_viking_weapon-512.png',
+  intelligence:
+    'https://cdn2.iconfinder.com/data/icons/avatar-classes-role-playing-game-1/340/character_rpg_alchemist_alchemy_science_chemistry_medicine_lab-512.png',
+  wisdom:
+    'https://cdn2.iconfinder.com/data/icons/avatar-classes-role-playing-game-1/340/character_rpg_fantasy_priest_mage_wizard_magic-512.png',
+  charisma:
+    'https://cdn4.iconfinder.com/data/icons/medieval-23/340/medieval_jester_costume_clown_joker_carnival_history-512.png',
+};
+
 export const SKILLS = [
   { name: 'Academicismo', attribute: 'intelligence', type: 'c' },
   { name: 'Acrobacias', attribute: 'dexterity', type: 't' },

@@ -4,7 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { saveAs } from 'file-saver';
 import html2canvas from 'html2canvas';
 import { CharacterService } from '../character.service';
-import { ATTRIBUTES } from '../character.const';
+import { ATTRIBUTES,ATTRIBUTES_IMG } from '../character.const';
 import { SKILLS } from '../character.const';
 
 @Component({
@@ -14,6 +14,7 @@ import { SKILLS } from '../character.const';
 })
 export class PrintComponent implements OnInit {
   readonly ATTRIBUTES = ATTRIBUTES;
+  readonly ATTRIBUTES_IMG = ATTRIBUTES_IMG;
   readonly SKILLS = SKILLS;
   printCharacterSub!: Subscription;
   printCharacter: any;

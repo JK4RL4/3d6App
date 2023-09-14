@@ -13,9 +13,9 @@
         <div class="char-image">
           <img [src]="printCharacter?.character?.image" />
         </div>
-        <div class="char-name char-profile-data">
+        <!-- <div class="char-name char-profile-data">
           <span><b>Perfil</b></span>
-        </div>
+        </div> -->
         <div class="char-skill">
           <span>Concepto</span
           ><span>{{ printCharacter?.character?.archetype.concept }}</span>
@@ -31,15 +31,18 @@
 
         <!-- Pasivas -->
         <div class="char-skills char-passives-container">
-          <div class="char-name char-profile-data">
-            <span><b>Pasivas</b></span>
+          <div class="char-attribute char-profile-data">
+            <img
+              src="https://cdn2.iconfinder.com/data/icons/avatar-classes-role-playing-game-1/340/character_rpg_art_fighter_martial_warrior-512.png"
+            />
+            <span class="char-attribute-img"><b>Pasivas</b></span>
           </div>
           <div>
             <div>
               <img
                 src="https://cdn1.iconfinder.com/data/icons/game-ui-set-part-2/96/Heart_red-512.png"
               />
-              <span>Vida</span>
+              <span>Aguante</span>
             </div>
             <span>{{ printCharacter?.maxHealth }}</span>
           </div>
@@ -77,7 +80,10 @@
     <div class="char-stats-container char-gear-container">
       <div class="char-skills char-gear">
         <div class="char-attribute">
-          <span><b>Equipo base</b></span>
+          <img
+            src="https://cdn4.iconfinder.com/data/icons/medieval-23/340/blacksmith_medieval_anvil_craft_iron_forge_hammer-512.png"
+          />
+          <span class="char-attribute-img"><b>Equipo base</b></span>
         </div>
         <div class="char-skill">
           <span>Armadura</span
@@ -158,7 +164,11 @@
       <!-- Defensa -->
       <div class="char-skills char-def-container">
         <div class="char-attribute">
-          <span>Defensa</span><span>{{ printCharacter?.defense }}</span>
+          <img
+            src="https://cdn4.iconfinder.com/data/icons/medieval-23/340/medieval_knight_armor_warrior_history_sword_middle_ages-512.png"
+          />
+          <span class="char-attribute-img">Defensa</span
+          ><span>{{ printCharacter?.defense }}</span>
         </div>
         <!-- Bloqueo -->
         <div class="char-def char-skill">
@@ -189,9 +199,11 @@
         *ngFor="let attribute of ['arcana', 'strength', 'constitution']"
       >
         <div class="char-attribute">
-          <span [ngClass]="{ 'char-arcana': attribute == 'arcana' }">{{
-            attribute | translate
-          }}</span
+          <img [src]="ATTRIBUTES_IMG[attribute]" />
+          <span
+            class="char-attribute-img"
+            [ngClass]="{ 'char-arcana': attribute == 'arcana' }"
+            >{{ attribute | translate }}</span
           ><span>{{
             printCharacter?.character?.attributes[attribute]
               ? parseInt(
@@ -224,7 +236,8 @@
         *ngFor="let attribute of ['dexterity', 'wisdom']"
       >
         <div class="char-attribute">
-          <span>{{ attribute | translate }}</span
+          <img [src]="ATTRIBUTES_IMG[attribute]" />
+          <span class="char-attribute-img"> {{ attribute | translate }}</span
           ><span>{{
             parseInt(String(printCharacter?.character?.attributes[attribute])) +
               10
@@ -253,7 +266,8 @@
         *ngFor="let attribute of ['intelligence', 'charisma']"
       >
         <div class="char-attribute">
-          <span>{{ attribute | translate }}</span
+          <img [src]="ATTRIBUTES_IMG[attribute]" />
+          <span class="char-attribute-img">{{ attribute | translate }}</span
           ><span>{{
             parseInt(String(printCharacter?.character?.attributes[attribute])) +
               10
@@ -288,10 +302,18 @@
           <span>{{ spell?.name }}</span>
         </div>
         <div class="spell-cost">
-          <img
-            src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/horror_skull_halloween_dark_death_evil_skeleton-512.png"
-          />
-          <span>{{ spell?.cost }} </span>
+          <div>
+            <img
+              src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/horror_skull_halloween_dark_death_evil_skeleton-512.png"
+            />
+            <img
+              src="https://cdn0.iconfinder.com/data/icons/gold-casino-color-set/64/c_dice_couple_ic-512.png"
+            />
+          </div>
+          <div>
+            <span>{{ spell?.cost }}</span>
+            <span class="spell-lost">{{ spell?.lost }}</span>
+          </div>
         </div>
       </div>
       <div class="spell-description">{{ spell?.description }}</div>
