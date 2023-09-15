@@ -86,6 +86,10 @@
           <span class="char-attribute-img"><b>Equipo base</b></span>
         </div>
         <div class="char-skill">
+          <span>Ropa</span
+          ><span>{{ printCharacter?.character?.gear?.clothes }}</span>
+        </div>
+        <div class="char-skill">
           <span>Armadura</span
           ><span>{{ printCharacter?.character?.gear?.armor }}</span>
         </div>
@@ -303,16 +307,23 @@
         </div>
         <div class="spell-cost">
           <div>
-            <img
-              src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/horror_skull_halloween_dark_death_evil_skeleton-512.png"
-            />
-            <img
-              src="https://cdn0.iconfinder.com/data/icons/gold-casino-color-set/64/c_dice_couple_ic-512.png"
-            />
+            <span>
+              <img
+                src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/ability_skill_swords_game_target_aim_shot_sniper_aiming-512.png"
+            /></span>
+            <span>
+              <img
+                src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/horror_skull_halloween_dark_death_evil_skeleton-512.png"
+            /></span>
+            <span
+              ><img
+                src="https://cdn0.iconfinder.com/data/icons/gold-casino-color-set/64/c_dice_couple_ic-512.png"
+            /></span>
           </div>
           <div>
+            <span>{{ spell?.range }}</span>
             <span>{{ spell?.cost }}</span>
-            <span class="spell-lost">{{ spell?.lost }}</span>
+            <span>{{ spell?.lost }}</span>
           </div>
         </div>
       </div>

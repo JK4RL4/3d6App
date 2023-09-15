@@ -97,6 +97,7 @@ export class Spell {
   public type: string | null;
   public cost: number | null;
   public lost: number | null;
+  public range: string | null;
 
   constructor() {
     this.name = null;
@@ -104,5 +105,6 @@ export class Spell {
     this.description = null;
     this.cost = null;
     this.lost = null;
+    this.range = null;
   }
 }

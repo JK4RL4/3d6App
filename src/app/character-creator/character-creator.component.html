@@ -340,12 +340,25 @@
             <select class="spell-type" name="select" [(ngModel)]="spell.type">
               <option value="null" disabled selected>Tipo</option>
               <option
-                *ngFor="let type of ['Narrativa', 'Combate']"
+                *ngFor="
+                  let type of [
+                    'Narrativa',
+                    'Ataque especial',
+                    'Hechizo',
+                    'Habilidad pasiva'
+                  ]
+                "
                 [value]="type"
               >
                 {{ type }}
               </option>
             </select>
+            <input
+              matInput
+              type="string"
+              [(ngModel)]="spell.range"
+              [placeholder]="'Rango'"
+            />
             <input
               matInput
               type="number"
