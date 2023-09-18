@@ -88,7 +88,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
         this.getCharIntermediateStats();
         this.calculateCharPasives();
         this.calculateCharStats();
-        this.setFight();
+        // this.setFight();
         this.setPrintWeapons();
         this.updateWeapon(0);
         this.setPrintCharater();
@@ -183,7 +183,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
         ?.strength!;
     // Evasión
     this.evadeCost = Math.round(
-      ((5 - (this.armorPen ? this.armorPen : 0)) * 2 - this.dexterity) / 3
+      ((4 - (this.armorPen ? this.armorPen : 0)) * 2 - this.dexterity) / 3
     );
     if (this.evadeCost <= 0) {
       this.evadeCost = 1;
@@ -250,7 +250,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
             weaponDefense *
               (1 +
                 (this.dexterity +
-                  (this.currentWeapon.name.toUpperCase() == 'SIN ARMA'
+                  (this.currentWeapon.name.toUpperCase().includes('SIN ARMA')
                     ? this.fight
                       ? this.fight
                       : 0
@@ -292,7 +292,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
 
   setPrintWeapons(): void {
     this.parsedWeapons = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
       this.updateWeapon(i, true);
     }
   }
@@ -320,7 +320,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
       // Impactar
       let hit = !currentWeapon.range?.toUpperCase().includes('MELÉ')
         ? ad
-        : currentWeapon.name?.toUpperCase() == 'SIN ARMA'
+        : currentWeapon.name?.toUpperCase().includes('SIN ARMA')
         ? this.fight
         : this.cc;
       // Energía
@@ -361,7 +361,10 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
       });
       effects.forEach((effect) => {
         if (effect.type == 'Perforar') {
-          currentWeapon.piercing = effect.rank;
+          currentWeapon.piercing =
+            effect.rank -
+            (weaponSize?.effects ? weaponSize?.effects : 0) -
+            (weaponQuality?.effects ? weaponQuality?.effects : 0);
         } else {
           if (
             !currentWeapon.effects.some(
@@ -410,7 +413,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
                 (weaponDefense > 0 ? weaponDefense : 1) *
                   (0.5 +
                     (this.dexterity +
-                      (currentWeapon.name.toUpperCase() == 'SIN ARMA'
+                      (currentWeapon.name.toUpperCase().includes('SIN ARMA')
                         ? this.fight
                           ? this.fight
                           : 0
@@ -432,7 +435,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
 
     if (!print) {
       this.currentWeapon = currentWeapon;
-    } else {
+    } else if (currentWeapon?.name) {
       this.parsedWeapons.push(currentWeapon);
     }
     this.getCharIntermediateStats();
@@ -440,7 +443,11 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
   }
 
   setFight(): void {
-    if (!this.character?.weapons?.some((weapon) => weapon.name == 'Sin arma')) {
+    if (
+      !this.character?.weapons?.some((weapon) =>
+        weapon.name?.includes('Sin arma')
+      )
+    ) {
       this.character?.weapons?.push({
         name: 'Sin arma',
         size: 'pequeño',

@@ -148,7 +148,7 @@
 
 .char-custom-skill
     opacity: 0.2
-    font-weight: normal
+    font-weight: normal !important
 
 .char-arcana
     background-color: blue !important
@@ -183,7 +183,7 @@
 
     span:first-of-type
         width: 190px
-        padding: 5px 0 5px 10px
+        padding: 5px 0 5px 5px
         background-color: purple
         color: white
         text-shadow: -1px -1px 0 #000, 0 -1px 0 #000, 1px -1px 0 #000, 1px 0 0 #000, 1px 1px 0 #000, 0 1px 0 #000, -1px 1px 0 #000, -1px 0 0 #000
@@ -221,7 +221,7 @@
     display: flex
     justify-content: space-between
     align-items: center
-    padding: 0 10px 0 10px
+    padding: 0 6.5px 0 10px
     margin-bottom: 10px
 
     div
@@ -292,11 +292,16 @@
     align-items: center
 
 .char-image
-    width: auto
-    height: 320px
     display: flex
     justify-content: center
+    align-items: center
     overflow: hidden
+    padding: 10px 0
+    min-height: 320px
+
+    img
+        width: 100%
+        height: auto
 
 .char-def
     display: flex
@@ -317,6 +322,20 @@
         min-width: 1.5rem
         display: flex
         justify-content: center
+
+    div
+        display: flex
+
+        img
+            width: auto
+            height: 15px
+            margin: 0 5px 0 10px
+
+        span
+            display: block
+            width: 20px
+            text-align: center
+            font-weight: normal
 
 //***********************************************************************************************
 // SPELLS
@@ -340,7 +359,7 @@
     border: 1px solid black
 
 .spell-title
-    padding: 0.5rem 1rem 0 1rem
+    padding: 10px 20px
     display: flex
     justify-content: space-between
     align-items: center
@@ -354,14 +373,14 @@
     flex-direction: column
 
     span:first-of-type
+        // font-family: BreatheFireIii
+        font-size: 20px
+        font-weight: bold
+
+    span:last-of-type
         color: Gray
         font-family: 'Times New Roman', Times, serif
         font-size: 16px
-        padding-bottom: 10px
-
-    span:last-of-type
-        font-family: BreatheFireIii
-        font-size: 18px
 
 .spell-cost
     display: flex
@@ -380,7 +399,7 @@
         height: 20px
 
     span
-        min-width: 50px
+        min-width: 75px
         display: flex
         justify-content: center
         padding: 5px
@@ -389,4 +408,4 @@
     color: red !important
 
 .spell-description
-    padding: 10px
+    padding: 0 20px 20px 20px

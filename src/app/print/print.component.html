@@ -141,19 +141,33 @@
                 </div>
               </div>
             </div>
-            <div class="char-skill">
+            <div
+              *ngIf="!weapon?.name || weapon?.piercing > 0"
+              class="char-skill"
+            >
               <span>Perforante</span
               ><span [ngClass]="{ 'char-custom-skill': !weapon?.name }">{{
-                weapon?.name ? (weapon?.piercing ? weapon?.piercing : 0) : "___"
+                weapon?.name
+                  ? weapon?.piercing
+                    ? weapon?.piercing
+                    : 0
+                  : weapon?.name
+                  ? ""
+                  : "___"
               }}</span>
             </div>
-            <div class="char-skill char-weapon-effects">
+            <div
+              *ngIf="weapon?.printEffects"
+              class="char-skill char-weapon-effects"
+            >
               <span>Efectos</span
               ><span
                 [ngClass]="{ 'char-custom-skill': !weapon?.printEffects }"
                 >{{
                   weapon?.printEffects
                     ? weapon?.printEffects
+                    : weapon?.name
+                    ? ""
                     : "________________"
                 }}</span
               >
@@ -175,27 +189,119 @@
           ><span>{{ printCharacter?.defense }}</span>
         </div>
         <!-- Bloqueo -->
-        <div class="char-def char-skill">
-          <span>Bloqueo</span><span>{{ printCharacter?.shieldDefense }}</span>
+        <div
+          *ngIf="printCharacter?.shieldDefense > 0"
+          class="char-def char-skill"
+        >
+          <span>Bloqueo</span>
+          <div>
+            <div>
+              <img
+                src="https://cdn0.iconfinder.com/data/icons/gold-casino-color-set/64/c_dice_couple_ic-512.png"
+              /><span
+                [ngClass]="{
+                  'char-custom-skill': printCharacter?.shieldDefense == null
+                }"
+                >{{
+                  printCharacter?.shieldDefense != null
+                    ? printCharacter?.shieldDefense
+                    : "__"
+                }}</span
+              >
+            </div>
+            <div>
+              <img
+                src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/horror_skull_halloween_dark_death_evil_skeleton-512.png"
+              /><span
+                [ngClass]="{
+                  'char-custom-skill': printCharacter?.shieldDefense == null
+                }"
+                >{{
+                  printCharacter?.shieldPen != null
+                    ? printCharacter?.shieldPen > 0
+                      ? printCharacter?.shieldPen
+                      : 1
+                    : "__"
+                }}</span
+              >
+            </div>
+          </div>
         </div>
         <!-- Desvío -->
         <ng-container
           *ngFor="let weapon of printCharacter?.parsedWeapons; index as i"
         >
-          <div class="char-def char-skill">
+          <div *ngIf="weapon?.weaponDefense > 0" class="char-def char-skill">
             <span
               >Desvío <sup> ({{ i + 1 }})</sup></span
-            ><span
-              [ngClass]="{
-                'char-custom-skill': weapon?.weaponPen == null
-              }"
-              >{{ weapon?.weaponDefense ? weapon?.weaponDefense : "__" }}</span
             >
+            <div>
+              <div>
+                <img
+                  src="https://cdn0.iconfinder.com/data/icons/gold-casino-color-set/64/c_dice_couple_ic-512.png"
+                /><span
+                  [ngClass]="{
+                    'char-custom-skill': weapon?.weaponDefense == null
+                  }"
+                  >{{
+                    weapon?.weaponDefense != null ? weapon?.weaponDefense : "__"
+                  }}</span
+                >
+              </div>
+              <div>
+                <img
+                  src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/horror_skull_halloween_dark_death_evil_skeleton-512.png"
+                /><span
+                  [ngClass]="{
+                    'char-custom-skill': weapon?.weaponDefense == null
+                  }"
+                  >{{
+                    weapon?.weaponPen != null
+                      ? -weapon?.weaponPen > 0
+                        ? 1 - weapon?.weaponPen
+                        : 1
+                      : "__"
+                  }}</span
+                >
+              </div>
+            </div>
           </div>
         </ng-container>
         <!-- Evasión -->
-        <div class="char-def char-skill">
-          <span>Evasión</span><span>{{ printCharacter?.evasion }}</span>
+        <div *ngIf="printCharacter?.evasion > 0" class="char-def char-skill">
+          <span>Evasión</span>
+          <div>
+            <div>
+              <img
+                src="https://cdn0.iconfinder.com/data/icons/gold-casino-color-set/64/c_dice_couple_ic-512.png"
+              /><span
+                [ngClass]="{
+                  'char-custom-skill': printCharacter?.evasion == null
+                }"
+                >{{
+                  printCharacter?.evasion != null
+                    ? printCharacter?.evasion
+                    : "__"
+                }}</span
+              >
+            </div>
+            <div>
+              <img
+                src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/horror_skull_halloween_dark_death_evil_skeleton-512.png"
+              /><span
+                [ngClass]="{
+                  'char-custom-skill': printCharacter?.evasion == null
+                }"
+                >{{
+                  printCharacter?.evadeCost != null
+                    ? printCharacter?.evadeCost > 0
+                      ? printCharacter?.evadeCost
+                      : 1
+                    : "__"
+                }}</span
+              >
+            </div>
+          </div>
         </div>
       </div>
       <div
@@ -295,39 +401,38 @@
       </div>
     </div>
   </div>
-</div>
 
-<div class="character-spells">
-  <ng-container *ngIf="printCharacter?.character">
-    <div *ngFor="let spell of printCharacter?.character?.spells" class="spell">
-      <div class="spell-title">
-        <div class="spell-name">
-          <span>{{ spell?.type }}</span>
-          <span>{{ spell?.name }}</span>
-        </div>
-        <div class="spell-cost">
-          <div>
-            <span>
-              <img
-                src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/ability_skill_swords_game_target_aim_shot_sniper_aiming-512.png"
-            /></span>
-            <span>
-              <img
-                src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/horror_skull_halloween_dark_death_evil_skeleton-512.png"
-            /></span>
-            <span
-              ><img
-                src="https://cdn0.iconfinder.com/data/icons/gold-casino-color-set/64/c_dice_couple_ic-512.png"
-            /></span>
+  <div class="character-spells">
+    <ng-container *ngIf="printCharacter?.character">
+      <div
+        *ngFor="let spell of printCharacter?.character?.spells"
+        class="spell"
+      >
+        <div class="spell-title">
+          <div class="spell-name">
+            <span>{{ spell?.name }}</span>
+            <span>{{ spell?.type }} ({{ spell?.range }})</span>
           </div>
-          <div>
-            <span>{{ spell?.range }}</span>
-            <span>{{ spell?.cost }}</span>
-            <span>{{ spell?.lost }}</span>
+          <div class="spell-cost">
+            <div>
+              <span *ngIf="spell?.cost > 0">
+                <img
+                  src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/horror_skull_halloween_dark_death_evil_skeleton-512.png"
+              /></span>
+              <span *ngIf="spell?.lost > 0"
+                ><img
+                  src="https://cdn0.iconfinder.com/data/icons/gold-casino-color-set/64/c_dice_couple_ic-512.png"
+              /></span>
+            </div>
+            <div>
+              <!-- <span>{{ spell?.range }}</span> -->
+              <span *ngIf="spell?.cost > 0">{{ spell?.cost }}</span>
+              <span *ngIf="spell?.lost > 0">{{ spell?.lost }}</span>
+            </div>
           </div>
         </div>
+        <div class="spell-description">{{ spell?.description }}</div>
       </div>
-      <div class="spell-description">{{ spell?.description }}</div>
-    </div>
-  </ng-container>
+    </ng-container>
+  </div>
 </div>
