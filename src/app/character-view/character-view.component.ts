@@ -326,6 +326,9 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
       // Energía
       currentWeapon.energy =
         2 +
+        (currentWeapon.baseEnergy != null
+          ? this.parseInt(currentWeapon.baseEnergy)
+          : 0) +
         weaponSize?.energy! -
         (this.armorPen < 0 ? this.armorPen : 0) -
         (this.helmetPen < 0 ? this.helmetPen : 0) -
@@ -345,6 +348,9 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
       currentWeapon.damage =
         (this.character.attributes[currentWeapon.damageAtt]
           ? parseInt(String(this.character.attributes[currentWeapon.damageAtt]))
+          : 0) +
+        (currentWeapon.baseDamage != null
+          ? parseInt(String(currentWeapon.baseDamage))
           : 0) +
         weaponSize?.damage! +
         weaponQuality?.damage!;
@@ -442,23 +448,23 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
     this.calculateCharPasives();
   }
 
-  setFight(): void {
-    if (
-      !this.character?.weapons?.some((weapon) =>
-        weapon.name?.includes('Sin arma')
-      )
-    ) {
-      this.character?.weapons?.push({
-        name: 'Sin arma',
-        size: 'pequeño',
-        range: 'melé(1)',
-        quality: 'estándar',
-        damageType: ['Contundente'],
-        impactAtt: 'dexterity',
-        damageAtt: 'strength',
-      });
-    }
-  }
+  // setFight(): void {
+  //   if (
+  //     !this.character?.weapons?.some((weapon) =>
+  //       weapon.name?.includes('Sin arma')
+  //     )
+  //   ) {
+  //     this.character?.weapons?.push({
+  //       name: 'Sin arma',
+  //       size: 'pequeño',
+  //       range: 'melé(1)',
+  //       quality: 'estándar',
+  //       damageType: ['Contundente'],
+  //       impactAtt: 'dexterity',
+  //       damageAtt: 'strength',
+  //     });
+  //   }
+  // }
 
   setPrintCharater(): void {
     this.characterService.sendPrintCharacter({

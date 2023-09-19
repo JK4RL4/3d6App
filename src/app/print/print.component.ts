@@ -4,8 +4,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { saveAs } from 'file-saver';
 import html2canvas from 'html2canvas';
 import { CharacterService } from '../character.service';
-import { ATTRIBUTES,ATTRIBUTES_IMG } from '../character.const';
+import { ATTRIBUTES, ATTRIBUTES_IMG } from '../character.const';
 import { SKILLS } from '../character.const';
+import { Attributes, Skill } from '../character.type';
 
 @Component({
   selector: 'app-print',
@@ -19,6 +20,7 @@ export class PrintComponent implements OnInit {
   printCharacterSub!: Subscription;
   printCharacter: any;
   printed!: boolean;
+  printCharacterSkills!: any;
   parseInt = parseInt;
   String = String;
 
@@ -29,16 +31,36 @@ export class PrintComponent implements OnInit {
 
   ngOnInit(): void {
     this.printCharacter = this.characterService.getCurrentPrintCharacter();
-  }
-
-  getSkill(skill: string): number | string | null {
-    let skillFound = this.printCharacter.parsedSkills.find(
-      (parsedSkill: any) => parsedSkill.name == skill
-    );
-    if (skillFound) {
-      return this.parseInt(String(skillFound.rank)) + 8;
-    } else {
-      return '__';
+    if (this.printCharacter) {
+      this.printCharacterSkills = this.SKILLS.map((skill) => {
+        let skillFound = this.printCharacter.parsedSkills.find(
+          (parsedSkill: any) => parsedSkill.name == skill.name
+        );
+        if (skillFound) {
+          return {
+            name: skill.name,
+            attribute: skill.attribute,
+            type: skill.type,
+            competence: true,
+            rank: this.parseInt(String(skillFound.rank)) + 8,
+          };
+        } else {
+          return {
+            name: skill.name,
+            attribute: skill.attribute,
+            type: skill.type,
+            competence: false,
+            rank:
+              skill.type == 'c'
+                ? "-"
+                : 10 +
+                  this.parseInt(
+                    this.printCharacter.character.attributes[skill.attribute]
+                  ) -
+                  (skill.type == 'i' ? 2 : skill.type == 't' ? 4 : 0),
+          };
+        }
+      });
     }
   }
 

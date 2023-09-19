@@ -78,6 +78,10 @@
             [(ngModel)]="character.attributes[attribute]"
           >
             <option [value]="null" disabled selected>Rango</option>
+            <option [value]="-4">-4</option>
+            <option [value]="-3">-3</option>
+            <option [value]="-2">-2</option>
+            <option [value]="-1">-1</option>
             <option [value]="0">0</option>
             <option [value]="1">1</option>
             <option [value]="2">2</option>
@@ -264,6 +268,37 @@
               </option>
               <option *ngFor="let range of WEAPON.range" [value]="range">
                 {{ "Alcance " + range }}
+              </option>
+            </select>
+            <!-- Manos -->
+            <select name="select" [(ngModel)]="weapon.hands">
+              <option [value]="null" disabled selected>Selecciona manos</option>
+              <option *ngFor="let hands of [0, 1, 2]" [value]="hands">
+                {{ hands }}
+              </option>
+            </select>
+            <!-- Daño base -->
+            <select name="select" [(ngModel)]="weapon.baseDamage">
+              <option [value]="null" disabled selected>
+                Selecciona daño base
+              </option>
+              <option
+                *ngFor="let damage of [-3, -2, -1, 0, 1, 2, 3]"
+                [value]="damage"
+              >
+                {{ damage }}
+              </option>
+            </select>
+            <!-- Energía base -->
+            <select name="select" [(ngModel)]="weapon.baseEnergy">
+              <option [value]="null" disabled selected>
+                Selecciona energía base
+              </option>
+              <option
+                *ngFor="let energy of [-3, -2, -1, 0, 1, 2, 3]"
+                [value]="energy"
+              >
+                {{ energy }}
               </option>
             </select>
             <!-- Daño -->

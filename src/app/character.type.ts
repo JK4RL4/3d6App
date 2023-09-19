@@ -79,6 +79,9 @@ export class Weapon {
   public damageType: string[] | null;
   public impactAtt: string | null;
   public damageAtt: string | null;
+  public hands: number | null;
+  public baseDamage: number | null;
+  public baseEnergy: number | null;
 
   constructor() {
     this.name = null;
@@ -88,6 +91,9 @@ export class Weapon {
     this.damageType = [];
     this.impactAtt = null;
     this.damageAtt = null;
+    this.hands = null;
+    this.baseDamage = null;
+    this.baseEnergy = null;
   }
 }
 

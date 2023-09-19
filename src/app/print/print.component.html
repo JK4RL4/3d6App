@@ -123,6 +123,18 @@
                 }}</span>
               </div>
               <div>
+                <div class="char-weapon-hands">
+                  <img
+                    class="char-weapon-hands-up"
+                    src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/hand_gesture_palm_rpg_game_skill_ability-512.png"
+                  />
+                  <img
+                    [ngClass]="{
+                      'char-weapon-hands-up': parseInt(weapon?.hands) >= 2
+                    }"
+                    src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/hand_gesture_palm_rpg_game_skill_ability-512.png"
+                  />
+                </div>
                 <div>
                   <img
                     src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/horror_skull_halloween_dark_death_evil_skeleton-512.png"
@@ -322,14 +334,13 @@
               : ""
           }}</span>
         </div>
-        <ng-container *ngFor="let skill of SKILLS">
+        <ng-container *ngFor="let skill of printCharacterSkills">
           <div class="char-skill" *ngIf="skill.attribute == attribute">
             <span
               ><span>({{ skill.type }})</span> {{ skill.name }}</span
-            ><span
-              [ngClass]="{ 'char-custom-skill': getSkill(skill.name) == '__' }"
-              >{{ getSkill(skill.name) }}</span
-            >
+            ><span [ngClass]="{ 'char-custom-skill': !skill.competence }">{{
+              skill.rank
+            }}</span>
           </div></ng-container
         >
         <ng-container *ngFor="let i of [0, 1]">
@@ -353,14 +364,13 @@
               10
           }}</span>
         </div>
-        <ng-container *ngFor="let skill of SKILLS">
+        <ng-container *ngFor="let skill of printCharacterSkills">
           <div class="char-skill" *ngIf="skill.attribute == attribute">
             <span
               ><span>({{ skill.type }})</span> {{ skill.name }}</span
-            ><span
-              [ngClass]="{ 'char-custom-skill': getSkill(skill.name) == '__' }"
-              >{{ getSkill(skill.name) }}</span
-            >
+            ><span [ngClass]="{ 'char-custom-skill': !skill.competence }">{{
+              skill.rank
+            }}</span>
           </div></ng-container
         >
         <ng-container *ngFor="let i of [0, 1]">
@@ -383,14 +393,13 @@
               10
           }}</span>
         </div>
-        <ng-container *ngFor="let skill of SKILLS">
+        <ng-container *ngFor="let skill of printCharacterSkills">
           <div class="char-skill" *ngIf="skill.attribute == attribute">
             <span
               ><span>({{ skill.type }})</span> {{ skill.name }}</span
-            ><span
-              [ngClass]="{ 'char-custom-skill': getSkill(skill.name) == '__' }"
-              >{{ getSkill(skill.name) }}</span
-            >
+            ><span [ngClass]="{ 'char-custom-skill': !skill.competence }">{{
+              skill.rank
+            }}</span>
           </div></ng-container
         >
         <ng-container *ngFor="let i of [0, 1]">

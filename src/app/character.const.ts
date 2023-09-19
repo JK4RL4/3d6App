@@ -79,9 +79,9 @@ export const GEAR = {
     { name: 'Ropajes ilustres' },
   ],
   armor: [
-    { name: 'Sin armadura', defense: 0, strength: 1, weight: 0 },
-    { name: 'Armadura ligera', defense: 2, strength: 2, weight: 0 },
-    { name: 'Armadura ligera +1', defense: 3, strength: 2, weight: 0 },
+    { name: 'Sin armadura', defense: 0, strength: 0, weight: 0 },
+    { name: 'Armadura ligera', defense: 2, strength: 1, weight: 0 },
+    { name: 'Armadura ligera +1', defense: 3, strength: 1, weight: 0 },
     { name: 'Armadura media', defense: 4, strength: 2, weight: 1 },
     { name: 'Armadura media +1', defense: 5, strength: 2, weight: 1 },
     { name: 'Armadura pesada', defense: 6, strength: 3, weight: 2 },
@@ -89,15 +89,15 @@ export const GEAR = {
     { name: 'Armadura completa', defense: 8, strength: 4, weight: 3 },
   ],
   shield: [
-    { name: 'Sin escudo', defense: 0, strength: 1, weight: 0 },
-    { name: 'Escudo pequeño', defense: 2, strength: 2, weight: 0 },
-    { name: 'Escudo mediano', defense: 3, strength: 3, weight: 1 },
+    { name: 'Sin escudo', defense: 0, strength: 0, weight: 0 },
+    { name: 'Escudo pequeño', defense: 2, strength: 1, weight: 0 },
+    { name: 'Escudo mediano', defense: 3, strength: 2, weight: 1 },
     { name: 'Escudo grande', defense: 4, strength: 4, weight: 2 },
   ],
   helmet: [
-    { name: 'Sin yelmo', defense: 0, strength: 1, weight: 0 },
-    { name: 'Yelmo ligero', defense: 1, strength: 2, weight: 0 },
-    { name: 'Yelmo medio', defense: 2, strength: 3, weight: 1 },
+    { name: 'Sin yelmo', defense: 0, strength: 0, weight: 0 },
+    { name: 'Yelmo ligero', defense: 1, strength: 1, weight: 0 },
+    { name: 'Yelmo medio', defense: 2, strength: 2, weight: 1 },
     { name: 'Yelmo pesado', defense: 4, strength: 4, weight: 2 },
   ],
 };
@@ -129,7 +129,7 @@ export const WEAPON_SIZES = [
     effects: 1,
     def: -2,
     energy: -1,
-    strength: 1,
+    strength: 0,
   },
   {
     size: 'pequeño',
@@ -139,7 +139,7 @@ export const WEAPON_SIZES = [
     effects: 1,
     def: -1,
     energy: -1,
-    strength: 2,
+    strength: 0,
   },
   {
     size: 'medio',
@@ -149,7 +149,7 @@ export const WEAPON_SIZES = [
     effects: 0,
     def: 1,
     energy: 0,
-    strength: 3,
+    strength: 2,
   },
   {
     size: 'grande',
