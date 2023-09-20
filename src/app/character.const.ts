@@ -91,14 +91,14 @@ export const GEAR = {
   shield: [
     { name: 'Sin escudo', defense: 0, strength: 0, weight: 0 },
     { name: 'Escudo pequeño', defense: 2, strength: 1, weight: 0 },
-    { name: 'Escudo mediano', defense: 3, strength: 2, weight: 1 },
-    { name: 'Escudo grande', defense: 4, strength: 4, weight: 2 },
+    { name: 'Escudo mediano', defense: 4, strength: 3, weight: 1 },
+    { name: 'Escudo grande', defense: 6, strength: 5, weight: 2 },
   ],
   helmet: [
     { name: 'Sin yelmo', defense: 0, strength: 0, weight: 0 },
-    { name: 'Yelmo ligero', defense: 1, strength: 1, weight: 0 },
-    { name: 'Yelmo medio', defense: 2, strength: 2, weight: 1 },
-    { name: 'Yelmo pesado', defense: 4, strength: 4, weight: 2 },
+    { name: 'Yelmo ligero', defense: 2, strength: 1, weight: 0 },
+    { name: 'Yelmo medio', defense: 4, strength: 2, weight: 1 },
+    { name: 'Yelmo pesado', defense: 6, strength: 4, weight: 2 },
   ],
 };
 
@@ -114,7 +114,7 @@ export const WEAPON_RANGES = [
 
 export const WEAPON_QUALITIES = [
   { quality: 'baja', damage: -1, crit: 0, effects: 1, hit: -1, def: -2 },
-  { quality: 'estándar', damage: 0, crit: 0, effects: 0, hit: 0, def: 1 },
+  { quality: 'estándar', damage: 0, crit: 0, effects: 0, hit: 0, def: 0 },
   { quality: 'alta', damage: 1, crit: 0, effects: 0, hit: 1, def: 1 },
   { quality: 'legendaria', damage: 2, crit: 1, effects: -1, hit: 2, def: 2 },
   { quality: 'única', damage: 3, crit: 2, effects: -1, hit: 3, def: 2 },
@@ -127,7 +127,7 @@ export const WEAPON_SIZES = [
     damage: 1,
     crit: 2,
     effects: 1,
-    def: -2,
+    def: 0,
     energy: -1,
     strength: 0,
   },
@@ -137,9 +137,9 @@ export const WEAPON_SIZES = [
     damage: 2,
     crit: 1,
     effects: 1,
-    def: -1,
-    energy: -1,
-    strength: 0,
+    def: 1,
+    energy: 0,
+    strength: 1,
   },
   {
     size: 'medio',
@@ -147,9 +147,9 @@ export const WEAPON_SIZES = [
     damage: 4,
     crit: 0,
     effects: 0,
-    def: 1,
+    def: 3,
     energy: 0,
-    strength: 2,
+    strength: 3,
   },
   {
     size: 'grande',
@@ -157,9 +157,9 @@ export const WEAPON_SIZES = [
     damage: 6,
     crit: 0,
     effects: -1,
-    def: 2,
-    energy: 2,
-    strength: 4,
+    def: 5,
+    energy: 1,
+    strength: 5,
   },
   {
     size: 'colosal',
@@ -168,8 +168,8 @@ export const WEAPON_SIZES = [
     crit: 1,
     effects: -3,
     def: 0,
-    energy: 3,
-    strength: 5,
+    energy: 2,
+    strength: 8,
   },
 ];
 

@@ -193,7 +193,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
       (armor) => armor.name == this.character?.gear?.armor
     )?.defense!;
     // Evasión
-    this.evasion = Math.round((this.dexterity + (dodge ? dodge : 0)) / 2);
+    this.evasion = Math.round(this.dexterity + (dodge ? dodge : 0));
     // Escudo
     this.shield = this.GEAR.shield.find(
       (shield) => shield.name == this.character?.gear?.shield
@@ -280,7 +280,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
 
   calculateCharStats(): void {
     let initiated = this.maxHealth != null;
-    this.maxHealth = this.constitution * 8;
+    this.maxHealth = 12 + this.constitution * 4;
     this.maxEnergy = Math.round(
       this.constitution * 2 + this.strength + this.dexterity
     );
@@ -433,9 +433,8 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
           currentWeapon.weaponDefense = 0;
         }
         currentWeapon.weaponPen =
-          this.strength -
           this.SIZES.find((type) => type.size == currentWeapon?.size)
-            ?.strength!;
+            ?.strength! - this.strength;
       }
     }
 

@@ -140,7 +140,11 @@
                     src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/horror_skull_halloween_dark_death_evil_skeleton-512.png"
                   /><span
                     [ngClass]="{ 'char-custom-skill': !weapon?.energy }"
-                    >{{ weapon?.energy != null ? weapon?.energy : "__" }}</span
+                    >{{
+                      weapon?.energy != null
+                        ? weapon?.energy + weapon?.weaponPen
+                        : "__"
+                    }}</span
                   >
                 </div>
                 <div>
@@ -209,7 +213,7 @@
           <div>
             <div>
               <img
-                src="https://cdn0.iconfinder.com/data/icons/gold-casino-color-set/64/c_dice_couple_ic-512.png"
+                src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/ability_skill_shield_game_protection_protect_defense-512.png"
               /><span
                 [ngClass]="{
                   'char-custom-skill': printCharacter?.shieldDefense == null
@@ -250,7 +254,7 @@
             <div>
               <div>
                 <img
-                  src="https://cdn0.iconfinder.com/data/icons/gold-casino-color-set/64/c_dice_couple_ic-512.png"
+                  src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/ability_skill_shield_game_protection_protect_defense-512.png"
                 /><span
                   [ngClass]="{
                     'char-custom-skill': weapon?.weaponDefense == null
@@ -269,9 +273,7 @@
                   }"
                   >{{
                     weapon?.weaponPen != null
-                      ? -weapon?.weaponPen > 0
-                        ? 1 - weapon?.weaponPen
-                        : 1
+                      ? weapon?.energy + weapon?.weaponPen - 1
                       : "__"
                   }}</span
                 >
@@ -285,7 +287,7 @@
           <div>
             <div>
               <img
-                src="https://cdn0.iconfinder.com/data/icons/gold-casino-color-set/64/c_dice_couple_ic-512.png"
+                src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/ability_skill_shield_game_protection_protect_defense-512.png"
               /><span
                 [ngClass]="{
                   'char-custom-skill': printCharacter?.evasion == null
