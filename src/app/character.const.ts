@@ -71,35 +71,24 @@ export const SKILLS = [
 ];
 
 export const GEAR = {
-  clothes: [
-    { name: 'Harapos' },
-    { name: 'Ropa normal' },
-    { name: 'Ropa de camuflaje' },
-    { name: 'Ropa de calidad' },
-    { name: 'Ropajes ilustres' },
-  ],
   armor: [
-    { name: 'Sin armadura', defense: 0, strength: 0, weight: 0 },
-    { name: 'Armadura ligera', defense: 2, strength: 1, weight: 0 },
-    { name: 'Armadura ligera +1', defense: 3, strength: 1, weight: 0 },
-    { name: 'Armadura media', defense: 4, strength: 2, weight: 1 },
-    { name: 'Armadura media +1', defense: 5, strength: 2, weight: 1 },
-    { name: 'Armadura pesada', defense: 6, strength: 3, weight: 2 },
-    { name: 'Armadura pesada +1', defense: 7, strength: 3, weight: 2 },
-    { name: 'Armadura completa', defense: 8, strength: 4, weight: 3 },
+    { name: 'Sin armadura', defense: 0, strength: -4, weight: 0 },
+    { name: 'Acolchada', defense: 1, strength: -2, weight: 0 },
+    { name: 'Cuero', defense: 2, strength: -1, weight: 0 },
+    { name: 'Cuero tachonado', defense: 0, strength: 1, weight: 0 },
+    { name: 'Mallas', defense: 4, strength: 1, weight: 1 },
+    { name: 'Coraza', defense: 5, strength: 2, weight: 1 },
+    { name: 'Laminada', defense: 6, strength: 3, weight: 2 },
+    { name: 'Placas y mallas', defense: 7, strength: 4, weight: 2 },
+    { name: 'Completa', defense: 8, strength: 5, weight: 3 },
   ],
   shield: [
-    { name: 'Sin escudo', defense: 0, strength: 0, weight: 0 },
-    { name: 'Escudo pequeño', defense: 2, strength: 1, weight: 0 },
-    { name: 'Escudo mediano', defense: 4, strength: 3, weight: 1 },
-    { name: 'Escudo grande', defense: 6, strength: 5, weight: 2 },
-  ],
-  helmet: [
-    { name: 'Sin yelmo', defense: 0, strength: 0, weight: 0 },
-    { name: 'Yelmo ligero', defense: 2, strength: 1, weight: 0 },
-    { name: 'Yelmo medio', defense: 4, strength: 2, weight: 1 },
-    { name: 'Yelmo pesado', defense: 6, strength: 4, weight: 2 },
-  ],
+    { name: 'Sin escudo', defense: 0, strength: -4, weight: 0 },
+    { name: 'Pequeño', defense: 1, strength: -1, weight: 0 },
+    { name: 'Mediano', defense: 2, strength: 1, weight: 1 },
+    { name: 'Grande', defense: 3, strength: 3, weight: 1 },
+    { name: 'Pavés', defense: 4, strength: 5, weight: 2 },
+  ]
 };
 
 export const WEAPON_RANGES = [

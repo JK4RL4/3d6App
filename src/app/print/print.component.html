@@ -13,18 +13,24 @@
         <div class="char-image">
           <img [src]="printCharacter?.character?.image" />
         </div>
-        <!-- <div class="char-name char-profile-data">
-          <span><b>Perfil</b></span>
-        </div> -->
-        <div class="char-skill">
+        <div
+          class="char-skill"
+          *ngIf="printCharacter?.character?.archetype.concept"
+        >
           <span>Concepto</span
           ><span>{{ printCharacter?.character?.archetype.concept }}</span>
         </div>
-        <div class="char-skill">
+        <div
+          class="char-skill"
+          *ngIf="printCharacter?.character?.archetype.nature"
+        >
           <span>Naturaleza</span
           ><span>{{ printCharacter?.character?.archetype.nature }}</span>
         </div>
-        <div class="char-skill">
+        <div
+          class="char-skill"
+          *ngIf="printCharacter?.character?.archetype.conduct"
+        >
           <span>Conducta</span
           ><span>{{ printCharacter?.character?.archetype.conduct }}</span>
         </div>
@@ -78,31 +84,6 @@
     </div>
 
     <div class="char-stats-container char-gear-container">
-      <div class="char-skills char-gear">
-        <div class="char-attribute">
-          <img
-            src="https://cdn4.iconfinder.com/data/icons/medieval-23/340/blacksmith_medieval_anvil_craft_iron_forge_hammer-512.png"
-          />
-          <span class="char-attribute-img"><b>Equipo base</b></span>
-        </div>
-        <div class="char-skill">
-          <span>Ropa</span
-          ><span>{{ printCharacter?.character?.gear?.clothes }}</span>
-        </div>
-        <div class="char-skill">
-          <span>Armadura</span
-          ><span>{{ printCharacter?.character?.gear?.armor }}</span>
-        </div>
-        <div class="char-skill">
-          <span>Casco</span
-          ><span>{{ printCharacter?.character?.gear?.helmet }}</span>
-        </div>
-        <div class="char-skill">
-          <span>Escudo</span
-          ><span>{{ printCharacter?.character?.gear?.shield }}</span>
-        </div>
-      </div>
-
       <!-- Armas -->
       <div class="char-stats-container">
         <ng-container
@@ -138,14 +119,11 @@
                 <div>
                   <img
                     src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/horror_skull_halloween_dark_death_evil_skeleton-512.png"
-                  /><span
-                    [ngClass]="{ 'char-custom-skill': !weapon?.energy }"
-                    >{{
-                      weapon?.energy != null
-                        ? weapon?.energy + weapon?.weaponPen
-                        : "__"
-                    }}</span
-                  >
+                  /><span>{{
+                    weapon?.energy != null
+                      ? weapon?.energy + weapon?.weaponPen
+                      : "__"
+                  }}</span>
                 </div>
                 <div>
                   <img
@@ -202,120 +180,15 @@
             src="https://cdn4.iconfinder.com/data/icons/medieval-23/340/medieval_knight_armor_warrior_history_sword_middle_ages-512.png"
           />
           <span class="char-attribute-img">Defensa</span
-          ><span>{{ printCharacter?.defense }}</span>
+          ><span>{{ printCharacter?.defense }} </span>
         </div>
-        <!-- Bloqueo -->
-        <div
-          *ngIf="printCharacter?.shieldDefense > 0"
-          class="char-def char-skill"
-        >
-          <span>Bloqueo</span>
-          <div>
-            <div>
-              <img
-                src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/ability_skill_shield_game_protection_protect_defense-512.png"
-              /><span
-                [ngClass]="{
-                  'char-custom-skill': printCharacter?.shieldDefense == null
-                }"
-                >{{
-                  printCharacter?.shieldDefense != null
-                    ? printCharacter?.shieldDefense
-                    : "__"
-                }}</span
-              >
-            </div>
-            <div>
-              <img
-                src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/horror_skull_halloween_dark_death_evil_skeleton-512.png"
-              /><span
-                [ngClass]="{
-                  'char-custom-skill': printCharacter?.shieldDefense == null
-                }"
-                >{{
-                  printCharacter?.shieldPen != null
-                    ? printCharacter?.shieldPen > 0
-                      ? printCharacter?.shieldPen
-                      : 1
-                    : "__"
-                }}</span
-              >
-            </div>
-          </div>
+        <div class="char-skill">
+          <span>Armadura</span
+          ><span>{{ printCharacter?.character?.gear?.armor }}</span>
         </div>
-        <!-- Desvío -->
-        <ng-container
-          *ngFor="let weapon of printCharacter?.parsedWeapons; index as i"
-        >
-          <div *ngIf="weapon?.weaponDefense > 0" class="char-def char-skill">
-            <span
-              >Desvío <sup> ({{ i + 1 }})</sup></span
-            >
-            <div>
-              <div>
-                <img
-                  src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/ability_skill_shield_game_protection_protect_defense-512.png"
-                /><span
-                  [ngClass]="{
-                    'char-custom-skill': weapon?.weaponDefense == null
-                  }"
-                  >{{
-                    weapon?.weaponDefense != null ? weapon?.weaponDefense : "__"
-                  }}</span
-                >
-              </div>
-              <div>
-                <img
-                  src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/horror_skull_halloween_dark_death_evil_skeleton-512.png"
-                /><span
-                  [ngClass]="{
-                    'char-custom-skill': weapon?.weaponDefense == null
-                  }"
-                  >{{
-                    weapon?.weaponPen != null
-                      ? weapon?.energy + weapon?.weaponPen - 1
-                      : "__"
-                  }}</span
-                >
-              </div>
-            </div>
-          </div>
-        </ng-container>
-        <!-- Evasión -->
-        <div *ngIf="printCharacter?.evasion > 0" class="char-def char-skill">
-          <span>Evasión</span>
-          <div>
-            <div>
-              <img
-                src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/ability_skill_shield_game_protection_protect_defense-512.png"
-              /><span
-                [ngClass]="{
-                  'char-custom-skill': printCharacter?.evasion == null
-                }"
-                >{{
-                  printCharacter?.evasion != null
-                    ? printCharacter?.evasion
-                    : "__"
-                }}</span
-              >
-            </div>
-            <div>
-              <img
-                src="https://cdn3.iconfinder.com/data/icons/role-playing-game-5/340/horror_skull_halloween_dark_death_evil_skeleton-512.png"
-              /><span
-                [ngClass]="{
-                  'char-custom-skill': printCharacter?.evasion == null
-                }"
-                >{{
-                  printCharacter?.evadeCost != null
-                    ? printCharacter?.evadeCost > 0
-                      ? printCharacter?.evadeCost
-                      : 1
-                    : "__"
-                }}</span
-              >
-            </div>
-          </div>
+        <div class="char-skill">
+          <span>Escudo</span
+          ><span>{{ printCharacter?.character?.gear?.shield }}</span>
         </div>
       </div>
       <div

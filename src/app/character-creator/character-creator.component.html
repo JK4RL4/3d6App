@@ -151,13 +151,6 @@
         </mat-expansion-panel-header>
 
         <div class="gear">
-          <!-- Ropa -->
-          <select name="select" [(ngModel)]="character.gear!.clothes">
-            <option [value]="null" disabled selected>Selecciona ropa</option>
-            <option *ngFor="let clothes of GEAR.clothes" [value]="clothes.name">
-              {{ clothes.name }}
-            </option>
-          </select>
           <!-- Armadura -->
           <select name="select" [(ngModel)]="character.gear!.armor">
             <option [value]="null" disabled selected>
@@ -165,13 +158,6 @@
             </option>
             <option *ngFor="let armor of GEAR.armor" [value]="armor.name">
               {{ armor.name }}
-            </option>
-          </select>
-          <!-- Yelmo -->
-          <select name="select" [(ngModel)]="character.gear!.helmet">
-            <option [value]="null" disabled selected>Selecciona yelmo</option>
-            <option *ngFor="let helmet of GEAR.helmet" [value]="helmet.name">
-              {{ helmet.name }}
             </option>
           </select>
           <!-- Escudo -->

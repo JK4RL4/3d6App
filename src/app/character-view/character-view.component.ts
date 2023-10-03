@@ -46,7 +46,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
   // Estadísticas intermedias
   weaponDefense!: number;
   shieldDefense!: number;
-  defense!: number;
+  defense!: any;
   alert!: number;
   helmetPen!: number;
   armorPen!: number;
@@ -59,7 +59,6 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
   fight!: number;
   sizeMod!: number;
   qualityMod!: number;
-  evadeCost!: number;
 
   strength!: number;
   dexterity!: number;
@@ -159,35 +158,20 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
         )?.rank!
       )
     );
-    // Penalización de casco
-    this.helmetPen =
-      this.strength -
-      this.GEAR.helmet.find(
-        (helmet) => helmet.name == this.character?.gear?.helmet
-      )?.strength!;
     // Penalización de armadura
     this.armorPen =
-      this.strength -
       this.GEAR.armor.find((armor) => armor.name == this.character?.gear?.armor)
-        ?.strength!;
+        ?.strength! - this.strength;
     // Penalización de escudo
     this.shieldPen =
-      this.strength -
       this.GEAR.shield.find(
         (shield) => shield.name == this.character?.gear?.shield
-      )?.strength!;
+      )?.strength! - this.strength;
     // Penalización de arma
     this.weaponPen =
       this.strength -
       this.SIZES.find((type) => type.size == this.currentWeapon?.size)
         ?.strength!;
-    // Evasión
-    this.evadeCost = Math.round(
-      ((4 - (this.armorPen ? this.armorPen : 0)) * 2 - this.dexterity) / 3
-    );
-    if (this.evadeCost <= 0) {
-      this.evadeCost = 1;
-    }
     // Armadura
     this.armor = this.GEAR.armor.find(
       (armor) => armor.name == this.character?.gear?.armor
@@ -226,19 +210,16 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
 
   calculateCharPasives(): void {
     // Percepción
-    this.perception =
-      8 +
-      Math.round((2 * this.wisdom + this.intelligence) / 3) +
-      (this.helmetPen < 0 ? this.helmetPen : 0);
+    this.perception = 8 + Math.round((2 * this.wisdom + this.intelligence) / 2);
     // Voluntad
     this.will =
-      8 + Math.round((this.wisdom * 2 + this.intelligence + this.strength) / 2);
+      8 + Math.round((this.wisdom * 3 + this.intelligence + this.strength) / 3);
     // Velocidad
     this.speed =
       this.dexterity * 2 +
-      this.intelligence +
-      (this.armorPen < 0 ? this.armorPen : 0) +
-      (this.shieldPen < 0 ? this.shieldPen : 0);
+      this.intelligence -
+      (this.armorPen > 0 ? this.armorPen : 0) -
+      (this.shieldPen > 0 ? this.shieldPen : 0);
     // Defensa con arma
     let weaponDefense =
       (this.sizeMod ? this.sizeMod : 0) +
@@ -275,7 +256,13 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
       this.shieldDefense = 0;
     }
     // Defensa
-    this.defense = this.armor ? this.armor : 0;
+    this.defense = this.armor
+      ? this.shield
+        ? this.armor + this.shield + '/' + this.armor
+        : this.armor
+      : this.shield
+      ? this.shield + '/' + 0
+      : 0;
   }
 
   calculateCharStats(): void {
@@ -330,9 +317,8 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
           ? this.parseInt(currentWeapon.baseEnergy)
           : 0) +
         weaponSize?.energy! -
-        (this.armorPen < 0 ? this.armorPen : 0) -
-        (this.helmetPen < 0 ? this.helmetPen : 0) -
-        (this.shieldPen < 0 ? this.shieldPen : 0);
+        (this.armorPen > 0 ? this.armorPen : 0) -
+        (this.shieldPen > 0 ? this.shieldPen : 0);
       // Impacto
       currentWeapon.impact =
         8 +
@@ -473,7 +459,6 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
       speed: this.speed,
       defense: this.defense,
       evasion: this.evasion,
-      evadeCost: this.evadeCost,
       shieldDefense: this.shieldDefense,
       shieldPen: this.shieldPen,
       parsedSkills: this.parsedSkills,
