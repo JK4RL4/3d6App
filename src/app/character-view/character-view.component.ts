@@ -195,8 +195,7 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
     // Velocidad
     this.speed =
       8 +
-      this.dexterity * 2 +
-      this.intelligence -
+      Math.round((this.dexterity * 3 + this.intelligence) / 2) -
       (this.armorPen > 0 ? this.armorPen : 0) -
       (this.shieldPen > 0 ? this.shieldPen : 0);
     // Defensa con escudo
