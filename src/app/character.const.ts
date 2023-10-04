@@ -75,7 +75,7 @@ export const GEAR = {
     { name: 'Sin armadura', defense: 0, strength: -4, weight: 0 },
     { name: 'Acolchada', defense: 1, strength: -2, weight: 0 },
     { name: 'Cuero', defense: 2, strength: -1, weight: 0 },
-    { name: 'Cuero tachonado', defense: 0, strength: 1, weight: 0 },
+    { name: 'Cuero tachonado', defense: 3, strength: 1, weight: 0 },
     { name: 'Mallas', defense: 4, strength: 1, weight: 1 },
     { name: 'Coraza', defense: 5, strength: 2, weight: 1 },
     { name: 'Laminada', defense: 6, strength: 3, weight: 2 },
