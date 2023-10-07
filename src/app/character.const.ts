@@ -96,7 +96,8 @@ export const WEAPON_RANGES = [
   'melé(2)',
   'melé(3)',
   'lanzar',
-  'corto',
+  'corto(1)',
+  'corto(2)',
   'largo',
   'extremo',
 ];

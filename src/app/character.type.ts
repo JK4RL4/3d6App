@@ -25,6 +25,7 @@ export class Character {
       conduct: null,
     };
     this.attributes = {
+      arcana:0,
       strength: 2,
       dexterity: 2,
       constitution: 2,

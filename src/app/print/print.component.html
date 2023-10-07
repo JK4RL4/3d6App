@@ -202,11 +202,8 @@
             [ngClass]="{ 'char-arcana': attribute == 'arcana' }"
             >{{ attribute | translate }}</span
           ><span>{{
-            printCharacter?.character?.attributes[attribute]
-              ? parseInt(
-                  String(printCharacter?.character?.attributes[attribute])
-                ) + 10
-              : ""
+            parseInt(String(printCharacter?.character?.attributes[attribute])) +
+              10
           }}</span>
         </div>
         <ng-container *ngFor="let skill of printCharacterSkills">

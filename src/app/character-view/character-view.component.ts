@@ -44,7 +44,6 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
   currentWeaponIndex!: string | null;
 
   // Estadísticas intermedias
-  shieldDefense!: number;
   defense!: any;
   armorPen!: number;
   shieldPen!: number;
@@ -198,17 +197,6 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
       Math.round((this.dexterity * 3 + this.intelligence) / 2) -
       (this.armorPen > 0 ? this.armorPen : 0) -
       (this.shieldPen > 0 ? this.shieldPen : 0);
-    // Defensa con escudo
-    this.shieldDefense =
-      this.shield > 0
-        ? Math.round(
-            this.shield *
-              (0.5 + (this.dexterity + (this.cc ? this.cc : 0)) / 10)
-          ) + this.shieldPen
-        : 0;
-    if (this.shieldDefense < 0) {
-      this.shieldDefense = 0;
-    }
     // Defensa
     this.defense = this.armor
       ? this.shield
@@ -364,8 +352,6 @@ export class CharacterViewComponent implements OnInit, OnDestroy {
       will: this.will,
       speed: this.speed,
       defense: this.defense,
-      shieldDefense: this.shieldDefense,
-      shieldPen: this.shieldPen,
       parsedSkills: this.parsedSkills,
       parsedWeapons: this.parsedWeapons,
       maxHealth: this.maxHealth,

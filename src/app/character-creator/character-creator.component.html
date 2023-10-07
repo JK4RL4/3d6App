@@ -260,7 +260,13 @@
             <select name="select" [(ngModel)]="weapon.hands">
               <option [value]="null" disabled selected>Selecciona manos</option>
               <option *ngFor="let hands of [0, 1, 2]" [value]="hands">
-                {{ hands }}
+                {{
+                  hands == 0
+                    ? "Sin manos"
+                    : hands == 1
+                    ? "A una mano"
+                    : "A dos manos"
+                }}
               </option>
             </select>
             <!-- Daño base -->
@@ -272,7 +278,7 @@
                 *ngFor="let damage of [-3, -2, -1, 0, 1, 2, 3]"
                 [value]="damage"
               >
-                {{ damage }}
+                Daño base {{ damage }}
               </option>
             </select>
             <!-- Energía base -->
@@ -284,7 +290,7 @@
                 *ngFor="let energy of [-5, -4, -3, -2, -1, 0, 1, 2, 3]"
                 [value]="energy"
               >
-                {{ energy }}
+                Energía base {{ energy }}
               </option>
             </select>
             <!-- Daño -->
